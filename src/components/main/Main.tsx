@@ -5,7 +5,7 @@ import { MyPosts } from "./myPosts/MyPosts";
 export const Main = () => {
     return (
         <main className={s.main}>
-            <img className={s.bgImage} height={'200'} src={'https://www.kino-teatr.ru/news/30463/272783.jpg'}/>
+            <img className={s.bgImage} height={'200'} src={'https://www.kino-teatr.ru/news/30463/272783.jpg'} alt={'Background image.'}/>
             <div>avatar + descr</div>
             <MyPosts/>
         </main>

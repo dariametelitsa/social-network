@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './Post.module.scss';
-import { PostsProps } from "../MyPosts";
 
 type PostProps = {
     src: string;
