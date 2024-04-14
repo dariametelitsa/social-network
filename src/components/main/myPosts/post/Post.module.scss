@@ -1,0 +1,16 @@
+.post {
+  display: flex;
+  gap: 20px;
+
+  & + .post {
+    margin-top: 16px;
+  }
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  object-position: 0 0;
+  border-radius: 50%;
+}
