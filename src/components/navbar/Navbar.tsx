@@ -4,7 +4,7 @@ import s from './Navbar.module.scss';
 export const Navbar = () => {
     return (
         <nav className={s.nav}>
-            <ul>
+            <ul className={s.navList}>
                 <li className={s.item}><a className={s.link} href={'#1'}>Profile</a></li>
                 <li className={s.item}><a className={`${s.link} ${s.active}`} href={'#1'}>Message</a></li>
                 <li className={s.item}><a className={s.link} href={'#1'}>News</a></li>
