@@ -29,7 +29,12 @@ a {
 
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  /*.App-logo {*/
+  /*  animation: App-logo-spin infinite 20s linear;*/
+  /*}*/
+}
+
+.main {
+  grid-area: main;
+  background-color: #a4b7e0;
 }
