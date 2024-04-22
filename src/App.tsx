@@ -14,10 +14,8 @@ function App(): JSX.Element {
                 <Navbar/>
                 <main className="main_wrapper">
                     <Routes>
-                        <Route index path={'/dialogs'} element={<Profile/>}/>
-                        <Route path={'/profile'} element={<Dialogs/>}/>
-                        {/*<Profile/>*/}
-                        {/*<Dialogs/>*/}
+                        <Route path={'/profile'} element={<Profile/>}/>
+                        <Route path={'/dialogs'} element={<Dialogs/>}/>
                     </Routes>
                 </main>
             </div>
