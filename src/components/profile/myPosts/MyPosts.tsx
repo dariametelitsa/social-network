@@ -1,6 +1,7 @@
 import React from 'react';
 import { Post } from "./post/Post";
 import uuid from "react-uuid";
+import s from './MyPosts.module.scss';
 
 export type PostsProps = {
     id: string;
@@ -44,13 +45,15 @@ const posts: PostsProps[] = [
 
 export const MyPosts: React.FC = () => {
     return (
-        <div>
+        <div className={s.posts}>
+            <h3>My posts</h3>
             <textarea></textarea>
             <button onClick={() => {
-            }}>Add post
+            }} className={s.addPostButton}>Add post
             </button>
             <ul>
-                {posts.map((post: PostsProps) => (<Post key={post.id} src={post.img} text={post.text} likes={post.likes} />))}
+                {posts.map((post: PostsProps) => (
+                    <Post key={post.id} src={post.img} text={post.text} likes={post.likes}/>))}
             </ul>
         </div>
 
