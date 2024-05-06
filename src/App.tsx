@@ -4,7 +4,8 @@ import { Header } from "./components/header/Header";
 import { Navbar } from "./components/navbar/Navbar";
 import { Profile } from "./components/profile/Profile";
 import { Dialogs } from "./components/dialogs/Dialogs";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, createBrowserRouter, Routes, Route, RouterProvider } from "react-router-dom";
+
 
 function App(): JSX.Element {
     return (

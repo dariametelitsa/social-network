@@ -8,12 +8,10 @@ export const Navbar = () => {
             <nav className={s.nav}>
                 <ul className={s.navList}>
                     <li className={s.item}>
-                        {/*<NavLink className={isActive => s.active + (!isActive ? s.link : "")} to={'/profile'}>Profile</NavLink>*/}
                         <NavLink className={({ isActive }) => isActive ? s.active : undefined} to={'/profile'}>Profile</NavLink>
                     </li>
                     <li className={s.item}>
                         <NavLink  className={({ isActive }) => isActive ? s.active : undefined} to={'/dialogs'}>Message</NavLink>
-                        {/*<a className={`${s.link} ${s.active}`} href={'/dialogs'}>Message</a>*/}
                     </li>
                     <li className={s.item}>
                         <NavLink className={s.link} to={'#1'}>News</NavLink>
@@ -27,7 +25,6 @@ export const Navbar = () => {
                 </ul>
             </nav>
             <hr/>
-            {/*<Outlet/>*/}
         </>
     );
 };

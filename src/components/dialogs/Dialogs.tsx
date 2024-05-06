@@ -1,20 +1,17 @@
-// @flow 
+// @flow
 import * as React from 'react';
 import s from './Dialogs.module.scss';
-import { NavLink } from "react-router-dom";
 import { Dialog } from "./Dialog";
 import { Message } from "./Message";
 
-type Props = {
-    
-};
+type Props = {};
 
-type namesType = {
+type dialogType = {
     id: string
     name: string
 }
 
-const names: namesType[] = [
+const dialogsData: dialogType[] = [
     {id: '1', name: 'Tom'},
     {id: '2', name: 'Steve'},
     {id: '3', name: 'Veronica'},
@@ -26,14 +23,14 @@ const names: namesType[] = [
 export const Dialogs = (props: Props) => {
     return (
         <div className={s.dialogs}>
-                <ul className={s.dialogsItems}>
-                    {names.map(name => (<Dialog key={name.id} name={name.name} id={name.id}/>))}
-                </ul>
-                <div className={s.messagesItems}>
-                    <Message message={'Hey'}/>
-                    <Message message={'How are you?'}/>
-                    <Message message={'Do you want to go to the concert with me?'}/>
-                </div>
+            <ul className={s.dialogsItems}>
+                {dialogsData.map(name => (<Dialog key={name.id} name={name.name} id={name.id}/>))}
+            </ul>
+            <div className={s.messagesItems}>
+                <Message message={'Hey'}/>
+                <Message message={'How are you?'}/>
+                <Message message={'Do you want to go to the concert with me?'}/>
+            </div>
         </div>
     );
 };
