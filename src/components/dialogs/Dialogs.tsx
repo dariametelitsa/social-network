@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import s from './Dialogs.module.scss';
-import { Dialog } from "./Dialog";
+import { DialogItem } from "./DialogItem";
 import { Message } from "./Message";
 
 type Props = {};
@@ -24,7 +24,7 @@ export const Dialogs = (props: Props) => {
     return (
         <div className={s.dialogs}>
             <ul className={s.dialogsItems}>
-                {dialogsData.map(name => (<Dialog key={name.id} name={name.name} id={name.id}/>))}
+                {dialogsData.map(name => (<DialogItem key={name.id} name={name.name} id={name.id}/>))}
             </ul>
             <div className={s.messagesItems}>
                 <Message message={'Hey'}/>

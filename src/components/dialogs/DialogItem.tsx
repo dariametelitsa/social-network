@@ -3,11 +3,11 @@ import * as React from 'react';
 import s from "./Dialogs.module.scss";
 import { NavLink } from "react-router-dom";
 
-type DialogProps = {
+type DialogItemProps = {
     name: string
     id: string
 };
-export const Dialog = ({name, id}: DialogProps) => {
+export const DialogItem = ({name, id}: DialogItemProps) => {
     const path = '/dialogs/' + id;
     return (
         <li className={s.dialog + ' ' + s.active}>
