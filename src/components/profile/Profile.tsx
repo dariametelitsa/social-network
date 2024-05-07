@@ -9,7 +9,7 @@ type ProfileProps = {
 }
 
 export const Profile = ({posts}: ProfileProps) => {
-    console.log(posts);
+    debugger
     return (
         <div>
             <ProfileInfo />

@@ -4,7 +4,7 @@ import { Header } from "./components/header/Header";
 import { Navbar } from "./components/navbar/Navbar";
 import { Profile } from "./components/profile/Profile";
 import { Dialogs } from "./components/dialogs/Dialogs";
-import { BrowserRouter, createBrowserRouter, Routes, Route, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { dialogType, PostsProps } from "./index";
 
 
