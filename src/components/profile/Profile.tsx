@@ -1,11 +1,11 @@
 import React from 'react';
 import { MyPosts } from "./myPosts/MyPosts";
 import { ProfileInfo } from "./profileInfo/ProfileInfo";
-import { PostsProps } from "../../index";
+import { postsProps } from "../../redux/state";
 
 
 type ProfileProps = {
-    posts: PostsProps[];
+    posts: postsProps[];
 }
 
 export const Profile = ({posts}: ProfileProps) => {

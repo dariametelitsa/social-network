@@ -5,15 +5,14 @@ import { Navbar } from "./components/navbar/Navbar";
 import { Profile } from "./components/profile/Profile";
 import { Dialogs } from "./components/dialogs/Dialogs";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { dialogType, PostsProps } from "./index";
+import { stateType } from "./redux/state";
 
 
 type AppProps = {
-    posts: PostsProps[]
-    dialogsData: dialogType[]
+    state: stateType
 }
 
-function App({posts, dialogsData}: AppProps): JSX.Element {
+function App({state}: AppProps): JSX.Element {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -21,10 +20,10 @@ function App({posts, dialogsData}: AppProps): JSX.Element {
                 <Navbar/>
                 <main className="main_wrapper">
                     <Routes>
-                        {/*<Route path={'/profile'} element={<Profile/>}/>*/}
-                        {/*<Route path={'/dialogs'} element={<Dialogs/>}/>*/}
-                        <Route path={'/profile'} element={<Profile posts={posts} />} />
-                        <Route path={'/dialogs'} element={<Dialogs dialogsData={dialogsData}/>} />
+                        <Route path={'/profile'} element={<Profile posts={state.profilePage.posts} />} />
+                        <Route path={'/dialogs'} element={<Dialogs
+                            dialogsData={state.dialogsPage.dialogs}
+                            messages={state.dialogsPage.messages}/>} />
                     </Routes>
                 </main>
             </div>

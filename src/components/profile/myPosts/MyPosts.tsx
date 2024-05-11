@@ -1,11 +1,10 @@
 import React from 'react';
 import { Post } from "./post/Post";
 import s from './MyPosts.module.scss';
-import { PostsProps } from "../../../index";
-
+import { postsProps } from "../../../redux/state";
 
 type MyPostsProps = {
-    posts: PostsProps[]
+    posts: postsProps[]
 }
 
 export const MyPosts = ({posts}: MyPostsProps) => {
@@ -17,7 +16,7 @@ export const MyPosts = ({posts}: MyPostsProps) => {
             }} className={s.addPostButton}>Add post
             </button>
             <ul>
-                {posts.map((post: PostsProps) => (
+                {posts.map((post: postsProps) => (
                     <Post key={post.id} src={post.img} text={post.text} likes={post.likes}/>))}
             </ul>
         </div>
