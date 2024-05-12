@@ -17,7 +17,7 @@ function App({state}: AppProps): JSX.Element {
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <Navbar/>
+                <Navbar friends={state.sidebar}/>
                 <main className="main_wrapper">
                     <Routes>
                         <Route path={'/profile'} element={<Profile posts={state.profilePage.posts} />} />

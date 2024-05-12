@@ -1,4 +1,5 @@
 import uuid from "react-uuid";
+import avatar from './avatar5.jpg'
 
 export type postsProps = {
     id: string;
@@ -14,6 +15,10 @@ export type messageType = {
     id: number
     message: string
 };
+export type myFriendsType = {
+    img: string,
+    name: string,
+}
 
 export type stateType = {
     profilePage: {
@@ -23,6 +28,7 @@ export type stateType = {
         'dialogs': dialogType[],
         'messages': messageType[],
     },
+    sidebar: myFriendsType[],
 }
 
 let state: stateType = {
@@ -77,7 +83,20 @@ let state: stateType = {
             {id: 5, message: 'Hello World! 5'},
         ],
     },
-
+    'sidebar': [
+        {
+            img: avatar,
+            name: 'Vasia'
+        },
+        {
+            img: avatar,
+            name: 'Kolia'
+        },
+        {
+            img: avatar,
+            name: 'Stanislav'
+        },
+    ],
 };
 
 export default state;

@@ -21,3 +21,20 @@
 .item a.active {
   background-color: #a4b7e0;
 }
+
+.friendsList {
+  margin: 30px 6px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.friendItem {
+flex-grow: 1;
+}
+
+.avatar {
+  height: 80px;
+  width: 80px;
+}
