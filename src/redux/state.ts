@@ -1,5 +1,6 @@
 import uuid from "react-uuid";
 import avatar from './avatar5.jpeg'
+import { rerenderEntireTree } from "../render";
 
 export type postsProps = {
     id: string;
@@ -106,6 +107,6 @@ export let addPost = (postMessage: string) => {
         text: postMessage,
         likes: 0,
     };
-
     state.profilePage.posts.push(newPost);
+    rerenderEntireTree(state);
 }
