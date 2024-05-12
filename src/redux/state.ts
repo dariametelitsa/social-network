@@ -1,5 +1,5 @@
 import uuid from "react-uuid";
-import avatar from './avatar5.jpg'
+import avatar from './avatar5.jpeg'
 
 export type postsProps = {
     id: string;
@@ -89,11 +89,11 @@ let state: stateType = {
             name: 'Vasia'
         },
         {
-            img: avatar,
+            img: 'https://s5.afisha.ru/mediastorage/6e/d9/25b648cf760b44d1870b4c33d96e.jpg',
             name: 'Kolia'
         },
         {
-            img: avatar,
+            img: 'https://gameguru.ru/media/publications/392_zu04cT9.jpg',
             name: 'Stanislav'
         },
     ],
