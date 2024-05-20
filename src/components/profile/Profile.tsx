@@ -5,16 +5,20 @@ import { postsProps } from "../../redux/state";
 
 
 type ProfileProps = {
-    posts: postsProps[]
+    profilePage: {
+        'posts': postsProps[]
+        newPostText: string
+    }
     addPost: (postMessage: string) => void
+    updateNewPostText: (newText: string) => void
 }
 
-export const Profile = ({posts, addPost}: ProfileProps) => {
+export const Profile = ({profilePage, addPost, updateNewPostText}: ProfileProps) => {
     debugger
     return (
         <div>
             <ProfileInfo />
-            <MyPosts posts={posts} addPost={addPost} />
+            <MyPosts posts={profilePage.posts} addPost={addPost} newPostChange={profilePage.newPostText} updateNewPostText={updateNewPostText} />
         </div>
     );
 };

@@ -23,13 +23,14 @@ export type myFriendsType = {
 
 export type stateType = {
     profilePage: {
-        'posts': postsProps[],
+        'posts': postsProps[]
+        newPostText: string
     }
     dialogsPage: {
-        'dialogs': dialogType[],
-        'messages': messageType[],
+        'dialogs': dialogType[]
+        'messages': messageType[]
     },
-    sidebar: myFriendsType[],
+    sidebar: myFriendsType[]
 }
 let state: stateType = {
     'profilePage': {
@@ -65,6 +66,7 @@ let state: stateType = {
                 likes: 972,
             },
         ],
+        newPostText: 'i am new here'
     },
     'dialogsPage': {
         'dialogs': [
@@ -108,5 +110,11 @@ export let addPost = (postMessage: string) => {
         likes: 0,
     };
     state.profilePage.posts.push(newPost);
+    updateNewPostText('');
+    rerenderEntireTree(state);
+};
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText;
     rerenderEntireTree(state);
 }
