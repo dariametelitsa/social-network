@@ -1,7 +1,7 @@
 import React from 'react';
 import { MyPosts } from "./myPosts/MyPosts";
 import { ProfileInfo } from "./profileInfo/ProfileInfo";
-import { postsProps } from "../../redux/state";
+import { DispatchActionTypes, postsProps } from "../../redux/state";
 
 
 type ProfileProps = {
@@ -9,7 +9,7 @@ type ProfileProps = {
         'posts': postsProps[]
         newPostText: string
     }
-    dispatch: (action: any) => void
+    dispatch: (action: DispatchActionTypes) => void
 }
 
 export const Profile = ({profilePage, dispatch}: ProfileProps) => {

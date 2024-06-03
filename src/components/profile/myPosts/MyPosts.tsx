@@ -1,12 +1,12 @@
 import React, { ChangeEvent, RefObject } from 'react';
 import { Post } from "./post/Post";
 import s from './MyPosts.module.scss';
-import { postsProps } from "../../../redux/state";
+import { AddPostAction, ChangeNewTextAction, DispatchActionTypes, postsProps } from "../../../redux/state";
 
 type MyPostsProps = {
     posts: postsProps[]
     newPostChange: string
-    dispatch: (action: any) => void
+    dispatch: (action: DispatchActionTypes) => void
 }
 
 export const MyPosts = ({posts, dispatch, newPostChange}: MyPostsProps) => {
@@ -18,12 +18,12 @@ export const MyPosts = ({posts, dispatch, newPostChange}: MyPostsProps) => {
     const addPostHandler = () => {
         const newPost = newPostEl.current?.value;
         if(newPost) {
-            dispatch({type: 'ADD_POST'});
+            dispatch(AddPostAction());
         }
     }
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch({type: 'UPDATE_NEW_POST_TEXT', newText: e.currentTarget.value});
+        dispatch(ChangeNewTextAction(e.currentTarget.value));
     }
     return (
         <div className={s.posts}>

@@ -31,6 +31,21 @@ export type stateType = {
     sidebar: myFriendsType[]
 };
 
+//actions
+
+export const AddPostAction = () => ({type: 'ADD_POST'} as const);
+
+export const ChangeNewTextAction = (newText: string) => ({
+        type: 'UPDATE_NEW_POST_TEXT',
+        newText
+    } as const);
+
+//AC
+export type AddPostActionType = ReturnType<typeof AddPostAction>
+export type ChangeNewTextActionType = ReturnType<typeof ChangeNewTextAction>
+
+export type DispatchActionTypes = AddPostActionType | ChangeNewTextActionType
+
 export type TStore = {
     _state: stateType
     getState: () => stateType
@@ -38,7 +53,7 @@ export type TStore = {
     _addPost: () => void
     _updateNewPostText: (newText: string) => void
     subscriber: (observer: () => void) => void
-    dispatch: (action: any) => void
+    dispatch: (action: DispatchActionTypes) => void
 };
 
 export const store: TStore = {
@@ -116,7 +131,7 @@ export const store: TStore = {
     getState() {
         return this._state
     },
-    subscriber (observer: () => void) {
+    subscriber(observer: () => void) {
         this._callSubscriber = observer;
     },
 
@@ -143,7 +158,8 @@ export const store: TStore = {
             case 'UPDATE_NEW_POST_TEXT':
                 this._updateNewPostText(action.newText);
                 break;
-            default: return;
+            default:
+                return;
         }
     }
 };
