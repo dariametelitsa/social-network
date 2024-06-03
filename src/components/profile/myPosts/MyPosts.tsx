@@ -5,12 +5,11 @@ import { postsProps } from "../../../redux/state";
 
 type MyPostsProps = {
     posts: postsProps[]
-    addPost: (postMessage: string) => void
     newPostChange: string
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: any) => void
 }
 
-export const MyPosts = ({posts, addPost, newPostChange, updateNewPostText}: MyPostsProps) => {
+export const MyPosts = ({posts, dispatch, newPostChange}: MyPostsProps) => {
     const postElements = posts.map((post: postsProps) => (
         <Post key={post.id} src={post.img} text={post.text} likes={post.likes}/>));
 
@@ -19,13 +18,12 @@ export const MyPosts = ({posts, addPost, newPostChange, updateNewPostText}: MyPo
     const addPostHandler = () => {
         const newPost = newPostEl.current?.value;
         if(newPost) {
-            addPost(newPost);
-            // updateNewPostText('');
+            dispatch({type: 'ADD_POST'});
         }
     }
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        updateNewPostText(e.currentTarget.value);
+        dispatch({type: 'UPDATE_NEW_POST_TEXT', newText: e.currentTarget.value});
     }
     return (
         <div className={s.posts}>

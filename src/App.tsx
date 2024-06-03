@@ -10,11 +10,10 @@ import { stateType } from "./redux/state";
 
 type AppProps = {
     state: stateType
-    addPost: (postMessage: string) => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: any) => void
 }
 
-function App({state, addPost, updateNewPostText}: AppProps): JSX.Element {
+function App({state, dispatch}: AppProps): JSX.Element {
     return (
 
         <div className="app-wrapper">
@@ -22,7 +21,7 @@ function App({state, addPost, updateNewPostText}: AppProps): JSX.Element {
             <Navbar friends={state.sidebar}/>
             <main className="main_wrapper">
                 <Routes>
-                    <Route path={'/profile'} element={<Profile profilePage={state.profilePage} addPost={addPost} updateNewPostText={updateNewPostText}/>}/>
+                    <Route path={'/profile'} element={<Profile profilePage={state.profilePage} dispatch={dispatch}/>}/>
                     <Route path={'/dialogs'} element={<Dialogs
                         dialogsData={state.dialogsPage.dialogs}
                         messages={state.dialogsPage.messages}/>}/>

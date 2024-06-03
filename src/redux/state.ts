@@ -35,9 +35,10 @@ export type TStore = {
     _state: stateType
     getState: () => stateType
     _callSubscriber: () => void
-    addPost: (postMessage: string) => void
-    updateNewPostText: (newText: string) => void
+    _addPost: () => void
+    _updateNewPostText: (newText: string) => void
     subscriber: (observer: () => void) => void
+    dispatch: (action: any) => void
 };
 
 export const store: TStore = {
@@ -109,13 +110,17 @@ export const store: TStore = {
             },
         ],
     },
-    getState() {
-        return this._state
-    },
     _callSubscriber() {
         console.log('State changed')
     },
-    addPost() {
+    getState() {
+        return this._state
+    },
+    subscriber (observer: () => void) {
+        this._callSubscriber = observer;
+    },
+
+    _addPost() {
         const newPost: postsProps = {
             id: uuid(),
             img: avatar,
@@ -123,16 +128,24 @@ export const store: TStore = {
             likes: 0,
         };
         this._state.profilePage.posts.push(newPost);
-        this.updateNewPostText('');
+        this._updateNewPostText('');
         this._callSubscriber();
     },
-    updateNewPostText(newText: string) {
+    _updateNewPostText(newText: string) {
         this._state.profilePage.newPostText = newText;
         this._callSubscriber();
     },
-    subscriber (observer: () => void) {
-        this._callSubscriber = observer;
-    },
+    dispatch(action) {
+        switch (action.type) {
+            case 'ADD_POST':
+                this._addPost();
+                break;
+            case 'UPDATE_NEW_POST_TEXT':
+                this._updateNewPostText(action.newText);
+                break;
+            default: return;
+        }
+    }
 };
 
 export default store;

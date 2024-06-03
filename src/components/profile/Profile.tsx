@@ -9,16 +9,15 @@ type ProfileProps = {
         'posts': postsProps[]
         newPostText: string
     }
-    addPost: (postMessage: string) => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: any) => void
 }
 
-export const Profile = ({profilePage, addPost, updateNewPostText}: ProfileProps) => {
+export const Profile = ({profilePage, dispatch}: ProfileProps) => {
     debugger
     return (
         <div>
             <ProfileInfo />
-            <MyPosts posts={profilePage.posts} addPost={addPost} newPostChange={profilePage.newPostText} updateNewPostText={updateNewPostText} />
+            <MyPosts posts={profilePage.posts} newPostChange={profilePage.newPostText} dispatch={dispatch} />
         </div>
     );
 };
