@@ -4,13 +4,12 @@ import s from './Dialogs.module.scss';
 import { DialogItem } from "./DialogItem";
 import { Message } from "./Message";
 import {
-    AddMessageAction,
-    ChangeNewMessageAction,
     dialogType,
     DispatchActionTypes,
     messageType, store
 } from "../../redux/state";
 import { ChangeEvent, RefObject } from "react";
+import { AddMessageAction, ChangeNewMessageAction } from "../../redux/dialogsReducer";
 
 type DialogsProps = {
     dialogsPage: {

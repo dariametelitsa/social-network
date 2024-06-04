@@ -13,7 +13,6 @@ type ProfileProps = {
 }
 
 export const Profile = ({profilePage, dispatch}: ProfileProps) => {
-    debugger
     return (
         <div>
             <ProfileInfo />
