@@ -3,35 +3,51 @@ import * as React from 'react';
 import s from './Dialogs.module.scss';
 import { DialogItem } from "./DialogItem";
 import { Message } from "./Message";
-import { dialogType, DispatchActionTypes, messageType } from "../../redux/state";
-import { RefObject } from "react";
+import {
+    AddMessageAction,
+    ChangeNewMessageAction,
+    dialogType,
+    DispatchActionTypes,
+    messageType, store
+} from "../../redux/state";
+import { ChangeEvent, RefObject } from "react";
 
 type DialogsProps = {
-    dialogsData: dialogType[]
-    messages: messageType[]
+    dialogsPage: {
+        dialogs: dialogType[]
+        messages: messageType[]
+        newMessageText: string
+    },
     dispatch: (action: DispatchActionTypes) => void
 }
 
-export const Dialogs = ({dialogsData, messages, dispatch}: DialogsProps) => {
+export const Dialogs = ({dialogsPage, dispatch}: DialogsProps) => {
     const newMessage: RefObject<HTMLTextAreaElement> = React.createRef();
 
     const addNewMessage = () => {
-        const message = newMessage.current?.value;
-        alert(message);
+        dispatch(AddMessageAction());
+    }
+
+    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        dispatch(ChangeNewMessageAction(e.currentTarget.value))
     }
 
     return (
         <div className={s.dialogs}>
             <ul className={s.dialogsItems}>
-                {dialogsData.map(name => (<DialogItem key={name.id} name={name.name} id={name.id}/>))}
+                {dialogsPage.dialogs.map(name => (<DialogItem key={name.id} name={name.name} id={name.id}/>))}
             </ul>
             <div className={s.messagesItems}>
-                {messages.map((message) => (
+                {dialogsPage.messages.map((message) => (
                     <Message key={message.id} message={message.message}/>
                 ))}
             </div>
             <div>
-                <textarea ref={newMessage}></textarea>
+                <textarea
+                    ref={newMessage}
+                    placeholder={'Enter your message...'}
+                    onChange={onChangeHandler}
+                    value={dialogsPage.newMessageText}></textarea>
                 <button onClick={addNewMessage}>Add message</button>
             </div>
         </div>

@@ -23,8 +23,7 @@ function App({state, dispatch}: AppProps): JSX.Element {
                 <Routes>
                     <Route path={'/profile'} element={<Profile profilePage={state.profilePage} dispatch={dispatch}/>}/>
                     <Route path={'/dialogs'} element={<Dialogs
-                        dialogsData={state.dialogsPage.dialogs}
-                        messages={state.dialogsPage.messages}
+                        dialogsPage={state.dialogsPage}
                         dispatch={dispatch}/>}/>
                 </Routes>
             </main>

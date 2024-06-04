@@ -164,7 +164,8 @@ export const store: TStore = {
             id: uuid(),
             message: this._state.dialogsPage.newMessageText,
         };
-        this._state.dialogsPage.messages.push(newMessage);
+        // this._state.dialogsPage.messages.push(newMessage);
+        this._state = {...this._state, dialogsPage: {...this._state.dialogsPage, messages: [...this._state.dialogsPage.messages, newMessage]}}
         this._updateNewMessageText('');
         this._callSubscriber();
     },
@@ -185,10 +186,10 @@ export const store: TStore = {
                 this._updateNewPostText(action.newText);
                 break;
             case 'ADD_MESSAGE':
-                this._addPost();
+                this._addMessage();
                 break;
             case 'UPDATE_NEW_MESSAGE':
-                this._updateNewPostText(action.newText);
+                this._updateNewMessageText(action.newText);
                 break;
             default:
                 return;
