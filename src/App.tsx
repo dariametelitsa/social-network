@@ -6,10 +6,11 @@ import { Profile } from "./components/profile/Profile";
 import { Route, Routes } from "react-router-dom";
 import { DialogsContainer } from "./components/dialogs/DialogsContainer";
 import { DispatchActionTypes } from "./redux/store";
+import { StoreType } from "./redux/reduxStore";
 
 
 type AppProps = {
-    store: any //StoreType
+    store: StoreType //StoreType
     dispatch: (action: DispatchActionTypes) => void
 }
 

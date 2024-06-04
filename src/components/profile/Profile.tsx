@@ -1,13 +1,11 @@
 import React from 'react';
-import { MyPosts } from "./myPosts/MyPosts";
 import { ProfileInfo } from "./profileInfo/ProfileInfo";
-import { DispatchActionTypes, postsProps } from "../../redux/store";
 import { MyPostsContainer } from "./myPosts/MyPostsContainer";
 import { StoreType } from "../../redux/reduxStore";
 
 
 type ProfileProps = {
-    store: any //StoreType
+    store: StoreType //StoreType
     //dispatch: (action: DispatchActionTypes) => void
 }
 

@@ -3,18 +3,16 @@ import { Post } from "./post/Post";
 import { DispatchActionTypes, postsProps } from "../../../redux/store";
 import { AddPostAction, ChangeNewTextAction } from "../../../redux/profileReducer";
 import { MyPosts } from "./MyPosts";
-import { StoreType } from "../../../redux/reduxStore";
+import { StateType, StoreType } from "../../../redux/reduxStore";
 
 type MyPostsProps = {
-    store: any //StoreType
-    //dispatch: (action: DispatchActionTypes) => void
+    store: StoreType
 }
 
 export const MyPostsContainer = ({store}: MyPostsProps) => {
-    const state: StoreType = store.getState();
+    const state: StateType = store.getState();
 
     const addPostHandler = () => {
-        //dispatch(AddPostAction());
         store.dispatch(AddPostAction());
     }
 

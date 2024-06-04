@@ -14,7 +14,6 @@ type DialogsProps = {
     },
     addMessage: () => void
     changeNewMessage: (newText: string) => void
-    // dispatch: (action: DispatchActionTypes) => void
 }
 
 export const Dialogs = ({dialogsPage, addMessage, changeNewMessage}: DialogsProps) => {

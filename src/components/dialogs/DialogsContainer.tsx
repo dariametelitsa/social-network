@@ -2,18 +2,15 @@
 import * as React from 'react';
 import { AddMessageAction, ChangeNewMessageAction } from "../../redux/dialogsReducer";
 import { Dialogs } from "./Dialogs";
+import { StateType, StoreType } from "../../redux/reduxStore";
 
 type DialogsProps = {
-    // dialogsPage: {
-    //     dialogs: dialogType[]
-    //     messages: messageType[]
-    //     newMessageText: string
-    // },
-    // dispatch: (action: DispatchActionTypes) => void
-    store: any //StoreType
+    store: StoreType
 }
 
 export const DialogsContainer = ({store}: DialogsProps) => {
+
+    const state: StateType = store.getState();
 
     const addNewMessage = () => {
         store.dispatch(AddMessageAction());
@@ -21,10 +18,9 @@ export const DialogsContainer = ({store}: DialogsProps) => {
 
     const onChangeHandler = (newText: string) => {
         store.dispatch(ChangeNewMessageAction(newText));
-        store.dispatch(ChangeNewMessageAction)
     }
 
     return (
-        <Dialogs dialogsPage={store.getState().dialogsPage} addMessage={addNewMessage} changeNewMessage={onChangeHandler} />
+        <Dialogs dialogsPage={state.dialogsPage} addMessage={addNewMessage} changeNewMessage={onChangeHandler} />
     );
 };
