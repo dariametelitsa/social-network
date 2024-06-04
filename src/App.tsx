@@ -22,7 +22,7 @@ function App({store}: AppProps): JSX.Element {
             <main className="main_wrapper">
                 <Routes>
                     <Route path={'/profile'} element={<Profile store={store}/>}/>
-                    <Route path={'/dialogs'} element={<DialogsContainer store={store}/>}/>
+                    <Route path={'/dialogs'} element={<DialogsContainer/>}/>
                 </Routes>
             </main>
         </div>

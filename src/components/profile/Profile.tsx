@@ -13,7 +13,7 @@ export const Profile = ({store}: ProfileProps) => {
     return (
         <div>
             <ProfileInfo />
-            <MyPostsContainer store={store} />
+            <MyPostsContainer />
         </div>
     );
 };
