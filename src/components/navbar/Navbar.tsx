@@ -29,8 +29,8 @@ export const Navbar = ({friends}: {friends: myFriendsType[]}) => {
 
                 <hr/>
                 <ul className={s.friendsList}>
-                    {friends.map((friend: myFriendsType) => {
-                        return (<li className={s.friendItem}>
+                    {friends.map((friend: myFriendsType, index) => {
+                        return (<li className={s.friendItem} key={index}>
                             <img src={friend.img} className={s.avatar} alt={`Photo of ${friend.name}`} />
                             <p>{friend.name}</p>
                         </li>)

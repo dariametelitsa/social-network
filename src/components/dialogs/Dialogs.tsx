@@ -1,15 +1,10 @@
 // @flow
 import * as React from 'react';
+import { ChangeEvent, RefObject } from 'react';
 import s from './Dialogs.module.scss';
 import { DialogItem } from "./DialogItem";
 import { Message } from "./Message";
-import {
-    dialogType,
-    DispatchActionTypes,
-    messageType, store
-} from "../../redux/store";
-import { ChangeEvent, RefObject } from "react";
-import { AddMessageAction, ChangeNewMessageAction } from "../../redux/dialogsReducer";
+import { dialogType, messageType } from "../../redux/store";
 
 type DialogsProps = {
     dialogsPage: {
@@ -17,18 +12,20 @@ type DialogsProps = {
         messages: messageType[]
         newMessageText: string
     },
-    dispatch: (action: DispatchActionTypes) => void
+    addMessage: () => void
+    changeNewMessage: (newText: string) => void
+    // dispatch: (action: DispatchActionTypes) => void
 }
 
-export const Dialogs = ({dialogsPage, dispatch}: DialogsProps) => {
+export const Dialogs = ({dialogsPage, addMessage, changeNewMessage}: DialogsProps) => {
     const newMessage: RefObject<HTMLTextAreaElement> = React.createRef();
 
     const addNewMessage = () => {
-        dispatch(AddMessageAction());
+        addMessage();
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(ChangeNewMessageAction(e.currentTarget.value))
+        changeNewMessage(e.currentTarget.value);
     }
 
     return (

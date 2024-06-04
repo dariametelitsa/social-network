@@ -1,16 +1,16 @@
 import React, { ChangeEvent, RefObject } from 'react';
 import { Post } from "./post/Post";
 import s from './MyPosts.module.scss';
-import { DispatchActionTypes, postsProps } from "../../../redux/store";
-import { AddPostAction, ChangeNewTextAction } from "../../../redux/profileReducer";
+import { postsProps } from "../../../redux/store";
 
 type MyPostsProps = {
     posts: postsProps[]
     newPostChange: string
-    dispatch: (action: DispatchActionTypes) => void
+    changeNewText: (newText: string) => void
+    addPost: () => void
 }
 
-export const MyPosts = ({posts, dispatch, newPostChange}: MyPostsProps) => {
+export const MyPosts = ({posts, changeNewText, newPostChange, addPost}: MyPostsProps) => {
     const postElements = posts.map((post: postsProps) => (
         <Post key={post.id} src={post.img} text={post.text} likes={post.likes}/>));
 
@@ -19,12 +19,12 @@ export const MyPosts = ({posts, dispatch, newPostChange}: MyPostsProps) => {
     const addPostHandler = () => {
         const newPost = newPostEl.current?.value;
         if(newPost) {
-            dispatch(AddPostAction());
+            addPost();
         }
     }
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(ChangeNewTextAction(e.currentTarget.value));
+        changeNewText(e.currentTarget.value);
     }
     return (
         <div className={s.posts}>

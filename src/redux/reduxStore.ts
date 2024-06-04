@@ -8,6 +8,8 @@ const rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer});
 
+export type StoreType = ReturnType<typeof rootReducer>;
+
 const store = createStore(rootReducer);
 
 export default store;

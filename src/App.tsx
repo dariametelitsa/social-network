@@ -3,28 +3,25 @@ import './App.css';
 import { Header } from "./components/header/Header";
 import { Navbar } from "./components/navbar/Navbar";
 import { Profile } from "./components/profile/Profile";
-import { Dialogs } from "./components/dialogs/Dialogs";
 import { Route, Routes } from "react-router-dom";
-import { DispatchActionTypes, stateType } from "./redux/store";
+import { DialogsContainer } from "./components/dialogs/DialogsContainer";
+import { DispatchActionTypes } from "./redux/store";
 
 
 type AppProps = {
-    state: stateType
+    store: any //StoreType
     dispatch: (action: DispatchActionTypes) => void
 }
 
-function App({state, dispatch}: AppProps): JSX.Element {
+function App({store}: AppProps): JSX.Element {
     return (
-
         <div className="app-wrapper">
             <Header/>
-            <Navbar friends={state.sidebar}/>
+            <Navbar friends={store.getState().sidebar}/>
             <main className="main_wrapper">
                 <Routes>
-                    <Route path={'/profile'} element={<Profile profilePage={state.profilePage} dispatch={dispatch}/>}/>
-                    <Route path={'/dialogs'} element={<Dialogs
-                        dialogsPage={state.dialogsPage}
-                        dispatch={dispatch}/>}/>
+                    <Route path={'/profile'} element={<Profile store={store}/>}/>
+                    <Route path={'/dialogs'} element={<DialogsContainer store={store}/>}/>
                 </Routes>
             </main>
         </div>
