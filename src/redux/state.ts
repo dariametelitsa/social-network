@@ -12,7 +12,7 @@ export type dialogType = {
     name: string
 };
 export type messageType = {
-    id: number
+    id: string
     message: string
 };
 export type myFriendsType = {
@@ -27,6 +27,7 @@ export type stateType = {
     dialogsPage: {
         'dialogs': dialogType[]
         'messages': messageType[]
+        newMessageText: string
     },
     sidebar: myFriendsType[]
 };
@@ -40,18 +41,29 @@ export const ChangeNewTextAction = (newText: string) => ({
         newText
     } as const);
 
+export const AddMessageAction = () => ({type: 'ADD_MESSAGE'} as const);
+
+export const ChangeNewMessageAction = (newText: string) => ({
+    type: 'UPDATE_NEW_MESSAGE',
+    newText
+} as const);
+
 //AC
 export type AddPostActionType = ReturnType<typeof AddPostAction>
+export type AddMessageActionType = ReturnType<typeof AddMessageAction>
 export type ChangeNewTextActionType = ReturnType<typeof ChangeNewTextAction>
+export type ChangeNewMessageActionType = ReturnType<typeof ChangeNewMessageAction>
 
-export type DispatchActionTypes = AddPostActionType | ChangeNewTextActionType
+export type DispatchActionTypes = AddPostActionType | ChangeNewTextActionType | ChangeNewMessageActionType | AddMessageActionType
 
 export type TStore = {
     _state: stateType
     getState: () => stateType
     _callSubscriber: () => void
     _addPost: () => void
+    _addMessage: () => void
     _updateNewPostText: (newText: string) => void
+    _updateNewMessageText: (newText: string) => void
     subscriber: (observer: () => void) => void
     dispatch: (action: DispatchActionTypes) => void
 };
@@ -103,12 +115,13 @@ export const store: TStore = {
                 {id: '6', name: 'Aurora'},
             ],
             'messages': [
-                {id: 1, message: 'Hello World 1!'},
-                {id: 2, message: 'Hello World! 2'},
-                {id: 3, message: 'Hello World! 3'},
-                {id: 4, message: 'Hello World! 4'},
-                {id: 5, message: 'Hello World! 5'},
+                {id: '1', message: 'Hello World 1!'},
+                {id: '2', message: 'Hello World! 2'},
+                {id: '3', message: 'Hello World! 3'},
+                {id: '4', message: 'Hello World! 4'},
+                {id: '5', message: 'Hello World! 5'},
             ],
+            newMessageText: '',
         },
         'sidebar': [
             {
@@ -146,8 +159,21 @@ export const store: TStore = {
         this._updateNewPostText('');
         this._callSubscriber();
     },
+    _addMessage() {
+        const newMessage: messageType = {
+            id: uuid(),
+            message: this._state.dialogsPage.newMessageText,
+        };
+        this._state.dialogsPage.messages.push(newMessage);
+        this._updateNewMessageText('');
+        this._callSubscriber();
+    },
     _updateNewPostText(newText: string) {
         this._state.profilePage.newPostText = newText;
+        this._callSubscriber();
+    },
+    _updateNewMessageText(newText: string) {
+        this._state.dialogsPage.newMessageText = newText;
         this._callSubscriber();
     },
     dispatch(action) {
@@ -156,6 +182,12 @@ export const store: TStore = {
                 this._addPost();
                 break;
             case 'UPDATE_NEW_POST_TEXT':
+                this._updateNewPostText(action.newText);
+                break;
+            case 'ADD_MESSAGE':
+                this._addPost();
+                break;
+            case 'UPDATE_NEW_MESSAGE':
                 this._updateNewPostText(action.newText);
                 break;
             default:

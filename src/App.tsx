@@ -24,7 +24,8 @@ function App({state, dispatch}: AppProps): JSX.Element {
                     <Route path={'/profile'} element={<Profile profilePage={state.profilePage} dispatch={dispatch}/>}/>
                     <Route path={'/dialogs'} element={<Dialogs
                         dialogsData={state.dialogsPage.dialogs}
-                        messages={state.dialogsPage.messages}/>}/>
+                        messages={state.dialogsPage.messages}
+                        dispatch={dispatch}/>}/>
                 </Routes>
             </main>
         </div>

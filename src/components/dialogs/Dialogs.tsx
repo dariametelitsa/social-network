@@ -3,15 +3,16 @@ import * as React from 'react';
 import s from './Dialogs.module.scss';
 import { DialogItem } from "./DialogItem";
 import { Message } from "./Message";
-import { dialogType, messageType } from "../../redux/state";
+import { dialogType, DispatchActionTypes, messageType } from "../../redux/state";
 import { RefObject } from "react";
 
 type DialogsProps = {
     dialogsData: dialogType[]
     messages: messageType[]
+    dispatch: (action: DispatchActionTypes) => void
 }
 
-export const Dialogs = ({dialogsData, messages}: DialogsProps) => {
+export const Dialogs = ({dialogsData, messages, dispatch}: DialogsProps) => {
     const newMessage: RefObject<HTMLTextAreaElement> = React.createRef();
 
     const addNewMessage = () => {
