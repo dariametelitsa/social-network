@@ -19,16 +19,19 @@ export type myFriendsType = {
     img: string,
     name: string,
 };
+export type profilePageType = {
+    'posts': postsProps[]
+    newPostText: string
+}
+export type dialogsPageType = {
+    'dialogs': dialogType[]
+    'messages': messageType[]
+    newMessageText: string
+}
+
 export type stateType = {
-    profilePage: {
-        'posts': postsProps[]
-        newPostText: string
-    }
-    dialogsPage: {
-        'dialogs': dialogType[]
-        'messages': messageType[]
-        newMessageText: string
-    },
+    profilePage: profilePageType
+    dialogsPage: dialogsPageType
     sidebar: myFriendsType[]
 };
 
