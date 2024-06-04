@@ -7,7 +7,7 @@ import {
     dialogType,
     DispatchActionTypes,
     messageType, store
-} from "../../redux/state";
+} from "../../redux/store";
 import { ChangeEvent, RefObject } from "react";
 import { AddMessageAction, ChangeNewMessageAction } from "../../redux/dialogsReducer";
 

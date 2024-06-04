@@ -49,12 +49,12 @@ export type DispatchActionTypes = AddPostActionType | ChangeNewTextActionType | 
 export type TStore = {
     _state: stateType
     getState: () => stateType
-    _callSubscriber: () => void
+    _callSubscribe: () => void
     // _addPost: () => void
     // _addMessage: () => void
     // _updateNewPostText: (newText: string) => void
     // _updateNewMessageText: (newText: string) => void
-    subscriber: (observer: () => void) => void
+    subscribe: (observer: () => void) => void
     dispatch: (action: DispatchActionTypes) => void
 };
 
@@ -128,14 +128,14 @@ export const store: TStore = {
             },
         ],
     },
-    _callSubscriber() {
+    _callSubscribe() {
         console.log('State changed')
     },
     getState() {
         return this._state
     },
-    subscriber(observer: () => void) {
-        this._callSubscriber = observer;
+    subscribe(observer: () => void) {
+        this._callSubscribe = observer;
     },
 
     // _addPost() {
@@ -171,7 +171,7 @@ export const store: TStore = {
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
         this._state.sidebar = sidebarReducer(this._state.sidebar, action);
-        this._callSubscriber();
+        this._callSubscribe();
     }
 };
 

@@ -1,4 +1,4 @@
-import { dialogsPageType, DispatchActionTypes, messageType, postsProps, stateType } from "./state";
+import { dialogsPageType, DispatchActionTypes, messageType, postsProps, stateType } from "./store";
 import uuid from "react-uuid";
 
 //actions
@@ -8,7 +8,26 @@ export const ChangeNewMessageAction = (newText: string) => ({
     newText
 } as const);
 
-const dialogsReducer = (state: dialogsPageType, action: DispatchActionTypes): dialogsPageType => {
+const initialState: dialogsPageType =  {
+    'dialogs': [
+        {id: '1', name: 'Tom'},
+        {id: '2', name: 'Steve'},
+        {id: '3', name: 'Veronica'},
+        {id: '4', name: 'Nataniel'},
+        {id: '5', name: 'Mike'},
+        {id: '6', name: 'Aurora'},
+    ],
+        'messages': [
+        {id: '1', message: 'Hello World 1!'},
+        {id: '2', message: 'Hello World! 2'},
+        {id: '3', message: 'Hello World! 3'},
+        {id: '4', message: 'Hello World! 4'},
+        {id: '5', message: 'Hello World! 5'},
+    ],
+        newMessageText: '',
+};
+
+const dialogsReducer = (state: dialogsPageType = initialState, action: DispatchActionTypes): dialogsPageType => {
     switch (action.type) {
         case 'ADD_MESSAGE':
             const newMessage: messageType = {
