@@ -1,10 +1,9 @@
 // @flow
-import * as React from 'react';
 import { AddMessageAction, ChangeNewMessageAction } from "../../redux/dialogsReducer";
 import { Dialogs } from "./Dialogs";
-import { StateType, StoreType } from "../../redux/reduxStore";
+import { StateType } from "../../redux/reduxStore";
 import { connect } from "react-redux";
-import { dialogsPageType, DispatchActionTypes } from "../../redux/store";
+import { dialogsPageType } from "../../redux/store";
 import { Dispatch } from "redux";
 
 type mapStateToPropsType = {

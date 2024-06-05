@@ -1,4 +1,4 @@
-import { dialogsPageType, DispatchActionTypes, messageType, postsProps, stateType } from "./store";
+import { dialogsPageType, DispatchActionTypes, messageType } from "./store";
 import uuid from "react-uuid";
 
 //actions

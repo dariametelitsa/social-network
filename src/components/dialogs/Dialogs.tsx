@@ -4,7 +4,6 @@ import { ChangeEvent, RefObject } from 'react';
 import s from './Dialogs.module.scss';
 import { DialogItem } from "./DialogItem";
 import { Message } from "./Message";
-import { dialogType, messageType } from "../../redux/store";
 import { DialogsPropsType } from "./DialogsContainer";
 
 // type DialogsProps = {
