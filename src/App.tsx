@@ -21,8 +21,8 @@ function App({store}: AppProps): JSX.Element {
             <Navbar friends={store.getState().sidebar}/>
             <main className="main_wrapper">
                 <Routes>
-                    <Route path={'/profile'} element={<Profile store={store}/>}/>
-                    <Route path={'/dialogs'} element={<DialogsContainer store={store}/>}/>
+                    <Route path={'/profile'} element={<Profile/>}/>
+                    <Route path={'/dialogs'} element={<DialogsContainer/>}/>
                 </Routes>
             </main>
         </div>

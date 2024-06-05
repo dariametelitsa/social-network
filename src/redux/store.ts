@@ -23,7 +23,7 @@ export type myFriendsType = {
     name: string,
 };
 export type profilePageType = {
-    'posts': postsProps[]
+    posts: postsProps[]
     newPostText: string
 }
 export type dialogsPageType = {

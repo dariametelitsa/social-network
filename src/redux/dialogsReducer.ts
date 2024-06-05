@@ -9,7 +9,7 @@ export const ChangeNewMessageAction = (newText: string) => ({
 } as const);
 
 const initialState: dialogsPageType =  {
-    'dialogs': [
+    dialogs: [
         {id: '1', name: 'Tom'},
         {id: '2', name: 'Steve'},
         {id: '3', name: 'Veronica'},
@@ -17,7 +17,7 @@ const initialState: dialogsPageType =  {
         {id: '5', name: 'Mike'},
         {id: '6', name: 'Aurora'},
     ],
-        'messages': [
+        messages: [
         {id: '1', message: 'Hello World 1!'},
         {id: '2', message: 'Hello World! 2'},
         {id: '3', message: 'Hello World! 3'},

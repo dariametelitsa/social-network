@@ -2,15 +2,16 @@ import React, { ChangeEvent, RefObject } from 'react';
 import { Post } from "./post/Post";
 import s from './MyPosts.module.scss';
 import { postsProps } from "../../../redux/store";
+import { MyPostsPropsType } from "./MyPostsContainer";
 
-type MyPostsProps = {
-    posts: postsProps[]
-    newPostChange: string
-    changeNewText: (newText: string) => void
-    addPost: () => void
-}
+// type MyPostsProps = {
+//     posts: postsProps[]
+//     newPostChange: string
+//     changeNewText: (newText: string) => void
+//     addPost: () => void
+// }
 
-export const MyPosts = ({posts, changeNewText, newPostChange, addPost}: MyPostsProps) => {
+export const MyPosts = ({posts, changeNewText, newPostChange, addPost}: MyPostsPropsType) => {
     const postElements = posts.map((post: postsProps) => (
         <Post key={post.id} src={post.img} text={post.text} likes={post.likes}/>));
 

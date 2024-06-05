@@ -5,18 +5,19 @@ import s from './Dialogs.module.scss';
 import { DialogItem } from "./DialogItem";
 import { Message } from "./Message";
 import { dialogType, messageType } from "../../redux/store";
+import { DialogsPropsType } from "./DialogsContainer";
 
-type DialogsProps = {
-    dialogsPage: {
-        dialogs: dialogType[]
-        messages: messageType[]
-        newMessageText: string
-    },
-    addMessage: () => void
-    changeNewMessage: (newText: string) => void
-}
+// type DialogsProps = {
+//     dialogsPage: {
+//         dialogs: dialogType[]
+//         messages: messageType[]
+//         newMessageText: string
+//     },
+//     addMessage: () => void
+//     changeNewMessage: (newText: string) => void
+// }
 
-export const Dialogs = ({dialogsPage, addMessage, changeNewMessage}: DialogsProps) => {
+export const Dialogs = ({dialogsPage, addMessage, changeNewMessage}: DialogsPropsType) => {
     const newMessage: RefObject<HTMLTextAreaElement> = React.createRef();
 
     const addNewMessage = () => {
