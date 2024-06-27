@@ -34,6 +34,7 @@ export type dialogsPageType = {
 }
 export type userType = {
     id: string,
+    photoUrl: string
     followed: boolean
     fullName: string
     status: string

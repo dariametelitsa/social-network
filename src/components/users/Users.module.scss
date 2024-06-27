@@ -1,0 +1,27 @@
+.containerUser {
+  margin: 20px;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  border: 1px solid #ffffff;
+
+  & + & {
+    margin-top: 30px;
+  }
+}
+
+.blocksPosition {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &:last-child {
+    margin-left: auto;
+  }
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}

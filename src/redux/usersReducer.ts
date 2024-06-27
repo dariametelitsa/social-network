@@ -18,6 +18,7 @@ const initialState: usersPageType = {
         {
             id: v1(),
             followed: true,
+            photoUrl: 'https://www.hallofseries.com/wp-content/uploads/2018/10/jensen-ackles.jpg',
             fullName: 'Machiavelli',
             status: 'Hi there',
             location: {
@@ -27,6 +28,7 @@ const initialState: usersPageType = {
         },
         {
             id: v1(),
+            photoUrl: 'https://i.ebayimg.com/images/g/hywAAOSwxflZwEwe/s-l1200.webp',
             followed: false,
             fullName: 'Pablo Picasso',
             status: "I'm a great painter!",

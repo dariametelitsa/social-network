@@ -25,6 +25,9 @@ export const Navbar = ({friends}: {friends: myFriendsType[]}) => {
                     <li className={s.item}>
                         <NavLink className={s.link} to={'#1'}>Settings</NavLink>
                     </li>
+                    <li className={s.item}>
+                        <NavLink className={s.link} to={'/users'}>Users</NavLink>
+                    </li>
                 </ul>
 
                 <hr/>
