@@ -8,7 +8,13 @@ export const ChangeNewMessageAction = (newText: string) => ({
     newText
 } as const);
 
-const initialState: dialogsPageType =  {
+type AddMessageActionType = ReturnType<typeof AddMessageAction>
+type ChangeNewMessageActionType = ReturnType<typeof ChangeNewMessageAction>
+export type dialogActionType =
+    AddMessageActionType
+    | ChangeNewMessageActionType
+
+const initialState: dialogsPageType = {
     dialogs: [
         {id: '1', name: 'Tom'},
         {id: '2', name: 'Steve'},
@@ -17,17 +23,17 @@ const initialState: dialogsPageType =  {
         {id: '5', name: 'Mike'},
         {id: '6', name: 'Aurora'},
     ],
-        messages: [
+    messages: [
         {id: '1', message: 'Hello World 1!'},
         {id: '2', message: 'Hello World! 2'},
         {id: '3', message: 'Hello World! 3'},
         {id: '4', message: 'Hello World! 4'},
         {id: '5', message: 'Hello World! 5'},
     ],
-        newMessageText: '',
+    newMessageText: '',
 };
 
-const dialogsReducer = (state: dialogsPageType = initialState, action: DispatchActionTypes): dialogsPageType => {
+const dialogsReducer = (state: dialogsPageType = initialState, action: dialogActionType): dialogsPageType => {
     switch (action.type) {
         case 'ADD_MESSAGE':
             const newMessage: messageType = {

@@ -7,7 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import { DialogsContainer } from "./components/dialogs/DialogsContainer";
 import { DispatchActionTypes } from "./redux/store";
 import { StoreType } from "./redux/reduxStore";
-import { Users } from "./components/users/Users";
+import { UsersContainer } from "./components/users/UsersContainer";
 
 
 type AppProps = {
@@ -24,7 +24,7 @@ function App({store}: AppProps): JSX.Element {
                 <Routes>
                     <Route path={'/profile'} element={<Profile/>}/>
                     <Route path={'/dialogs'} element={<DialogsContainer/>}/>
-                    <Route path={'/users'} element={<Users/>}/>
+                    <Route path={'/users'} element={<UsersContainer/>}/>
                 </Routes>
             </main>
         </div>

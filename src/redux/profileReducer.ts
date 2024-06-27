@@ -9,6 +9,13 @@ export const ChangeNewTextAction = (newText: string) => ({
     newText
 } as const);
 
+type AddPostActionType = ReturnType<typeof AddPostAction>
+type ChangeNewTextActionType = ReturnType<typeof ChangeNewTextAction>
+
+export type profileActionType =
+    AddPostActionType
+    | ChangeNewTextActionType
+
 const initialState: profilePageType = {
     'posts': [
         {
@@ -45,7 +52,7 @@ const initialState: profilePageType = {
      newPostText: 'i am new here'
 };
 
-const profileReducer = (state: profilePageType = initialState, action: DispatchActionTypes): profilePageType => {
+const profileReducer = (state: profilePageType = initialState, action: profileActionType): profilePageType => {
     switch (action.type) {
         case 'ADD_POST':
             const newPost: postsProps = {

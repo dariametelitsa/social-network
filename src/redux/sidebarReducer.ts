@@ -16,7 +16,7 @@ const initialState: myFriendsType[] =  [
     },
 ];
 
-export const sidebarReducer = (state: myFriendsType[] = initialState, action: DispatchActionTypes): myFriendsType[] => {
+export const sidebarReducer = (state: myFriendsType[] = initialState, action: any): myFriendsType[] => {
     return state;
 };
 
