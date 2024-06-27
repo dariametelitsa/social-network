@@ -1,5 +1,6 @@
-import { dialogsPageType, DispatchActionTypes, messageType } from "./store";
+import { dialogsPageType, messageType } from "./store";
 import uuid from "react-uuid";
+import { DispatchActionTypes } from "./reduxStore";
 
 //actions
 export const AddMessageAction = () => ({type: 'ADD_MESSAGE'} as const);
@@ -33,7 +34,7 @@ const initialState: dialogsPageType = {
     newMessageText: '',
 };
 
-const dialogsReducer = (state: dialogsPageType = initialState, action: dialogActionType): dialogsPageType => {
+const dialogsReducer = (state: dialogsPageType = initialState, action: DispatchActionTypes): dialogsPageType => {
     switch (action.type) {
         case 'ADD_MESSAGE':
             const newMessage: messageType = {

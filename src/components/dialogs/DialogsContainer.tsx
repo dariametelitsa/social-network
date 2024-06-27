@@ -1,7 +1,7 @@
 // @flow
 import { AddMessageAction, ChangeNewMessageAction } from "../../redux/dialogsReducer";
 import { Dialogs } from "./Dialogs";
-import { StateType } from "../../redux/reduxStore";
+import { DispatchActionTypes, StateType } from "../../redux/reduxStore";
 import { connect } from "react-redux";
 import { dialogsPageType } from "../../redux/store";
 import { Dispatch } from "redux";
@@ -23,7 +23,7 @@ const mapStateToProps = (state: StateType): mapStateToPropsType => {
     }
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch<DispatchActionTypes>): mapDispatchToPropsType => {
     return {
         addMessage: () => dispatch(AddMessageAction()),
         changeNewMessage: (newText: string) => {dispatch(ChangeNewMessageAction(newText))}

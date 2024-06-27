@@ -1,6 +1,7 @@
-import { DispatchActionTypes, messageType, postsProps, profilePageType, stateType } from "./store";
+import { postsProps, profilePageType } from "./store";
 import uuid from "react-uuid";
 import avatar from "./avatar5.jpeg";
+import { DispatchActionTypes } from "./reduxStore";
 
 //actions
 export const AddPostAction = () => ({type: 'ADD_POST'} as const);
@@ -52,7 +53,7 @@ const initialState: profilePageType = {
      newPostText: 'i am new here'
 };
 
-const profileReducer = (state: profilePageType = initialState, action: profileActionType): profilePageType => {
+const profileReducer = (state: profilePageType = initialState, action: DispatchActionTypes): profilePageType => {
     switch (action.type) {
         case 'ADD_POST':
             const newPost: postsProps = {

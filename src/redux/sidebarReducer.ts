@@ -1,4 +1,4 @@
-import { DispatchActionTypes, myFriendsType } from "./store";
+import { myFriendsType } from "./store";
 import avatar from './avatar5.jpeg'
 
 const initialState: myFriendsType[] =  [
