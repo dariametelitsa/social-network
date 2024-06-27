@@ -17,4 +17,4 @@ const rerenderEntireTree = () => {
     );
 }
 rerenderEntireTree();
-store.subscribe(rerenderEntireTree)
+// store.subscribe(rerenderEntireTree)
