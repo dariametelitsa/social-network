@@ -5,7 +5,7 @@ import { Navbar } from "./components/navbar/Navbar";
 import { Profile } from "./components/profile/Profile";
 import { Route, Routes } from "react-router-dom";
 import { DialogsContainer } from "./components/dialogs/DialogsContainer";
-import { DispatchActionTypes, StoreType } from "./redux/reduxStore";
+import { DispatchActionTypes, StoreType } from "./redux/store";
 import { UsersContainer } from "./components/users/UsersContainer";
 
 

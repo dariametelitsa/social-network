@@ -1,18 +1,19 @@
 // @flow
 import { Users } from "./Users";
 import { connect } from "react-redux";
-import { usersPageType, userType } from "../../redux/store";
-import { DispatchActionTypes, StateType } from "../../redux/reduxStore";
+import { usersPageType } from "../../redux/store-example";
+import { DispatchActionTypes, StateType } from "../../redux/store";
 import { Dispatch } from "redux";
 import { followAC, setUsersAC, unfollowAC } from "../../redux/usersReducer";
+import { UserType } from "../../api/usersAPI";
 
 type mapStateToPropsType = {
     users: usersPageType
 }
 type mapStateToDispatchType = {
-    followUser: (userId: string) => void
-    unfollowUser: (userId: string) => void
-    setUsers: (users: userType[]) => void
+    followUser: (userId: number) => void
+    unfollowUser: (userId: number) => void
+    setUsers: (users: UserType[]) => void
 }
 export type UserPropsType = mapStateToPropsType & mapStateToDispatchType
 
@@ -24,9 +25,9 @@ export const mapStateToProps = (state: StateType): mapStateToPropsType => {
 }
 export const mapStateToDispatch = (dispatch: Dispatch<DispatchActionTypes>): mapStateToDispatchType => {
     return {
-        followUser: (userId: string) => dispatch(followAC(userId)),
-        unfollowUser: (userId: string) => dispatch(unfollowAC(userId)),
-        setUsers: (users: userType[]) => dispatch(setUsersAC(users))
+        followUser: (userId: number) => dispatch(followAC(userId)),
+        unfollowUser: (userId: number) => dispatch(unfollowAC(userId)),
+        setUsers: (users: UserType[]) => dispatch(setUsersAC(users))
     }
 }
 

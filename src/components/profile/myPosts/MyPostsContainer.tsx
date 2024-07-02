@@ -1,8 +1,8 @@
 import { AddPostAction, ChangeNewTextAction } from "../../../redux/profileReducer";
 import { MyPosts } from "./MyPosts";
-import { StateType } from "../../../redux/reduxStore";
+import { StateType } from "../../../redux/store";
 import { connect } from "react-redux";
-import { postsProps } from "../../../redux/store";
+import { postsProps } from "../../../redux/store-example";
 import { Dispatch } from "redux";
 
 type mapStateToPropsType = {

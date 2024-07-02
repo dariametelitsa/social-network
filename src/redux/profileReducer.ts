@@ -1,7 +1,7 @@
-import { postsProps, profilePageType } from "./store";
+import { postsProps, profilePageType } from "./store-example";
 import uuid from "react-uuid";
 import avatar from "./avatar5.jpeg";
-import { DispatchActionTypes } from "./reduxStore";
+import { DispatchActionTypes } from "./store";
 
 //actions
 export const AddPostAction = () => ({type: 'ADD_POST'} as const);

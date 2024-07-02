@@ -1,5 +1,5 @@
 import './index.css';
-import store from "./redux/reduxStore";
+import store from "./redux/store";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -17,4 +17,4 @@ const rerenderEntireTree = () => {
     );
 }
 rerenderEntireTree();
-// store.subscribe(rerenderEntireTree)
+// storeExample.subscribe(rerenderEntireTree)

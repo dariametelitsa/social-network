@@ -24,4 +24,19 @@
   width: 100px;
   height: 100px;
   object-fit: cover;
+  object-position: top;
+}
+
+.button {
+  padding: 4px 10px;
+  border: 1px solid #fff;
+  background-color: white;
+
+  &:hover {
+    border: 1px solid steelblue;
+  }
+
+  &:active {
+    background-color: steelblue;
+  }
 }

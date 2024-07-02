@@ -1,6 +1,6 @@
-import { dialogsPageType, messageType } from "./store";
+import { dialogsPageType, messageType } from "./store-example";
 import uuid from "react-uuid";
-import { DispatchActionTypes } from "./reduxStore";
+import { DispatchActionTypes } from "./store";
 
 //actions
 export const AddMessageAction = () => ({type: 'ADD_MESSAGE'} as const);

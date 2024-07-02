@@ -2,9 +2,22 @@
 import * as React from 'react';
 import { UserPropsType } from "./UsersContainer";
 import s from './Users.module.scss';
+import { userApi } from "../../api/usersAPI";
 
 //{users, unfollowUser, followUser, setUsers}: UserPropsType
 export const Users = ({users, unfollowUser, followUser, setUsers}: UserPropsType) => {
+    if(users.users.length === 0) {
+
+        userApi.getUsers()
+            .then(res =>
+                setUsers(res))
+            .catch(() => {
+                setUsers([])
+            })
+
+    }
+
+    const photo = 'https://i.ebayimg.com/images/g/hywAAOSwxflZwEwe/s-l1200.webp';
     return (
         <div>
             {
@@ -12,18 +25,19 @@ export const Users = ({users, unfollowUser, followUser, setUsers}: UserPropsType
                     return (
                         <div key={u.id} className={s.containerUser}>
                             <div className={s.blocksPosition}>
-                                <img className={s.avatar} src={u.photoUrl} alt={'User avatar'}/>
-                                <button onClick={() => {
-                                }}>Follow
-                                </button>
+                                <img className={s.avatar} src={u.photos.small || photo} alt={'User avatar'}/>
+                                {u.followed
+                                ? <button className={s.button} onClick={() => {unfollowUser(u.id)}}>Follow</button>
+                                : <button className={s.button} onClick={() => {followUser(u.id)}}>Unfollow</button>
+                                }
                             </div>
                             <div className={s.blocksPosition}>
-                                <b>{u.fullName}</b>
+                                <b>{u.name}</b>
                                 <span>{u.status}</span>
                             </div>
                             <div className={s.blocksPosition}>
-                                <span>{u.location.country}</span>
-                                <span>{u.location.city}</span>
+                                <span>Country</span>
+                                <span>City</span>
                             </div>
                         </div>)
                 })

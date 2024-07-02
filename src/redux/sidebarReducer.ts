@@ -1,4 +1,4 @@
-import { myFriendsType } from "./store";
+import { myFriendsType } from "./store-example";
 import avatar from './avatar5.jpeg'
 
 const initialState: myFriendsType[] =  [

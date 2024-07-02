@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Navbar.module.scss';
 import { NavLink } from 'react-router-dom';
-import { myFriendsType } from "../../redux/store";
+import { myFriendsType } from "../../redux/store-example";
 
 export const Navbar = ({friends}: {friends: myFriendsType[]}) => {
     return (

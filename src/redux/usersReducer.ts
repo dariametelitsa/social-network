@@ -1,9 +1,9 @@
-import { usersPageType, userType } from "./store";
-import { v1 } from "uuid";
+import { usersPageType } from "./store-example";
+import { UserType } from "../api/usersAPI";
 
-export const followAC = (userId: string) => ({type: 'FOLLOW', userId}) as const;
-export const unfollowAC = (userId: string) => ({type: 'UNFOLLOW', userId}) as const;
-export const setUsersAC = (users: userType[]) => ({type: 'SET_USERS', users}) as const;
+export const followAC = (userId: number) => ({type: 'FOLLOW', userId}) as const;
+export const unfollowAC = (userId: number) => ({type: 'UNFOLLOW', userId}) as const;
+export const setUsersAC = (users: UserType[]) => ({type: 'SET_USERS', users}) as const;
 
 type followAType = ReturnType<typeof followAC>
 type unfollowAType = ReturnType<typeof unfollowAC>
@@ -14,30 +14,7 @@ export type userActionType =
     | setUsersAType
 
 const initialState: usersPageType = {
-    users: [
-        {
-            id: v1(),
-            followed: true,
-            photoUrl: 'https://www.hallofseries.com/wp-content/uploads/2018/10/jensen-ackles.jpg',
-            fullName: 'Machiavelli',
-            status: 'Hi there',
-            location: {
-                city: 'New-York',
-                country: 'USA',
-            }
-        },
-        {
-            id: v1(),
-            photoUrl: 'https://i.ebayimg.com/images/g/hywAAOSwxflZwEwe/s-l1200.webp',
-            followed: false,
-            fullName: 'Pablo Picasso',
-            status: "I'm a great painter!",
-            location: {
-                city: 'Barcelona',
-                country: 'Spain',
-            }
-        },
-    ],
+    users: [],
 };
 
 const usersReducer = (state: usersPageType = initialState, action: userActionType): usersPageType => {
