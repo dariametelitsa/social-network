@@ -1,6 +1,7 @@
 import { dialogsPageType, messageType } from "./store-example";
 import uuid from "react-uuid";
 import { DispatchActionTypes } from "./store";
+import { DialogsPageType } from "../types/types";
 
 //actions
 export const AddMessageAction = () => ({type: 'ADD_MESSAGE'} as const);
@@ -15,7 +16,7 @@ export type dialogActionType =
     AddMessageActionType
     | ChangeNewMessageActionType
 
-const initialState: dialogsPageType = {
+const initialState: DialogsPageType = {
     dialogs: [
         {id: '1', name: 'Tom'},
         {id: '2', name: 'Steve'},

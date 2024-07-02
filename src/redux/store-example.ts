@@ -45,8 +45,10 @@ export type dialogsPageType = {
 //         country: string
 //     }
 // }
-export type usersPageType = {
-    users: UserType[],
+export type UsersPageType = {
+    users: UserType[]
+    pageSize: number
+    totalUserCount: number
 }
 
 export type stateType = {
