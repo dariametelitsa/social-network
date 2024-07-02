@@ -6,7 +6,7 @@ import { Profile } from "./features/profile/Profile";
 import { Route, Routes } from "react-router-dom";
 import { DialogsContainer } from "./features/dialogs/DialogsContainer";
 import { DispatchActionTypes, StoreType } from "./redux/store";
-import { UsersContainer } from "./features/users/UsersContainer";
+import UsersContainer from "./features/users/UsersContainer";
 
 
 type AppProps = {

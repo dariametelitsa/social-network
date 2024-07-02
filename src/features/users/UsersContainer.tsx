@@ -9,8 +9,9 @@ import {
     setUsersAC,
     unfollowAC
 } from "../../redux/usersReducer";
-import { UserType } from "../../api/usersAPI";
-import { UsersAPIComponent } from "./UsersAPIComponent";
+import { userApi, UserType } from "../../api/usersAPI";
+import React from "react";
+import { Users } from "./Users";
 
 
 type mapStateToPropsType = {
@@ -28,6 +29,57 @@ type mapStateToDispatchType = {
 }
 export type UserPropsType = mapStateToPropsType & mapStateToDispatchType
 
+type UsersAPIComponentState = {
+    photo: string
+}
+
+class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentState> {
+    private readonly property: string;
+
+    constructor(props: UserPropsType) {
+        super(props);
+        this.state = {
+            photo: 'https://i.ebayimg.com/images/g/hywAAOSwxflZwEwe/s-l1200.webp'
+        }
+        this.property = "It's private";
+    }
+
+    componentDidMount() {
+        userApi.getUsers(1, 10)
+            .then(res => {
+                this.props.setUsers(res.items);
+                this.props.setTotalUserCount(res.totalCount);
+            })
+            .catch(() => {
+                this.props.setUsers([])
+            })
+    }
+    onPageChanged(pageNumber: number) {
+        this.props.setCurrentPage(pageNumber);
+        userApi.getUsers(pageNumber, this.props.pageSize)
+            .then(res =>
+                this.props.setUsers(res.items))
+            .catch(() => {
+                this.props.setUsers([])
+            })
+    }
+
+    render() {
+        const {users, pageSize, totalUserCount, currentPage, unfollowUser, followUser} = this.props;
+
+        return (
+            <Users
+                users={users}
+                totalUserCount={totalUserCount}
+                pageSize={pageSize}
+                currentPage={currentPage}
+                onPageChangedHandler={this.onPageChanged.bind(this)}
+                followUser={followUser}
+                unfollowUser={unfollowUser}
+            />
+        )
+    }
+}
 
 export const mapStateToProps = (state: StateType): mapStateToPropsType => {
     return {
@@ -47,4 +99,4 @@ export const mapStateToDispatch = (dispatch: Dispatch<DispatchActionTypes>): map
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapStateToDispatch)(UsersAPIComponent);
+export default connect(mapStateToProps, mapStateToDispatch)(UsersContainer);
