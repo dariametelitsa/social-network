@@ -23,7 +23,7 @@ type mapStateToPropsType = {
 type mapStateToDispatchType = {
     followUser: (userId: number) => void
     unfollowUser: (userId: number) => void
-    setUsers: (users: UserType[]) => void
+    setUsers: (users: UserType[], extended?: boolean) => void
     setCurrentPage: (pageNumber: number) => void
     setTotalUserCount: (total: number) => void
 }
@@ -31,6 +31,8 @@ export type UserPropsType = mapStateToPropsType & mapStateToDispatchType
 
 type UsersAPIComponentState = {
     photo: string
+    pagesCount: number
+    extendedPage: number
 }
 
 class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentState> {
@@ -39,13 +41,21 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
     constructor(props: UserPropsType) {
         super(props);
         this.state = {
-            photo: 'https://i.ebayimg.com/images/g/hywAAOSwxflZwEwe/s-l1200.webp'
+            photo: 'https://i.ebayimg.com/images/g/hywAAOSwxflZwEwe/s-l1200.webp',
+            pagesCount: Math.ceil(this.props.totalUserCount/this.props.pageSize) || 1,
+            extendedPage: this.props.currentPage,
         }
         this.property = "It's private";
     }
 
+    componentDidUpdate(prevProps: Readonly<UserPropsType>, prevState: Readonly<UsersAPIComponentState>, snapshot?: any) {
+        //this.setState({pagesCount: Math.ceil(this.props.totalUserCount/this.props.pageSize) || 1})
+        //todo recalculate pagesCount when page refresh
+        console.log('update user')
+    }
+
     componentDidMount() {
-        userApi.getUsers(1, 10)
+        userApi.getUsers(this.props.currentPage, 10)
             .then(res => {
                 this.props.setUsers(res.items);
                 this.props.setTotalUserCount(res.totalCount);
@@ -54,6 +64,11 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
                 this.props.setUsers([])
             })
     }
+
+    componentWillUnmount() {
+        this.props.setCurrentPage(1);
+    }
+
     onPageChanged(pageNumber: number) {
         this.props.setCurrentPage(pageNumber);
         userApi.getUsers(pageNumber, this.props.pageSize)
@@ -64,16 +79,28 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
             })
     }
 
+    onLoadMoreUsers(){
+        const newPage = this.state.extendedPage + 1 <= this.state.pagesCount ? this.state.extendedPage + 1 : this.state.pagesCount
+        //this.props.setCurrentPage(newPage);
+        this.setState({extendedPage: newPage});
+        userApi.getUsers(newPage, this.props.pageSize)
+            .then(res =>
+                this.props.setUsers(res.items, true))
+            .catch(() => {
+                this.props.setUsers([])
+            })
+    }
+
     render() {
-        const {users, pageSize, totalUserCount, currentPage, unfollowUser, followUser} = this.props;
+        const {users, currentPage, unfollowUser, followUser} = this.props;
 
         return (
             <Users
                 users={users}
-                totalUserCount={totalUserCount}
-                pageSize={pageSize}
+                pagesCount={this.state.pagesCount}
                 currentPage={currentPage}
                 onPageChangedHandler={this.onPageChanged.bind(this)}
+                onLoadMoreUsers={this.onLoadMoreUsers.bind(this)}
                 followUser={followUser}
                 unfollowUser={unfollowUser}
             />
@@ -93,7 +120,7 @@ export const mapStateToDispatch = (dispatch: Dispatch<DispatchActionTypes>): map
     return {
         followUser: (userId: number) => dispatch(followAC(userId)),
         unfollowUser: (userId: number) => dispatch(unfollowAC(userId)),
-        setUsers: (users: UserType[]) => dispatch(setUsersAC(users)),
+        setUsers: (users: UserType[], extended?: boolean) => dispatch(setUsersAC(users, extended)),
         setCurrentPage: (pageNumber: number) => dispatch(setCurrentPageAC(pageNumber)),
         setTotalUserCount: (total: number) => dispatch(setTotalUsersCountAC(total)),
     }

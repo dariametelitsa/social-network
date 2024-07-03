@@ -36,7 +36,7 @@ export const Pagination = ({pagesCount, currentPage = 1, onPageClick}: Paginatio
         }
         const preStart = currentPage - 3 > 0 ? currentPage - 3 : 1;
         const end = currentPage + 3 < pagesCount ? currentPage + 3 + (preStart === 1 ? 4 - currentPage : 0) : pagesCount;
-        const start = currentPage + 3 < pagesCount ? preStart : preStart - 3 + (pagesCount - currentPage) ;
+        const start = currentPage + 3 < pagesCount ? preStart : currentPage - 3 > 0 ? preStart - 3 + (pagesCount - currentPage) : 1 ;
 
         for (let i = start; i <= end; i++) {
             pageNumbers.push(

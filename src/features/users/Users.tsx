@@ -6,17 +6,15 @@ import s from "./Users.module.scss";
 
 type UsersProps = {
     users: UserType[]
-    totalUserCount: number
-    pageSize: number
+    pagesCount: number
     currentPage: number
     onPageChangedHandler: (pageNumber: number) => void
+    onLoadMoreUsers: () => void
     unfollowUser: (userId: number) => void
     followUser: (userId: number) => void
 };
-export const Users = ({users, totalUserCount, pageSize, currentPage,onPageChangedHandler, unfollowUser, followUser}: UsersProps) => {
-
+export const Users = ({users, pagesCount, currentPage,onPageChangedHandler, onLoadMoreUsers, unfollowUser, followUser}: UsersProps) => {
     const defaultPhoto = 'https://i.ebayimg.com/images/g/hywAAOSwxflZwEwe/s-l1200.webp';
-    let pagesCount = Math.ceil(totalUserCount/pageSize);
     return (
         <div>
             <Pagination pagesCount={pagesCount} currentPage={currentPage} onPageClick={onPageChangedHandler}/>
@@ -48,5 +46,6 @@ export const Users = ({users, totalUserCount, pageSize, currentPage,onPageChange
                     )
                 })
             }
+            <button onClick={() => onLoadMoreUsers()}>Load more...</button>
         </div>)
 };
