@@ -49,9 +49,10 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
     }
 
     componentDidUpdate(prevProps: Readonly<UserPropsType>, prevState: Readonly<UsersAPIComponentState>, snapshot?: any) {
-        //this.setState({pagesCount: Math.ceil(this.props.totalUserCount/this.props.pageSize) || 1})
-        //todo recalculate pagesCount when page refresh
-        console.log('update user')
+        if (prevProps.totalUserCount !== this.props.totalUserCount) {
+            this.setState({
+                pagesCount: Math.ceil(this.props.totalUserCount/this.props.pageSize) || 1})
+        }
     }
 
     componentDidMount() {
@@ -71,6 +72,7 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
 
     onPageChanged(pageNumber: number) {
         this.props.setCurrentPage(pageNumber);
+        this.setState({extendedPage: pageNumber})
         userApi.getUsers(pageNumber, this.props.pageSize)
             .then(res =>
                 this.props.setUsers(res.items))
@@ -81,7 +83,6 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
 
     onLoadMoreUsers(){
         const newPage = this.state.extendedPage + 1 <= this.state.pagesCount ? this.state.extendedPage + 1 : this.state.pagesCount
-        //this.props.setCurrentPage(newPage);
         this.setState({extendedPage: newPage});
         userApi.getUsers(newPage, this.props.pageSize)
             .then(res =>

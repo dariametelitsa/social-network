@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { userApi, UserType } from "../../api/usersAPI";
+import { UserType } from "../../api/usersAPI";
 import { Pagination } from "../../components/pagination/Pagination";
 import s from "./Users.module.scss";
 

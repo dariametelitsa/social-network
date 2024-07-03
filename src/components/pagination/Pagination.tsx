@@ -32,7 +32,7 @@ export const Pagination = ({pagesCount, currentPage = 1, onPageClick}: Paginatio
     const paginationGeneration = () => {
         const pageNumbers: React.ReactNode[] = [];
         if(currentPage - 3 > 1) {
-            pageNumbers.push(<span className={styles.page + ' ' + styles.dots}>...</span>);
+            pageNumbers.push(<span key={'startDots'} className={styles.page + ' ' + styles.dots}>...</span>);
         }
         const preStart = currentPage - 3 > 0 ? currentPage - 3 : 1;
         const end = currentPage + 3 < pagesCount ? currentPage + 3 + (preStart === 1 ? 4 - currentPage : 0) : pagesCount;
@@ -44,7 +44,7 @@ export const Pagination = ({pagesCount, currentPage = 1, onPageClick}: Paginatio
                         onClick={() => onPageClickHandler(i)}>{i}</button>);
         }
         if(currentPage + 3 < pagesCount) {
-            pageNumbers.push(<span className={styles.page + ' ' + styles.dots}>...</span>);
+            pageNumbers.push(<span key={'endDdots'} className={styles.page + ' ' + styles.dots}>...</span>);
         }
         return pageNumbers;
     }
