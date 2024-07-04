@@ -5,6 +5,7 @@ import { Dispatch } from "redux";
 import {
     followAC,
     setCurrentPageAC,
+    setIsFetching,
     setTotalUsersCountAC,
     setUsersAC,
     unfollowAC
@@ -12,6 +13,7 @@ import {
 import { userApi, UserType } from "../../api/usersAPI";
 import React from "react";
 import { Users } from "./Users";
+import style from './Users.module.scss'
 
 
 type mapStateToPropsType = {
@@ -19,6 +21,7 @@ type mapStateToPropsType = {
     pageSize: number
     totalUserCount: number
     currentPage: number
+    isFetching: boolean
 }
 type mapStateToDispatchType = {
     followUser: (userId: number) => void
@@ -26,6 +29,7 @@ type mapStateToDispatchType = {
     setUsers: (users: UserType[], extended?: boolean) => void
     setCurrentPage: (pageNumber: number) => void
     setTotalUserCount: (total: number) => void
+    setIsFetching: (isFetching: boolean) => void
 }
 export type UserPropsType = mapStateToPropsType & mapStateToDispatchType
 
@@ -42,7 +46,7 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
         super(props);
         this.state = {
             photo: 'https://i.ebayimg.com/images/g/hywAAOSwxflZwEwe/s-l1200.webp',
-            pagesCount: Math.ceil(this.props.totalUserCount/this.props.pageSize) || 1,
+            pagesCount: Math.ceil(this.props.totalUserCount / this.props.pageSize) || 1,
             extendedPage: this.props.currentPage,
         }
         this.property = "It's private";
@@ -51,11 +55,13 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
     componentDidUpdate(prevProps: Readonly<UserPropsType>, prevState: Readonly<UsersAPIComponentState>, snapshot?: any) {
         if (prevProps.totalUserCount !== this.props.totalUserCount) {
             this.setState({
-                pagesCount: Math.ceil(this.props.totalUserCount/this.props.pageSize) || 1})
+                pagesCount: Math.ceil(this.props.totalUserCount / this.props.pageSize) || 1
+            })
         }
     }
 
     componentDidMount() {
+        this.props.setIsFetching(true)
         userApi.getUsers(this.props.currentPage, 10)
             .then(res => {
                 this.props.setUsers(res.items);
@@ -63,6 +69,9 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
             })
             .catch(() => {
                 this.props.setUsers([])
+            })
+            .finally(() => {
+                this.props.setIsFetching(false)
             })
     }
 
@@ -81,7 +90,7 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
             })
     }
 
-    onLoadMoreUsers(){
+    onLoadMoreUsers() {
         const newPage = this.state.extendedPage + 1 <= this.state.pagesCount ? this.state.extendedPage + 1 : this.state.pagesCount
         this.setState({extendedPage: newPage});
         userApi.getUsers(newPage, this.props.pageSize)
@@ -93,18 +102,21 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
     }
 
     render() {
-        const {users, currentPage, unfollowUser, followUser} = this.props;
+        const {users, currentPage, unfollowUser, followUser, isFetching} = this.props;
 
         return (
-            <Users
-                users={users}
-                pagesCount={this.state.pagesCount}
-                currentPage={currentPage}
-                onPageChangedHandler={this.onPageChanged.bind(this)}
-                onLoadMoreUsers={this.onLoadMoreUsers.bind(this)}
-                followUser={followUser}
-                unfollowUser={unfollowUser}
-            />
+            <>
+                {isFetching && <span className={style.loader}></span>}
+                <Users
+                    users={users}
+                    pagesCount={this.state.pagesCount}
+                    currentPage={currentPage}
+                    onPageChangedHandler={this.onPageChanged.bind(this)}
+                    onLoadMoreUsers={this.onLoadMoreUsers.bind(this)}
+                    followUser={followUser}
+                    unfollowUser={unfollowUser}
+                />
+            </>
         )
     }
 }
@@ -115,15 +127,17 @@ export const mapStateToProps = (state: StateType): mapStateToPropsType => {
         pageSize: state.usersPage.pageSize,
         totalUserCount: state.usersPage.totalUserCount,
         currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching,
     }
 }
 export const mapStateToDispatch = (dispatch: Dispatch<DispatchActionTypes>): mapStateToDispatchType => {
     return {
-        followUser: (userId: number) => dispatch(followAC(userId)),
-        unfollowUser: (userId: number) => dispatch(unfollowAC(userId)),
-        setUsers: (users: UserType[], extended?: boolean) => dispatch(setUsersAC(users, extended)),
-        setCurrentPage: (pageNumber: number) => dispatch(setCurrentPageAC(pageNumber)),
-        setTotalUserCount: (total: number) => dispatch(setTotalUsersCountAC(total)),
+        followUser: (userId) => dispatch(followAC(userId)),
+        unfollowUser: (userId) => dispatch(unfollowAC(userId)),
+        setUsers: (users, extended?) => dispatch(setUsersAC(users, extended)),
+        setCurrentPage: (pageNumber) => dispatch(setCurrentPageAC(pageNumber)),
+        setTotalUserCount: (total) => dispatch(setTotalUsersCountAC(total)),
+        setIsFetching: (isFetching) => dispatch(setIsFetching(isFetching)),
     }
 }
 

@@ -3,6 +3,7 @@ import * as React from 'react';
 import { UserType } from "../../api/usersAPI";
 import { Pagination } from "../../components/pagination/Pagination";
 import s from "./Users.module.scss";
+import { useParams } from "react-router-dom";
 
 type UsersProps = {
     users: UserType[]

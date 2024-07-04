@@ -12,6 +12,7 @@ export type UsersPageType = {
     pageSize: number
     totalUserCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 type DialogType = {

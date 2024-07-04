@@ -37,4 +37,5 @@ a {
 .main_wrapper {
   grid-area: main;
   background-color: #a4b7e0;
+  position: relative;
 }
