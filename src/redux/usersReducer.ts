@@ -1,19 +1,19 @@
 import { UserType } from "../api/usersAPI";
 import { UsersPageType } from "../types/types";
 
-export const followAC = (userId: number) => ({type: 'FOLLOW', userId}) as const;
-export const unfollowAC = (userId: number) => ({type: 'UNFOLLOW', userId}) as const;
-export const setUsersAC = (users: UserType[], extended: boolean = false) => ({type: 'SET_USERS', users, extended}) as const;
-export const setCurrentPageAC = (currentPage: number) => ({type: 'SET_CURRENT_PAGE', currentPage}) as const;
-export const setTotalUsersCountAC = (totalUsersCount: number) => ({type: 'SET_TOTAL_USER_COUNT', totalUsersCount}) as const;
+export const followUser = (userId: number) => ({type: 'FOLLOW_USER', userId}) as const;
+export const unfollowUser = (userId: number) => ({type: 'UNFOLLOW_USER', userId}) as const;
+export const setUsers = (users: UserType[], extended: boolean = false) => ({type: 'SET_USERS', users, extended}) as const;
+export const setCurrentPage = (currentPage: number) => ({type: 'SET_CURRENT_PAGE', currentPage}) as const;
+export const setTotalUsersCount = (totalUsersCount: number) => ({type: 'SET_TOTAL_USER_COUNT', totalUsersCount}) as const;
 export const setIsFetching = (isFetching: boolean) => ({type: 'SET_IS_FETCHING', isFetching}) as const;
 
 export type userActionType =
-    | ReturnType<typeof followAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setTotalUsersCountAC>
+    | ReturnType<typeof followUser>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof unfollowUser>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof setIsFetching>
 
 const initialState: UsersPageType = {
@@ -26,14 +26,14 @@ const initialState: UsersPageType = {
 
 const usersReducer = (state: UsersPageType = initialState, action: userActionType): UsersPageType => {
     switch (action.type) {
-        case 'FOLLOW': {
+        case 'FOLLOW_USER': {
             return {
                 ...state, users: state.users.map(u => {
                     return u.id === action.userId ? {...u, followed: true} : u
                 })
             }
         }
-        case "UNFOLLOW": {
+        case "UNFOLLOW_USER": {
             return {
                 ...state, users: state.users.map(u => {
                     return u.id === action.userId ? {...u, followed: false} : u

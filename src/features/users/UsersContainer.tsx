@@ -1,19 +1,18 @@
 // @flow
 import { connect } from "react-redux";
-import { DispatchActionTypes, StateType } from "../../redux/store";
-import { Dispatch } from "redux";
+import { StateType } from "../../redux/store";
 import {
-    followAC,
-    setCurrentPageAC,
+    followUser,
+    setCurrentPage,
     setIsFetching,
-    setTotalUsersCountAC,
-    setUsersAC,
-    unfollowAC
+    setTotalUsersCount,
+    setUsers,
+    unfollowUser
 } from "../../redux/usersReducer";
 import { userApi, UserType } from "../../api/usersAPI";
 import React from "react";
 import { Users } from "./Users";
-import style from './Users.module.scss'
+import Preloader from "../../components/preloader/Preloader";
 
 
 type mapStateToPropsType = {
@@ -28,8 +27,8 @@ type mapStateToDispatchType = {
     unfollowUser: (userId: number) => void
     setUsers: (users: UserType[], extended?: boolean) => void
     setCurrentPage: (pageNumber: number) => void
-    setTotalUserCount: (total: number) => void
     setIsFetching: (isFetching: boolean) => void
+    setTotalUsersCount: (total: number) => void
 }
 export type UserPropsType = mapStateToPropsType & mapStateToDispatchType
 
@@ -65,7 +64,7 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
         userApi.getUsers(this.props.currentPage, 10)
             .then(res => {
                 this.props.setUsers(res.items);
-                this.props.setTotalUserCount(res.totalCount);
+                this.props.setTotalUsersCount(res.totalCount);
             })
             .catch(() => {
                 this.props.setUsers([])
@@ -106,7 +105,7 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
 
         return (
             <>
-                {isFetching && <span className={style.loader}></span>}
+                {isFetching && <Preloader/>}
                 <Users
                     users={users}
                     pagesCount={this.state.pagesCount}
@@ -130,15 +129,24 @@ export const mapStateToProps = (state: StateType): mapStateToPropsType => {
         isFetching: state.usersPage.isFetching,
     }
 }
-export const mapStateToDispatch = (dispatch: Dispatch<DispatchActionTypes>): mapStateToDispatchType => {
-    return {
-        followUser: (userId) => dispatch(followAC(userId)),
-        unfollowUser: (userId) => dispatch(unfollowAC(userId)),
-        setUsers: (users, extended?) => dispatch(setUsersAC(users, extended)),
-        setCurrentPage: (pageNumber) => dispatch(setCurrentPageAC(pageNumber)),
-        setTotalUserCount: (total) => dispatch(setTotalUsersCountAC(total)),
-        setIsFetching: (isFetching) => dispatch(setIsFetching(isFetching)),
-    }
-}
+// export const mapStateToDispatch = (dispatch: Dispatch<DispatchActionTypes>): mapStateToDispatchType => {
+//     return {
+//         followUser: (userId) => dispatch(followAC(userId)),
+//         unfollowUser: (userId) => dispatch(unfollowAC(userId)),
+//         setUsers: (users, extended?) => dispatch(setUsersAC(users, extended)),
+//         setCurrentPage: (pageNumber) => dispatch(setCurrentPageAC(pageNumber)),
+//         setTotalUserCount: (total) => dispatch(setTotalUsersCountAC(total)),
+//         setIsFetching: (isFetching) => dispatch(setIsFetching(isFetching)),
+//     }
+// }
+//
 
-export default connect(mapStateToProps, mapStateToDispatch)(UsersContainer);
+//mapDispatchToProps может принимать объект с ACS
+export default connect(mapStateToProps, {
+    followUser,
+    unfollowUser,
+    setUsers,
+    setCurrentPage,
+    setIsFetching,
+    setTotalUsersCount,
+})(UsersContainer);
