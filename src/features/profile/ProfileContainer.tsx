@@ -8,10 +8,24 @@ import { useParams, } from "react-router-dom";
 
 class ProfileContainer extends React.Component<ProfileContainerProps> {
     componentDidMount() {
-        userApi.getUserProfile(this.props.router.params.userId)
+        let userId = this.props.router.params.userId;
+        if(!userId) {
+            userId = 2;
+        }
+        userApi.getUserProfile(userId)
             .then(res => {
                 this.props.setUserProfile(res.data)
             })
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfileContainerProps>, prevState: Readonly<{}>, snapshot?: any) {
+        if(prevProps.router.params.userId !== this.props.router.params.userId) {
+            const userId = 2;
+            userApi.getUserProfile(userId)
+                .then(res => {
+                    this.props.setUserProfile(res.data)
+                })
+        }
     }
 
     render() {
