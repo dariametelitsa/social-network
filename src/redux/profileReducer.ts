@@ -1,23 +1,23 @@
-import { postsProps, profilePageType } from "./store-example";
+import { postsProps, ProfilePageType } from "./store-example";
 import uuid from "react-uuid";
 import avatar from "./avatar5.jpeg";
 import { DispatchActionTypes } from "./store";
+import { GetUserProfileResponseType } from "../api/usersAPI";
 
 //actions
-export const AddPostAction = () => ({type: 'ADD_POST'} as const);
-export const ChangeNewTextAction = (newText: string) => ({
+export const addPostAction = () => ({type: 'ADD_POST'} as const);
+export const changeNewTextAction = (newText: string) => ({
     type: 'UPDATE_NEW_POST_TEXT',
     newText
 } as const);
-
-type AddPostActionType = ReturnType<typeof AddPostAction>
-type ChangeNewTextActionType = ReturnType<typeof ChangeNewTextAction>
+export const setUserProfile = (profile: GetUserProfileResponseType) => ({type: 'SET_USER_PROFILE', profile} as const);
 
 export type profileActionType =
-    AddPostActionType
-    | ChangeNewTextActionType
+    | ReturnType<typeof addPostAction>
+    | ReturnType<typeof changeNewTextAction>
+    | ReturnType<typeof setUserProfile>
 
-const initialState: profilePageType = {
+const initialState: ProfilePageType = {
     'posts': [
         {
             id: uuid(),
@@ -50,10 +50,11 @@ const initialState: profilePageType = {
             likes: 972,
         },
     ],
-     newPostText: 'i am new here'
+     newPostText: 'i am new here',
+    profile: null
 };
 
-const profileReducer = (state: profilePageType = initialState, action: DispatchActionTypes): profilePageType => {
+const profileReducer = (state: ProfilePageType = initialState, action: DispatchActionTypes): ProfilePageType => {
     switch (action.type) {
         case 'ADD_POST':
             const newPost: postsProps = {
@@ -65,6 +66,9 @@ const profileReducer = (state: profilePageType = initialState, action: DispatchA
             return {...state, posts: [...state.posts, newPost], newPostText: ''};
         case 'UPDATE_NEW_POST_TEXT':
             return {...state, newPostText: action.newText};
+        case "SET_USER_PROFILE": {
+            return {...state, profile: action.profile}
+        }
         default:
             return state;
     }

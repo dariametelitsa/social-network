@@ -15,6 +15,9 @@ export type StateType = ReturnType<typeof rootReducer>;
 
 const store = createStore(rootReducer);
 
+// @ts-ignore
+window.store = store;
+
 export type StoreType = Store<EmptyObject & StateType>
 
 export type DispatchActionTypes = userActionType | profileActionType | dialogActionType

@@ -14,7 +14,6 @@ import React from "react";
 import { Users } from "./Users";
 import Preloader from "../../components/preloader/Preloader";
 
-
 type mapStateToPropsType = {
     users: UserType[]
     pageSize: number

@@ -1,12 +1,15 @@
 import React from 'react';
 import { ProfileInfo } from "./profileInfo/ProfileInfo";
 import { MyPostsContainer } from "./myPosts/MyPostsContainer";
+import { GetUserProfileResponseType } from "../../api/usersAPI";
 
-
-export const Profile = () => {
+type ProfileProps = {
+    profile: GetUserProfileResponseType | null
+}
+export const Profile = ({profile}: ProfileProps) => {
     return (
         <div>
-            <ProfileInfo />
+            <ProfileInfo profile={profile} />
             <MyPostsContainer />
         </div>
     );

@@ -1,10 +1,10 @@
 import uuid from "react-uuid";
 import avatar from './avatar5.jpeg'
-import profileReducer, { AddPostAction, ChangeNewTextAction } from "./profileReducer";
 import dialogsReducer, { AddMessageAction, ChangeNewMessageAction } from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 import { DispatchActionTypes } from "./store";
-import { UserType } from "../api/usersAPI";
+import { GetUserProfileResponseType, UserType } from "../api/usersAPI";
+import profileReducer, { addPostAction, changeNewTextAction } from "./profileReducer";
 
 export type postsProps = {
     id: string;
@@ -24,9 +24,10 @@ export type myFriendsType = {
     img: string,
     name: string,
 };
-export type profilePageType = {
+export type ProfilePageType = {
     posts: postsProps[]
     newPostText: string
+    profile: GetUserProfileResponseType | null
 }
 export type dialogsPageType = {
     'dialogs': dialogType[]
@@ -52,15 +53,15 @@ export type UsersPageType = {
 }
 
 export type stateType = {
-    profilePage: profilePageType
+    profilePage: ProfilePageType
     dialogsPage: dialogsPageType
     sidebar: myFriendsType[]
 };
 
 //AC
-export type AddPostActionType = ReturnType<typeof AddPostAction>
+export type AddPostActionType = ReturnType<typeof addPostAction>
 export type AddMessageActionType = ReturnType<typeof AddMessageAction>
-export type ChangeNewTextActionType = ReturnType<typeof ChangeNewTextAction>
+export type ChangeNewTextActionType = ReturnType<typeof changeNewTextAction>
 export type ChangeNewMessageActionType = ReturnType<typeof ChangeNewMessageAction>
 
 //export type DispatchActionTypes = AddPostActionType | ChangeNewTextActionType | ChangeNewMessageActionType | AddMessageActionType
@@ -79,7 +80,7 @@ export type TStore = {
 
 export const storeExample: TStore = {
     _state: {
-        'profilePage': {
+        profilePage: {
             'posts': [
                 {
                     id: uuid(),
@@ -112,7 +113,8 @@ export const storeExample: TStore = {
                     likes: 972,
                 },
             ],
-            newPostText: 'i am new here'
+            newPostText: 'i am new here',
+            profile: null,
         },
         'dialogsPage': {
             'dialogs': [

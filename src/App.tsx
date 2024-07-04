@@ -7,6 +7,8 @@ import { Route, Routes } from "react-router-dom";
 import { DialogsContainer } from "./features/dialogs/DialogsContainer";
 import { DispatchActionTypes, StoreType } from "./redux/store";
 import UsersContainer from "./features/users/UsersContainer";
+import { PATH } from "./routes/PATHS";
+import ProfileContainer from "./features/profile/ProfileContainer";
 
 
 type AppProps = {
@@ -21,9 +23,9 @@ function App({store}: AppProps): JSX.Element {
             <Navbar friends={store.getState().sidebar}/>
             <main className="main_wrapper">
                 <Routes>
-                    <Route path={'/profile'} element={<Profile/>}/>
-                    <Route path={'/dialogs'} element={<DialogsContainer/>}/>
-                    <Route path={'/users'} element={<UsersContainer/>}/>
+                    <Route path={PATH.PROFILE} element={<ProfileContainer/>}/>
+                    <Route path={PATH.DIALOGS} element={<DialogsContainer/>}/>
+                    <Route path={PATH.USERS} element={<UsersContainer/>}/>
                 </Routes>
             </main>
         </div>

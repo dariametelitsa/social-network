@@ -3,6 +3,8 @@ import * as React from 'react';
 import { UserType } from "../../api/usersAPI";
 import { Pagination } from "../../components/pagination/Pagination";
 import s from "./Users.module.scss";
+import { Link } from "react-router-dom";
+import { PATH } from "../../routes/PATHS";
 
 type UsersProps = {
     users: UserType[]
@@ -23,8 +25,10 @@ export const Users = ({users, pagesCount, currentPage,onPageChangedHandler, onLo
                     return (
                         <div key={u.id} className={s.containerUser}>
                             <div className={s.blocksPosition}>
-                                <img className={s.avatar} src={u.photos.small || defaultPhoto}
-                                     alt={'User avatar'}/>
+                                <Link to={`${PATH.PROFILE}/${u.id}`}>
+                                    <img className={s.avatar} src={u.photos.small || defaultPhoto}
+                                            alt={'User avatar'}/>
+                                </Link>
                                 {u.followed
                                     ? <button className={s.button} onClick={() => {
                                         unfollowUser(u.id)

@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Navbar.module.scss';
 import { NavLink } from 'react-router-dom';
 import { myFriendsType } from "../../redux/store-example";
+import { PATH } from "../../routes/PATHS";
 
 export const Navbar = ({friends}: {friends: myFriendsType[]}) => {
     return (
@@ -10,11 +11,11 @@ export const Navbar = ({friends}: {friends: myFriendsType[]}) => {
                 <ul className={s.navList}>
                     <li className={s.item}>
                         <NavLink className={({isActive}) => isActive ? s.active : undefined}
-                                 to={'/profile'}>Profile</NavLink>
+                                 to={PATH.PROFILE}>Profile</NavLink>
                     </li>
                     <li className={s.item}>
                         <NavLink className={({isActive}) => isActive ? s.active : undefined}
-                                 to={'/dialogs'}>Message</NavLink>
+                                 to={PATH.DIALOGS}>Message</NavLink>
                     </li>
                     <li className={s.item}>
                         <NavLink className={s.link} to={'#1'}>News</NavLink>
@@ -26,7 +27,7 @@ export const Navbar = ({friends}: {friends: myFriendsType[]}) => {
                         <NavLink className={s.link} to={'#1'}>Settings</NavLink>
                     </li>
                     <li className={s.item}>
-                        <NavLink className={s.link} to={'/users'}>Users</NavLink>
+                        <NavLink className={s.link} to={PATH.USERS}>Users</NavLink>
                     </li>
                 </ul>
 
