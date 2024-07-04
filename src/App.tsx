@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import { Header } from "./features/header/Header";
 import { Navbar } from "./features/navbar/Navbar";
-import { Profile } from "./features/profile/Profile";
 import { Route, Routes } from "react-router-dom";
 import { DialogsContainer } from "./features/dialogs/DialogsContainer";
 import { DispatchActionTypes, StoreType } from "./redux/store";
