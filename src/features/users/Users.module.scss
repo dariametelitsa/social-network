@@ -29,14 +29,19 @@
 
 .button {
   padding: 4px 10px;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   background-color: white;
 
   &:hover {
-    border: 1px solid steelblue;
+    border: 2px solid steelblue;
   }
 
   &:active {
     background-color: steelblue;
+  }
+
+  &.unfollow {
+    background-color: transparent;
+    border: 2px solid steelblue;
   }
 }

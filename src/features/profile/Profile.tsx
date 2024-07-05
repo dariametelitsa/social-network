@@ -5,11 +5,11 @@ import { GetUserProfileResponseType } from "../../api/usersAPI";
 
 type ProfileProps = {
     profile: GetUserProfileResponseType | null
-    router: {
-        //location: Object
-        //navigate: Object
-        params: Object
-    }
+    // router: {
+    //     //location: Object
+    //     //navigate: Object
+    //     params: Object
+    // }
 }
 export const Profile = ({profile}: ProfileProps) => {
     return (

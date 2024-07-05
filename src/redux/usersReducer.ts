@@ -8,7 +8,7 @@ export const setCurrentPage = (currentPage: number) => ({type: 'SET_CURRENT_PAGE
 export const setTotalUsersCount = (totalUsersCount: number) => ({type: 'SET_TOTAL_USER_COUNT', totalUsersCount}) as const;
 export const setIsFetching = (isFetching: boolean) => ({type: 'SET_IS_FETCHING', isFetching}) as const;
 
-export type userActionType =
+export type UserActionType =
     | ReturnType<typeof followUser>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof unfollowUser>
@@ -24,7 +24,7 @@ const initialState: UsersPageType = {
     isFetching: false
 };
 
-const usersReducer = (state: UsersPageType = initialState, action: userActionType): UsersPageType => {
+const usersReducer = (state: UsersPageType = initialState, action: UserActionType): UsersPageType => {
     switch (action.type) {
         case 'FOLLOW_USER': {
             return {

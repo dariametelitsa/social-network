@@ -1,10 +1,12 @@
 import uuid from "react-uuid";
 import avatar from './avatar5.jpeg'
-import dialogsReducer, { AddMessageAction, ChangeNewMessageAction } from "./dialogsReducer";
+import dialogsReducer, { AddMessageAction, ChangeNewMessageAction, DialogActionType } from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 import { DispatchActionTypes } from "./store";
 import { GetUserProfileResponseType, UserType } from "../api/usersAPI";
-import profileReducer, { addPostAction, changeNewTextAction } from "./profileReducer";
+import profileReducer, { addPostAction, changeNewTextAction, ProfileActionType } from "./profileReducer";
+import { UserActionType } from "./usersReducer";
+import { AuthActionsType } from "./authReducer";
 
 export type postsProps = {
     id: string;
@@ -75,7 +77,7 @@ export type TStore = {
     // _updateNewPostText: (newText: string) => void
     // _updateNewMessageText: (newText: string) => void
     subscribe: (observer: () => void) => void
-    dispatch: (action: DispatchActionTypes) => void
+    dispatch: (action: DispatchActionTypes | UserActionType | ProfileActionType | DialogActionType | AuthActionsType) => void
 };
 
 export const storeExample: TStore = {
@@ -189,11 +191,25 @@ export const storeExample: TStore = {
     //     this._callSubscriber();
     // },
     dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action);
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        if (isActionType<ProfileActionType>(action)) {
+            this._state.profilePage = profileReducer(this._state.profilePage, action);
+        }
+        if (isActionType<DialogActionType>(action)) {
+            this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        }
+
         this._state.sidebar = sidebarReducer(this._state.sidebar, action);
         this._callSubscribe();
     }
 };
 
 export default storeExample;
+
+// //polymorphic type guard function
+// function isActionType<T extends DispatchActionTypes>(action: any, actionType: T['type']): action is T {
+//     return typeof action === 'object' && action !== null && action.type === actionType;
+// }
+
+const isActionType = <T extends DispatchActionTypes>(action: DispatchActionTypes): action is T => {
+    return action && typeof action.type === 'string' && 'payload' in action;
+};

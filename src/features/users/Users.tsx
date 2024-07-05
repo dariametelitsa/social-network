@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { UserType } from "../../api/usersAPI";
+import { userApi, UserType } from "../../api/usersAPI";
 import { Pagination } from "../../components/pagination/Pagination";
 import s from "./Users.module.scss";
 import { Link } from "react-router-dom";
@@ -15,7 +15,15 @@ type UsersProps = {
     unfollowUser: (userId: number) => void
     followUser: (userId: number) => void
 };
-export const Users = ({users, pagesCount, currentPage,onPageChangedHandler, onLoadMoreUsers, unfollowUser, followUser}: UsersProps) => {
+export const Users = ({
+                          users,
+                          pagesCount,
+                          currentPage,
+                          onPageChangedHandler,
+                          onLoadMoreUsers,
+                          unfollowUser,
+                          followUser
+                      }: UsersProps) => {
     const defaultPhoto = 'https://i.ebayimg.com/images/g/hywAAOSwxflZwEwe/s-l1200.webp';
     return (
         <div>
@@ -27,14 +35,17 @@ export const Users = ({users, pagesCount, currentPage,onPageChangedHandler, onLo
                             <div className={s.blocksPosition}>
                                 <Link to={`${PATH.PROFILE}/${u.id}`}>
                                     <img className={s.avatar} src={u.photos.small || defaultPhoto}
-                                            alt={'User avatar'}/>
+                                         alt={'User avatar'}/>
                                 </Link>
                                 {u.followed
                                     ? <button className={s.button} onClick={() => {
-                                        unfollowUser(u.id)
+                                        userApi.unsubscribe(u.id)
+                                            .then(() => {unfollowUser(u.id)})
                                     }}>Follow</button>
-                                    : <button className={s.button} onClick={() => {
-                                        followUser(u.id)
+                                    : <button className={s.button + ' ' + s.unfollow} onClick={() => {
+                                        userApi.subscribe(u.id)
+                                            .then(() => {
+                                        followUser(u.id)})
                                     }}>Unfollow</button>
                                 }
                             </div>

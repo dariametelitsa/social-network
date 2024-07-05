@@ -15,10 +15,19 @@ export const userApi = {
             .then(res => {
                 return res.data
             })
+            .catch(e => {
+                return e.message
+            })
     },
     getUserProfile: (userId: number) => {
-        return instance.get<GetUserProfileResponseType>(`${PATH.PROFILE}/${userId}`)
+        return instance.get<GetUserProfileResponseType>(`${PATH.PROFILE}/${userId}`);
     },
+    subscribe: (userId: number) => {
+        return instance.post(`follow/${userId}`);
+    },
+    unsubscribe: (userId: number) => {
+        return instance.delete(`follow/${userId}`);
+    }
 }
 
 export type UserType = {

@@ -12,7 +12,7 @@ export const changeNewTextAction = (newText: string) => ({
 } as const);
 export const setUserProfile = (profile: GetUserProfileResponseType) => ({type: 'SET_USER_PROFILE', profile} as const);
 
-export type profileActionType =
+export type ProfileActionType =
     | ReturnType<typeof addPostAction>
     | ReturnType<typeof changeNewTextAction>
     | ReturnType<typeof setUserProfile>
@@ -54,7 +54,7 @@ const initialState: ProfilePageType = {
     profile: null
 };
 
-const profileReducer = (state: ProfilePageType = initialState, action: DispatchActionTypes): ProfilePageType => {
+const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionType): ProfilePageType => {
     switch (action.type) {
         case 'ADD_POST':
             const newPost: postsProps = {

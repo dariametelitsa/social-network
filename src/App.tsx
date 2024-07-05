@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import { Header } from "./features/header/Header";
 import { Navbar } from "./features/navbar/Navbar";
 import { Route, Routes } from "react-router-dom";
 import { DialogsContainer } from "./features/dialogs/DialogsContainer";
@@ -8,6 +7,7 @@ import { DispatchActionTypes, StoreType } from "./redux/store";
 import UsersContainer from "./features/users/UsersContainer";
 import { PATH } from "./routes/PATHS";
 import ProfileContainer from "./features/profile/ProfileContainer";
+import HeaderContainer from "./features/header/HeaderContainer";
 
 
 type AppProps = {
@@ -18,7 +18,7 @@ type AppProps = {
 function App({store}: AppProps): JSX.Element {
     return (
         <div className="app-wrapper">
-            <Header/>
+            <HeaderContainer/>
             <Navbar friends={store.getState().sidebar}/>
             <main className="main_wrapper">
                 <Routes>

@@ -9,8 +9,8 @@ import { useParams, } from "react-router-dom";
 class ProfileContainer extends React.Component<ProfileContainerProps> {
     componentDidMount() {
         let userId = this.props.router.params.userId;
-        if(!userId) {
-            userId = 2;
+        if(!userId && this.props.userId) {
+            userId = this.props.userId;
         }
         userApi.getUserProfile(userId)
             .then(res => {
@@ -20,11 +20,13 @@ class ProfileContainer extends React.Component<ProfileContainerProps> {
 
     componentDidUpdate(prevProps: Readonly<ProfileContainerProps>, prevState: Readonly<{}>, snapshot?: any) {
         if(prevProps.router.params.userId !== this.props.router.params.userId) {
-            const userId = 2;
-            userApi.getUserProfile(userId)
-                .then(res => {
-                    this.props.setUserProfile(res.data)
-                })
+            const userId = this.props.userId;
+            if(userId) {
+                userApi.getUserProfile(userId)
+                    .then(res => {
+                        this.props.setUserProfile(res.data)
+                    })
+            }
         }
     }
 
@@ -32,7 +34,7 @@ class ProfileContainer extends React.Component<ProfileContainerProps> {
         return (
             <Profile
                 profile = {this.props.profile}
-                router={this.props.router}
+                // router={this.props.router}
             />
         );
     }
@@ -54,10 +56,12 @@ type mapDispatchToProps = {
 }
 type mapStateToPropsType = {
     profile: GetUserProfileResponseType | null
+    userId: number | null
 }
 const mapStateToProps = (state: StateType): mapStateToPropsType => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        userId: state.auth.id,
     }
 }
 

@@ -1,4 +1,20 @@
 .header {
   grid-area: header;
   background-color: antiquewhite;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.loginBlock {
+}
+
+.loginLink {
+  padding: 10px;
+  font-weight: bold;
+}
+
+.active {
+  background-color: white;
 }

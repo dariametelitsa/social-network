@@ -1,14 +1,16 @@
 import { combineReducers, createStore, EmptyObject, Store } from "redux";
-import profileReducer, { profileActionType } from "./profileReducer";
-import dialogsReducer, { dialogActionType } from "./dialogsReducer";
+import profileReducer, { ProfileActionType } from "./profileReducer";
+import dialogsReducer, { DialogActionType } from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
-import usersReducer, { userActionType } from "./usersReducer";
+import usersReducer, { UserActionType } from "./usersReducer";
+import { AuthActionsType, authReducer } from "./authReducer";
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer,
 });
 
 export type StateType = ReturnType<typeof rootReducer>;
@@ -20,6 +22,6 @@ window.store = store;
 
 export type StoreType = Store<EmptyObject & StateType>
 
-export type DispatchActionTypes = userActionType | profileActionType | dialogActionType
+export type DispatchActionTypes = UserActionType | ProfileActionType | DialogActionType | AuthActionsType
 
 export default store;
