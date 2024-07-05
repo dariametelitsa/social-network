@@ -1,7 +1,6 @@
 import { postsProps, ProfilePageType } from "./store-example";
 import uuid from "react-uuid";
 import avatar from "./avatar5.jpeg";
-import { DispatchActionTypes } from "./store";
 import { GetUserProfileResponseType } from "../api/usersAPI";
 
 //actions

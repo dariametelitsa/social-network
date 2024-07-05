@@ -1,6 +1,5 @@
 import { dialogsPageType, messageType } from "./store-example";
 import uuid from "react-uuid";
-import { DispatchActionTypes } from "./store";
 import { DialogsPageType } from "../types/types";
 
 //actions

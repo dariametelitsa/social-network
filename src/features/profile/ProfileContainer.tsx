@@ -14,7 +14,7 @@ class ProfileContainer extends React.Component<ProfileContainerProps> {
         }
         userApi.getUserProfile(userId)
             .then(res => {
-                this.props.setUserProfile(res.data)
+                this.props.setUserProfile(res)
             })
     }
 
@@ -24,7 +24,7 @@ class ProfileContainer extends React.Component<ProfileContainerProps> {
             if(userId) {
                 userApi.getUserProfile(userId)
                     .then(res => {
-                        this.props.setUserProfile(res.data)
+                        this.props.setUserProfile(res)
                     })
             }
         }

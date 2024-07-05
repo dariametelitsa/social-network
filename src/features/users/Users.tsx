@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { userApi, UserType } from "../../api/usersAPI";
+import { UserType } from "../../api/usersAPI";
 import { Pagination } from "../../components/pagination/Pagination";
 import s from "./Users.module.scss";
 import { Link } from "react-router-dom";
@@ -14,6 +14,8 @@ type UsersProps = {
     onLoadMoreUsers: () => void
     unfollowUser: (userId: number) => void
     followUser: (userId: number) => void
+    //toggleFollowingUser: (userId: number, isFollowing: boolean) => void
+    followingInProgress: Array<number>
 };
 export const Users = ({
                           users,
@@ -22,9 +24,13 @@ export const Users = ({
                           onPageChangedHandler,
                           onLoadMoreUsers,
                           unfollowUser,
-                          followUser
+                          followUser,
+                          followingInProgress,
                       }: UsersProps) => {
     const defaultPhoto = 'https://i.ebayimg.com/images/g/hywAAOSwxflZwEwe/s-l1200.webp';
+    const isDisabled = (userId: number) => {
+        return typeof followingInProgress.find(u => u === userId)  === 'number';
+    }
     return (
         <div>
             <Pagination pagesCount={pagesCount} currentPage={currentPage} onPageClick={onPageChangedHandler}/>
@@ -38,14 +44,11 @@ export const Users = ({
                                          alt={'User avatar'}/>
                                 </Link>
                                 {u.followed
-                                    ? <button className={s.button} onClick={() => {
-                                        userApi.unsubscribe(u.id)
-                                            .then(() => {unfollowUser(u.id)})
+                                    ? <button disabled={isDisabled(u.id)} className={s.button} onClick={() => {
+                                        unfollowUser(u.id);
                                     }}>Follow</button>
-                                    : <button className={s.button + ' ' + s.unfollow} onClick={() => {
-                                        userApi.subscribe(u.id)
-                                            .then(() => {
-                                        followUser(u.id)})
+                                    : <button disabled={isDisabled(u.id)}  className={s.button + ' ' + s.unfollow} onClick={() => {
+                                        followUser(u.id);
                                     }}>Unfollow</button>
                                 }
                             </div>

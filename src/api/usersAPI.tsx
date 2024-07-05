@@ -20,7 +20,10 @@ export const userApi = {
             })
     },
     getUserProfile: (userId: number) => {
-        return instance.get<GetUserProfileResponseType>(`${PATH.PROFILE}/${userId}`);
+        return instance.get<GetUserProfileResponseType>(`${PATH.PROFILE}/${userId}`)
+            .then(res => {
+                return res.data
+            })
     },
     subscribe: (userId: number) => {
         return instance.post(`follow/${userId}`);
