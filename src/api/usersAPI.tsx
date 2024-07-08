@@ -14,10 +14,20 @@ export const userApi = {
         try {
             const res = await instance.get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`);
             return res.data;
-        } catch (e: any) {
-            return e.message;
-        }
+            } catch (e: any) {
+                return e.message;
+            }
+        // } catch (e: unknown) {
+        //     if (axios.isAxiosError(e)) {
+        //         console.log(e.message);
+        //         return e.message;
+        //     } else {
+        //         console.log((e as Error).message);
+        //         return (e as Error).message;
+        //     }
+        // }
     },
+
     getUserProfile: (userId: number) => {
         return instance.get<GetUserProfileResponseType>(`${PATH.PROFILE}/${userId}`)
             .then(res => {
