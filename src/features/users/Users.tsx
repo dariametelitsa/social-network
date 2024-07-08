@@ -14,7 +14,6 @@ type UsersProps = {
     onLoadMoreUsers: () => void
     unfollowUser: (userId: number) => void
     followUser: (userId: number) => void
-    //toggleFollowingUser: (userId: number, isFollowing: boolean) => void
     followingInProgress: Array<number>
 };
 export const Users = ({

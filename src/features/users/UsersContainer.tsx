@@ -1,7 +1,7 @@
 // @flow
 import { connect } from "react-redux";
 import { StateType } from "../../redux/store";
-import { setCurrentPage, setIsFetching, setTotalUsersCount, toggleFollowingUser } from "../../redux/usersReducer";
+import { setCurrentPage } from "../../redux/usersReducer";
 import { UserType } from "../../api/usersAPI";
 import React from "react";
 import { Users } from "./Users";
@@ -20,11 +20,7 @@ type mapStateToDispatchType = {
     getUsersTC: (currentPage: number, pageSize: number, extended?: boolean) => void
     followUserTC: (userId: number) => void
     unfollowUserTC: (userId: number) => void
-    //setUsers: (users: UserType[], extended?: boolean) => void
     setCurrentPage: (pageNumber: number) => void
-    setIsFetching: (isFetching: boolean) => void
-    setTotalUsersCount: (total: number) => void
-    toggleFollowingUser: (userId: number, isFollowing: boolean) => void
 }
 export type UserPropsType = mapStateToPropsType & mapStateToDispatchType
 
@@ -35,7 +31,7 @@ type UsersAPIComponentState = {
 }
 
 class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentState> {
-    private readonly property: string;
+    //private readonly property: string;
 
     constructor(props: UserPropsType) {
         super(props);
@@ -44,7 +40,7 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
             pagesCount: Math.ceil(this.props.totalUserCount / this.props.pageSize) || 1,
             extendedPage: this.props.currentPage,
         }
-        this.property = "It's private";
+        //this.property = "It's private";
     }
 
     componentDidUpdate(prevProps: Readonly<UserPropsType>, prevState: Readonly<UsersAPIComponentState>, snapshot?: any) {
@@ -71,13 +67,12 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
     onLoadMoreUsers() {
         const newPage = this.state.extendedPage + 1 <= this.state.pagesCount ? this.state.extendedPage + 1 : this.state.pagesCount
         this.setState({extendedPage: newPage});
-        debugger
         this.props.getUsersTC(newPage, this.props.pageSize, true);
 
     }
 
     render() {
-        const {users, currentPage, unfollowUserTC, followUserTC, isFetching, toggleFollowingUser, followingInProgress} = this.props;
+        const {users, currentPage, unfollowUserTC, followUserTC, isFetching, followingInProgress} = this.props;
 
         return (
             <>
@@ -90,7 +85,6 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
                     onLoadMoreUsers={this.onLoadMoreUsers.bind(this)}
                     unfollowUser={unfollowUserTC}
                     followUser={followUserTC}
-                    //toggleFollowingUser={toggleFollowingUser}
                     followingInProgress={followingInProgress}
                 />
             </>
@@ -108,25 +102,11 @@ export const mapStateToProps = (state: StateType): mapStateToPropsType => {
         followingInProgress: state.usersPage.followingInProgress,
     }
 }
-// export const mapStateToDispatch = (dispatch: Dispatch<DispatchActionTypes>): mapStateToDispatchType => {
-//     return {
-//         followUser: (userId) => dispatch(followAC(userId)),
-//         unfollowUser: (userId) => dispatch(unfollowAC(userId)),
-//         setUsers: (users, extended?) => dispatch(setUsersAC(users, extended)),
-//         setCurrentPage: (pageNumber) => dispatch(setCurrentPageAC(pageNumber)),
-//         setTotalUserCount: (total) => dispatch(setTotalUsersCountAC(total)),
-//         setIsFetching: (isFetching) => dispatch(setIsFetching(isFetching)),
-//     }
-// }
-//
 
-//mapDispatchToProps может принимать объект с ACS
+//mapDispatchToProps может принимать объект с AC / thunk
 export default connect(mapStateToProps, {
     followUserTC,
     unfollowUserTC,
     getUsersTC,
     setCurrentPage,
-    setIsFetching,
-    setTotalUsersCount,
-    toggleFollowingUser,
 })(UsersContainer);

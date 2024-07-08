@@ -10,14 +10,13 @@ const instance = axios.create({
 })
 
 export const userApi = {
-    getUsers: (currentPage: number, pageSize: number) => {
-        return instance.get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
-            .then(res => {
-                return res.data
-            })
-            .catch(e => {
-                return e.message
-            })
+    getUsers: async (currentPage: number, pageSize: number) => {
+        try {
+            const res = await instance.get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`);
+            return res.data;
+        } catch (e: any) {
+            return e.message;
+        }
     },
     getUserProfile: (userId: number) => {
         return instance.get<GetUserProfileResponseType>(`${PATH.PROFILE}/${userId}`)

@@ -1,31 +1,26 @@
 import React from "react";
-import { GetUserProfileResponseType, userApi } from "../../api/usersAPI";
+import { GetUserProfileResponseType } from "../../api/usersAPI";
 import { connect } from "react-redux";
 import { StateType } from "../../redux/store";
-import { setUserProfile } from "../../redux/profileReducer";
 import { Profile } from "./Profile";
 import { useParams, } from "react-router-dom";
+import { getUserProfileTC } from "../../redux/thunks/usersThunk";
 
 class ProfileContainer extends React.Component<ProfileContainerProps> {
     componentDidMount() {
         let userId = this.props.router.params.userId;
+
         if(!userId && this.props.userId) {
             userId = this.props.userId;
         }
-        userApi.getUserProfile(userId)
-            .then(res => {
-                this.props.setUserProfile(res)
-            })
+        this.props.getUserProfileTC(userId);
     }
 
     componentDidUpdate(prevProps: Readonly<ProfileContainerProps>, prevState: Readonly<{}>, snapshot?: any) {
         if(prevProps.router.params.userId !== this.props.router.params.userId) {
             const userId = this.props.userId;
             if(userId) {
-                userApi.getUserProfile(userId)
-                    .then(res => {
-                        this.props.setUserProfile(res)
-                    })
+                this.props.getUserProfileTC(userId)
             }
         }
     }
@@ -52,7 +47,7 @@ class ProfileContainer extends React.Component<ProfileContainerProps> {
 type ProfileContainerProps = mapDispatchToProps & mapStateToPropsType & { router: {params: { userId: number }} }
 
 type mapDispatchToProps = {
-    setUserProfile: (profile: GetUserProfileResponseType) => void;
+    getUserProfileTC: (id: number) => void;
 }
 type mapStateToPropsType = {
     profile: GetUserProfileResponseType | null
@@ -84,4 +79,4 @@ function withRouter(Component: React.ComponentType<ProfileContainerProps>) {
     return ComponentWithRouterProp;
 }
 
-export default connect(mapStateToProps, {setUserProfile})(withRouter(ProfileContainer));
+export default connect(mapStateToProps, {getUserProfileTC})(withRouter(ProfileContainer));
