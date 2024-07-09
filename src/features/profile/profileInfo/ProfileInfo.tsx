@@ -3,6 +3,7 @@ import * as React from 'react';
 import s from "./ProfileInfo.module.scss";
 import { GetUserProfileResponseType } from "../../../api/usersAPI";
 import Preloader from "../../../components/preloader/Preloader";
+import { ProfileStatus } from "./profileStatus/ProfileStatus";
 
 
 type Props = {
@@ -23,6 +24,7 @@ export const ProfileInfo = ({profile}: Props) => {
                         <b className={s.name}>{profile.fullName}</b>
                         <p>{profile.aboutMe}</p>
                         <p>{profile.lookingForAJobDescription}</p>
+                        <p>Статус: <ProfileStatus status={'Hey'}/></p>
                     </div>
                 </div>
             </div>)

@@ -42,7 +42,7 @@ export type dialogsPageType = {
 //     photoUrl: string
 //     followed: boolean
 //     fullName: string
-//     status: string
+//     profileStatus: string
 //     location: {
 //         city: string,
 //         country: string

@@ -17,6 +17,7 @@ const mapStateToPropsForRedirect = (state: StateType): mapStateToPropsForRedirec
 type mapStateToPropsForRedirectType = {
     isAuth: boolean
 }
+
 //class component
 // export const withAuthRedirect = <T extends object>(Component: React.ComponentType<T>) => {
 //     class RedirectComponent extends React.Component<mapStateToPropsForRedirectType> {

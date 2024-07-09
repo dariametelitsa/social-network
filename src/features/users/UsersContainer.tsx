@@ -7,6 +7,7 @@ import React from "react";
 import { Users } from "./Users";
 import Preloader from "../../components/preloader/Preloader";
 import { followUserTC, getUsersTC, unfollowUserTC } from "../../redux/thunks/usersThunk";
+import { compose } from "redux";
 
 type mapStateToPropsType = {
     users: UserType[]

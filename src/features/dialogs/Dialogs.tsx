@@ -18,7 +18,7 @@ import { Navigate } from "react-router-dom";
 //     changeNewMessage: (newText: string) => void
 // }
 
-export const Dialogs = ({dialogsPage, addMessage, changeNewMessage, isAuth}: DialogsPropsType) => {
+export const Dialogs = ({dialogsPage, addMessage, changeNewMessage}: DialogsPropsType) => {
     const newMessage: RefObject<HTMLTextAreaElement> = React.createRef();
 
     const addNewMessage = () => {
@@ -27,10 +27,6 @@ export const Dialogs = ({dialogsPage, addMessage, changeNewMessage, isAuth}: Dia
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         changeNewMessage(e.currentTarget.value);
-    }
-
-    if(!isAuth) {
-        return <Navigate to={PATH.LOGIN}/>
     }
 
     return (

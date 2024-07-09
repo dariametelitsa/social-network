@@ -9,6 +9,7 @@ import {
     unfollowUser
 } from "../usersReducer";
 import { setUserProfile } from "../profileReducer";
+import { profileAPI } from "../../api/profileAPI";
 
 export const getUsersTC = (currentPage: number, pageSize: number, extended?: boolean): ThunkActionType => (dispatch) => {
     dispatch(setIsFetching(true))
@@ -54,7 +55,7 @@ export const followUserTC = (userId: number): ThunkActionType => (dispatch) => {
 
 export const getUserProfileTC = (userId: number): ThunkActionType => (dispatch) => {
     dispatch(toggleFollowingUser(userId, true));
-    userApi.getUserProfile(userId)
+    profileAPI.getUserProfile(userId)
         .then(res => {
             dispatch(setUserProfile(res));
         })
