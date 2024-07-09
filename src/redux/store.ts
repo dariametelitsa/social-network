@@ -24,6 +24,6 @@ window.store = store;
 export type StoreType = Store<EmptyObject & StateType>
 
 export type DispatchActionTypes = UserActionType | ProfileActionType | DialogActionType | AuthActionsType
-export type ThunkActionType = ThunkAction<void, StateType, unknown, DispatchActionTypes>
+export type ThunkActionType<ReturnType = void> = ThunkAction<ReturnType, StateType, unknown, DispatchActionTypes>
 
 export default store;

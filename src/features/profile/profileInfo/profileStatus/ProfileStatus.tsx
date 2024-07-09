@@ -4,7 +4,7 @@ import { ChangeEvent } from "react";
 
 type ProfileStatusProps = {
     status: string
-    updateStatus: (status: string) => void
+    updateStatus: (status: string) => Promise<void>
 };
 type ProfileStatusStateProps = {
     editMode: boolean
@@ -27,20 +27,32 @@ export class ProfileStatus extends React.Component<ProfileStatusProps, ProfileSt
     }
 
     deactivateEditMode = () => {
-        console.log(this)
         this.setState({
             editMode: false,
         });
-        this.props.updateStatus(this.state.status);
+        this.props.updateStatus(this.state.status)
+            .then(res => {
+              //console.log(res)
+            })
         // if(this.statusInputRef.current) {
         //     this.props.updateStatus(this.statusInputRef.current.value);
         // }
     }
+
     onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({
             status: e.currentTarget.value,
         })
 
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfileStatusProps>, prevState: Readonly<ProfileStatusStateProps>, snapshot?: any) {
+        console.log('upd');
+        if (this.props.status !== prevProps.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
     }
 
     render() {
@@ -56,7 +68,7 @@ export class ProfileStatus extends React.Component<ProfileStatusProps, ProfileSt
                         onBlur={this.deactivateEditMode} autoFocus={true}/>
                 </div>)
                 : (<div onDoubleClick={this.activateEditMode.bind(this)}>
-                    <p>{this.props.status}</p>
+                    <p>{this.props.status || '---'}</p>
                 </div>)
             }
         </>)

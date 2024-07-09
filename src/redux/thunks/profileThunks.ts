@@ -4,6 +4,7 @@ import { ThunkActionType } from "../store";
 import { toggleFollowingUser } from "../usersReducer";
 import { profileAPI } from "../../api/profileAPI";
 import { setUserProfile, setUserStatus } from "../profileReducer";
+import axios, { AxiosError } from "axios";
 
 export const getUserProfileTC = (userId: number): ThunkActionType => (dispatch) => {
     dispatch(toggleFollowingUser(userId, true));
@@ -26,14 +27,18 @@ export const getUserStatusTC = (userId: number): ThunkActionType => (dispatch) =
         })
 }
 
-export const updateUserStatusTC = (status: string): ThunkActionType => (dispatch) => {
-    profileAPI.updateUserStatus(status)
-        .then(res => {
-            if(res.data.resultCode === 0) {
-                dispatch(setUserStatus(status));
-            }
-        })
-        .catch(e => {
-            console.log(e.message);
-        })
+export const updateUserStatusTC = (status: string): ThunkActionType<Promise<void>> => async dispatch => {
+    const res = await profileAPI.updateUserStatus(status);
+    try {
+        const res = await profileAPI.updateUserStatus(status);
+        if (res.data.resultCode === 0) {
+            dispatch(setUserStatus(status));
+        }
+    } catch (e: unknown) {
+         if (axios.isAxiosError(e)) {
+             console.log(e.message);
+         } else {
+             console.log((e as Error).message);
+         }
+    }
 }

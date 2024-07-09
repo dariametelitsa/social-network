@@ -9,7 +9,7 @@ import { ProfileStatus } from "./profileStatus/ProfileStatus";
 type Props = {
     profile: GetUserProfileResponseType | null
     status: string
-    updateStatus: (status: string) => void
+    updateStatus: (status: string) => Promise<void>
 };
 
 export const ProfileInfo = ({profile, status, updateStatus}: Props) => {

@@ -6,7 +6,7 @@ import { GetUserProfileResponseType } from "../../api/usersAPI";
 type ProfileProps = {
     profile: GetUserProfileResponseType | null
     status: string
-    updateStatus: (status: string) => void
+    updateStatus: (status: string) => Promise<void>
     // router: {
     //     //location: Object
     //     //navigate: Object

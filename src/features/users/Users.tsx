@@ -58,6 +58,7 @@ export const Users = ({
                             <div className={s.blocksPosition}>
                                 <span>Country</span>
                                 <span>City</span>
+                                <span>{u.id}</span>
                             </div>
                         </div>
                     )

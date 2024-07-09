@@ -56,7 +56,7 @@ type ProfileContainerProps = mapDispatchToPropsType & mapStateToPropsType & { ro
 type mapDispatchToPropsType = {
     getUserProfileTC: (id: number) => void
     getUserStatusTC: (id: number) => void
-    updateUserStatusTC: (status: string) => void
+    updateUserStatusTC: (status: string) => Promise<void>
 }
 type mapStateToPropsType = {
     profile: GetUserProfileResponseType | null
