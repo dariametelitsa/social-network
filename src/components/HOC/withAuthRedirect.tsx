@@ -17,9 +17,9 @@ const mapStateToPropsForRedirect = (state: StateType): mapStateToPropsForRedirec
 type mapStateToPropsForRedirectType = {
     isAuth: boolean
 }
-
-// export const withAuthRedirect = <T extends ExtendedProps>(Component: React.ComponentType<T>) => {
-//     return class RedirectComponent extends React.Component<ExtendedProps & T> {
+//class component
+// export const withAuthRedirect = <T extends object>(Component: React.ComponentType<T>) => {
+//     class RedirectComponent extends React.Component<mapStateToPropsForRedirectType> {
 //             render() {
 //                 const {isAuth, ...props} = this.props;
 //                 console.log(isAuth);
@@ -30,6 +30,7 @@ type mapStateToPropsForRedirectType = {
 //                 return <Component {...props as T}/>
 //             }
 //         }
+//     return connect(mapStateToPropsForRedirect)(RedirectComponent);
 // };
 
 export const withAuthRedirect = <T extends object>(Component: React.ComponentType<T>) => {
@@ -39,6 +40,5 @@ export const withAuthRedirect = <T extends object>(Component: React.ComponentTyp
         }
         return <Component {...props as T} />;
     };
-    const ConnectedAuthRedirectComp = connect(mapStateToPropsForRedirect)(RedirectComponent)
-    return ConnectedAuthRedirectComp;
+    return connect(mapStateToPropsForRedirect)(RedirectComponent);
 };

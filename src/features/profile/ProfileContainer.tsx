@@ -6,6 +6,9 @@ import { Profile } from "./Profile";
 import { useParams, } from "react-router-dom";
 import { getUserProfileTC } from "../../redux/thunks/usersThunk";
 import { withAuthRedirect } from "../../components/HOC/withAuthRedirect";
+import { compose } from "redux";
+import { withRouter } from "../../components/HOC/withRouter";
+
 
 
 class ProfileContainer extends React.Component<ProfileContainerProps> {
@@ -62,22 +65,10 @@ const mapStateToProps = (state: StateType): mapStateToPropsType => {
     }
 }
 
-function withRouter(Component: React.ComponentType<ProfileContainerProps>) {
-    function ComponentWithRouterProp(props: any) {
-        //let location = useLocation();
-        //let navigate = useNavigate();
-        let params = useParams();
-        return (
-            <Component
-                {...props}
-                router={{
-                    //location,
-                    //navigate,
-                    params }}
-            />
-        );
-    }
-    return ComponentWithRouterProp;
-}
+ // export default connect(mapStateToProps, {getUserProfileTC})(withRouter(withAuthRedirect(ProfileContainer)));
 
-export default connect(mapStateToProps, {getUserProfileTC})(withRouter(withAuthRedirect(ProfileContainer)));
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {getUserProfileTC}),
+    withRouter,
+    withAuthRedirect,
+)(ProfileContainer)

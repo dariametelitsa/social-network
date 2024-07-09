@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Navbar } from "./features/navbar/Navbar";
 import { Route, Routes } from "react-router-dom";
-import { DialogsContainer } from "./features/dialogs/DialogsContainer";
+import DialogsContainer from "./features/dialogs/DialogsContainer";
 import { DispatchActionTypes, StoreType } from "./redux/store";
 import UsersContainer from "./features/users/UsersContainer";
 import { PATH } from "./routes/PATHS";

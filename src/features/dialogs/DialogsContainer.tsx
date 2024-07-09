@@ -4,7 +4,7 @@ import { Dialogs } from "./Dialogs";
 import { DispatchActionTypes, StateType } from "../../redux/store";
 import { connect } from "react-redux";
 import { dialogsPageType } from "../../redux/store-example";
-import { Dispatch } from "redux";
+import { compose, Dispatch } from "redux";
 
 type mapStateToPropsType = {
     dialogsPage: dialogsPageType
@@ -32,4 +32,8 @@ const mapDispatchToProps = (dispatch: Dispatch<DispatchActionTypes>): mapDispatc
     }
 };
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+//export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps)
+)(Dialogs)
