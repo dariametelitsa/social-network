@@ -26,9 +26,9 @@ export const ProfileInfo = ({profile, status, updateStatus}: Props) => {
                         <b className={s.name}>{profile.fullName}</b>
                         <p>{profile.aboutMe}</p>
                         <p>{profile.lookingForAJobDescription}</p>
-                        <p>
+                        <div>
                             <ProfileStatus status={status} updateStatus={updateStatus}/>
-                        </p>
+                        </div>
                     </div>
                 </div>
             </div>)
