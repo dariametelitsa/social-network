@@ -1,15 +1,14 @@
 import { ThunkActionType } from "../store";
 import { userApi } from "../../api/usersAPI";
 import {
-    followUser, setCurrentPage,
+    followUser,
+    setCurrentPage,
     setIsFetching,
     setTotalUsersCount,
     setUsers,
     toggleFollowingUser,
     unfollowUser
 } from "../usersReducer";
-import { setUserProfile } from "../profileReducer";
-import { profileAPI } from "../../api/profileAPI";
 
 export const getUsersTC = (currentPage: number, pageSize: number, extended?: boolean): ThunkActionType => (dispatch) => {
     dispatch(setIsFetching(true))
@@ -50,16 +49,5 @@ export const followUserTC = (userId: number): ThunkActionType => (dispatch) => {
         })
         .finally(() => {
             dispatch(toggleFollowingUser(userId, false));
-        })
-}
-
-export const getUserProfileTC = (userId: number): ThunkActionType => (dispatch) => {
-    dispatch(toggleFollowingUser(userId, true));
-    profileAPI.getUserProfile(userId)
-        .then(res => {
-            dispatch(setUserProfile(res));
-        })
-        .catch(e => {
-            console.log(e.message)
         })
 }

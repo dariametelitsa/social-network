@@ -8,9 +8,11 @@ import { ProfileStatus } from "./profileStatus/ProfileStatus";
 
 type Props = {
     profile: GetUserProfileResponseType | null
+    status: string
+    updateStatus: (status: string) => void
 };
 
-export const ProfileInfo = ({profile}: Props) => {
+export const ProfileInfo = ({profile, status, updateStatus}: Props) => {
 
     const defaultPhoto = 'https://www.film.ru/sites/default/files/people/1564966-1099943.jpg';
     return (
@@ -24,7 +26,9 @@ export const ProfileInfo = ({profile}: Props) => {
                         <b className={s.name}>{profile.fullName}</b>
                         <p>{profile.aboutMe}</p>
                         <p>{profile.lookingForAJobDescription}</p>
-                        <p>Статус: <ProfileStatus status={'Hey'}/></p>
+                        <p>
+                            <ProfileStatus status={status} updateStatus={updateStatus}/>
+                        </p>
                     </div>
                 </div>
             </div>)

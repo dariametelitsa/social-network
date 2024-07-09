@@ -5,8 +5,6 @@ import s from './Dialogs.module.scss';
 import { DialogItem } from "./DialogItem";
 import { Message } from "./Message";
 import { DialogsPropsType } from "./DialogsContainer";
-import { PATH } from "../../routes/PATHS";
-import { Navigate } from "react-router-dom";
 
 // type DialogsProps = {
 //     dialogsPage: {

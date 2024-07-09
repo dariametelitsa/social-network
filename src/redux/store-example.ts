@@ -30,6 +30,7 @@ export type ProfilePageType = {
     posts: postsProps[]
     newPostText: string
     profile: GetUserProfileResponseType | null
+    status: string
 }
 export type dialogsPageType = {
     'dialogs': dialogType[]
@@ -117,6 +118,7 @@ export const storeExample: TStore = {
             ],
             newPostText: 'i am new here',
             profile: null,
+            status: '123',
         },
         'dialogsPage': {
             'dialogs': [

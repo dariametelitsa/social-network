@@ -1,7 +1,5 @@
 import React from "react";
-import { Navigate, useParams } from "react-router-dom";
-import { PATH } from "../../routes/PATHS";
-import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 
 type WithRouterType = {
  router:

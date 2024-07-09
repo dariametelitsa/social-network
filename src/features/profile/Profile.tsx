@@ -2,20 +2,21 @@ import React from 'react';
 import { ProfileInfo } from "./profileInfo/ProfileInfo";
 import { MyPostsContainer } from "./myPosts/MyPostsContainer";
 import { GetUserProfileResponseType } from "../../api/usersAPI";
-import Login from "../../components/login/Login";
 
 type ProfileProps = {
     profile: GetUserProfileResponseType | null
+    status: string
+    updateStatus: (status: string) => void
     // router: {
     //     //location: Object
     //     //navigate: Object
     //     params: Object
     // }
 }
-export const Profile = ({profile}: ProfileProps) => {
+export const Profile = ({profile, status, updateStatus}: ProfileProps) => {
     return (
             <div>
-                <ProfileInfo profile={profile}/>
+                <ProfileInfo profile={profile} status={status} updateStatus={updateStatus}/>
                 <MyPostsContainer/>
             </div>
     );

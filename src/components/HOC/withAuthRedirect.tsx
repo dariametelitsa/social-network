@@ -5,10 +5,6 @@ import { PATH } from "../../routes/PATHS";
 import { connect } from "react-redux";
 import { StateType } from "../../redux/store";
 
-type Props = {
-    Component: React.ComponentType<any>
-};
-
 const mapStateToPropsForRedirect = (state: StateType): mapStateToPropsForRedirectType => {
     return {
         isAuth: state.auth.isAuth,

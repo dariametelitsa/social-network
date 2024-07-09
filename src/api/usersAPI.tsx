@@ -1,5 +1,3 @@
-import axios from "axios";
-import { PATH } from "../routes/PATHS";
 import { instance } from "./authAPI";
 
 export const userApi = {

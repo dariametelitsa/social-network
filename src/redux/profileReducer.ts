@@ -10,14 +10,16 @@ export const changeNewTextAction = (newText: string) => ({
     newText
 } as const);
 export const setUserProfile = (profile: GetUserProfileResponseType) => ({type: 'SET_USER_PROFILE', profile} as const);
+export const setUserStatus = (status: string) => ({type: 'SET_USER_STATUS', status} as const);
 
 export type ProfileActionType =
     | ReturnType<typeof addPostAction>
     | ReturnType<typeof changeNewTextAction>
     | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setUserStatus>
 
 const initialState: ProfilePageType = {
-    'posts': [
+    posts: [
         {
             id: uuid(),
             img: 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Misha_Collins_%26_Jensen_Ackles_%2848478258422%29%28c%29.jpg',
@@ -49,8 +51,9 @@ const initialState: ProfilePageType = {
             likes: 972,
         },
     ],
-     newPostText: 'i am new here',
-    profile: null
+    newPostText: 'i am new here',
+    profile: null,
+    status: '',
 };
 
 const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionType): ProfilePageType => {
@@ -66,8 +69,11 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
         case 'UPDATE_NEW_POST_TEXT':
             return {...state, newPostText: action.newText};
         case "SET_USER_PROFILE": {
-            return {...state, profile: action.profile}
+            return {...state, profile: action.profile};
         }
+        case "SET_USER_STATUS": {
+            return {...state, status: action.status};
+    }
         default:
             return state;
     }
