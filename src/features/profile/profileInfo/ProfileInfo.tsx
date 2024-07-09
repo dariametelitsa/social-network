@@ -3,8 +3,6 @@ import * as React from 'react';
 import s from "./ProfileInfo.module.scss";
 import { GetUserProfileResponseType } from "../../../api/usersAPI";
 import Preloader from "../../../components/preloader/Preloader";
-import { Link } from "react-router-dom";
-import { Login } from "../../../components/login/Login";
 
 
 type Props = {
@@ -28,6 +26,6 @@ export const ProfileInfo = ({profile}: Props) => {
                     </div>
                 </div>
             </div>)
-            : <Login/>
+            : <Preloader/>
     );
 };

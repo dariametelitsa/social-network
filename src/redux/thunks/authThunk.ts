@@ -3,7 +3,7 @@ import { authAPI } from "../../api/authAPI";
 import { setUserData } from "../authReducer";
 
 export const getUserDataTC = () :ThunkActionType => (dispatch) => {
-    authAPI.getUserData()
+    authAPI.me()
         .then((res) => {
             if(res.data.resultCode === 0) {
                 dispatch(setUserData(res.data.data));

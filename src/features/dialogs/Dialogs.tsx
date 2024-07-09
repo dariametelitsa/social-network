@@ -5,6 +5,8 @@ import s from './Dialogs.module.scss';
 import { DialogItem } from "./DialogItem";
 import { Message } from "./Message";
 import { DialogsPropsType } from "./DialogsContainer";
+import { PATH } from "../../routes/PATHS";
+import { Navigate } from "react-router-dom";
 
 // type DialogsProps = {
 //     dialogsPage: {
@@ -16,7 +18,7 @@ import { DialogsPropsType } from "./DialogsContainer";
 //     changeNewMessage: (newText: string) => void
 // }
 
-export const Dialogs = ({dialogsPage, addMessage, changeNewMessage}: DialogsPropsType) => {
+export const Dialogs = ({dialogsPage, addMessage, changeNewMessage, isAuth}: DialogsPropsType) => {
     const newMessage: RefObject<HTMLTextAreaElement> = React.createRef();
 
     const addNewMessage = () => {
@@ -25,6 +27,10 @@ export const Dialogs = ({dialogsPage, addMessage, changeNewMessage}: DialogsProp
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         changeNewMessage(e.currentTarget.value);
+    }
+
+    if(!isAuth) {
+        return <Navigate to={PATH.LOGIN}/>
     }
 
     return (

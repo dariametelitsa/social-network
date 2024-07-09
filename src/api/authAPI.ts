@@ -9,7 +9,7 @@ const instance = axios.create({
 });
 
 export const authAPI = {
-    getUserData(){
+    me(){
         return instance.get<AuthResponseType<AuthResponseDataType>, AxiosResponse<AuthResponseType<AuthResponseDataType>>>('auth/me');
     }
 }

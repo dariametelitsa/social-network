@@ -8,6 +8,7 @@ import UsersContainer from "./features/users/UsersContainer";
 import { PATH } from "./routes/PATHS";
 import ProfileContainer from "./features/profile/ProfileContainer";
 import HeaderContainer from "./features/header/HeaderContainer";
+import Login from "./components/login/Login";
 
 
 type AppProps = {
@@ -25,6 +26,7 @@ function App({store}: AppProps): JSX.Element {
                     <Route path={`${PATH.PROFILE}/:userId?`} element={<ProfileContainer/>}/>
                     <Route path={PATH.DIALOGS} element={<DialogsContainer/>}/>
                     <Route path={PATH.USERS} element={<UsersContainer/>}/>
+                    <Route path={PATH.LOGIN} element={<Login/>}/>
                 </Routes>
             </main>
         </div>

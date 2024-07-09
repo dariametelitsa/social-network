@@ -5,11 +5,12 @@ import { StateType } from "../../redux/store";
 import { Profile } from "./Profile";
 import { useParams, } from "react-router-dom";
 import { getUserProfileTC } from "../../redux/thunks/usersThunk";
+import { withAuthRedirect } from "../../components/HOC/withAuthRedirect";
+
 
 class ProfileContainer extends React.Component<ProfileContainerProps> {
     componentDidMount() {
         let userId = this.props.router.params.userId;
-
         if(!userId && this.props.userId) {
             userId = this.props.userId;
         }
@@ -34,6 +35,7 @@ class ProfileContainer extends React.Component<ProfileContainerProps> {
         );
     }
 }
+
 // const ProfileContainer = ({profile, setUserProfile} : ProfileContainerProps) => {
 //     useEffect(() => {
 //         userApi.getUserProfile(2)
@@ -44,9 +46,9 @@ class ProfileContainer extends React.Component<ProfileContainerProps> {
 //     return (<Profile profile = {profile} />)
 // }
 
-type ProfileContainerProps = mapDispatchToProps & mapStateToPropsType & { router: {params: { userId: number }} }
+type ProfileContainerProps = mapDispatchToPropsType & mapStateToPropsType & { router: {params: { userId: number }} }
 
-type mapDispatchToProps = {
+type mapDispatchToPropsType = {
     getUserProfileTC: (id: number) => void;
 }
 type mapStateToPropsType = {
@@ -75,8 +77,7 @@ function withRouter(Component: React.ComponentType<ProfileContainerProps>) {
             />
         );
     }
-
     return ComponentWithRouterProp;
 }
 
-export default connect(mapStateToProps, {getUserProfileTC})(withRouter(ProfileContainer));
+export default connect(mapStateToProps, {getUserProfileTC})(withRouter(withAuthRedirect(ProfileContainer)));
