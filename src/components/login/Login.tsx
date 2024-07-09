@@ -9,6 +9,7 @@ const Login = (props: Props) => {
             <div className={style.loginForm}>
                 <input className={style.input} type={"text"} placeholder={'Enter your login'}/>
                 <input className={style.input} type={"text"} placeholder={'Enter your password'}/>
+                <label><input type={"checkbox"}/> remember me</label>
                 <button className={style.input}>Log in</button>
             </div>
         </div>
