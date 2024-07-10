@@ -32,10 +32,11 @@ type mapStateToPropsForRedirectType = {
 
 export const withAuthRedirect = <T extends object>(Component: React.ComponentType<T>) => {
     const RedirectComponent: React.FC<mapStateToPropsForRedirectType> = (props) => {
-        if (!props.isAuth) {
+        const {isAuth, ...restProps} = props;
+        if (!isAuth) {
             return <Navigate to={PATH.LOGIN} />;
         }
-        return <Component {...props as T} />;
+        return <Component {...restProps as T} />;
     };
     return connect(mapStateToPropsForRedirect)(RedirectComponent);
 };
