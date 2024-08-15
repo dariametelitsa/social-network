@@ -9,7 +9,7 @@ import { NewMessageFormRedux, NewMessageFormType } from "features/dialogs/NewMes
 export const Dialogs = ({dialogsPage, addMessage}: DialogsPropsType) => {
 
 
-    const addNewMessage = (formData: NewMessageFormType) => {
+    const addNewMessageHandler = (formData: NewMessageFormType) => {
         addMessage(formData.newMessage);
     }
 
@@ -23,7 +23,7 @@ export const Dialogs = ({dialogsPage, addMessage}: DialogsPropsType) => {
                     <Message key={message.id} message={message.message}/>
                 ))}
             </div>
-            <NewMessageFormRedux onSubmit={addNewMessage}/>
+            <NewMessageFormRedux onSubmit={addNewMessageHandler}/>
         </div>
     );
 };

@@ -1,7 +1,7 @@
 // @flow 
 import * as React from 'react';
 import { Navigate } from "react-router-dom";
-import { PATH } from "../../routes/PATHS";
+import { PATH } from "../../common/routes/PATHS";
 import { connect } from "react-redux";
 import { StateType } from "../../redux/store";
 

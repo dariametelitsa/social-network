@@ -2,7 +2,7 @@
 import * as React from 'react';
 import s from "./ProfileInfo.module.scss";
 import { GetUserProfileResponseType } from "../../../api/usersAPI";
-import Preloader from "../../../components/preloader/Preloader";
+import Preloader from "../../../components/common/preloader/Preloader";
 import { ProfileStatus } from "./profileStatus/ProfileStatus";
 
 

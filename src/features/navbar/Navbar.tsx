@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Navbar.module.scss';
 import { NavLink } from 'react-router-dom';
 import { myFriendsType } from "../../redux/store-example";
-import { PATH } from "../../routes/PATHS";
+import { PATH } from "../../common/routes/PATHS";
 
 export const Navbar = ({friends}: {friends: myFriendsType[]}) => {
     return (

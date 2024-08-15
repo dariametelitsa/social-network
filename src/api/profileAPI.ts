@@ -1,4 +1,4 @@
-import { PATH } from "../routes/PATHS";
+import { PATH } from "../common/routes/PATHS";
 import { GetUserProfileResponseType } from "./usersAPI";
 import { instance } from "./authAPI";
 

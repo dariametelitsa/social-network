@@ -1,4 +1,4 @@
-import { UserType } from "../api/usersAPI";
+import { UserType } from "api/usersAPI";
 
 
 export type DialogsPageType = {

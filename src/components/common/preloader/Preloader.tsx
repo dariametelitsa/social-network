@@ -1,6 +1,6 @@
 // @flow 
 import * as React from 'react';
-import style from './Preloader.module.scss';
+import style from 'components/common/preloader/Preloader.module.scss';
 
  const Preloader = () => {
     return (

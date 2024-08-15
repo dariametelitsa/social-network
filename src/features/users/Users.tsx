@@ -4,7 +4,7 @@ import { UserType } from "../../api/usersAPI";
 import { Pagination } from "../../components/pagination/Pagination";
 import s from "./Users.module.scss";
 import { Link } from "react-router-dom";
-import { PATH } from "../../routes/PATHS";
+import { PATH } from "../../common/routes/PATHS";
 
 type UsersProps = {
     users: UserType[]

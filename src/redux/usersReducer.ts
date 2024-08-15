@@ -1,5 +1,5 @@
 import { UserType } from "../api/usersAPI";
-import { UsersPageType } from "../types/types";
+import { UsersPageType } from "../common/types/types";
 
 export const followUser = (userId: number) => ({type: 'FOLLOW_USER', userId}) as const;
 export const unfollowUser = (userId: number) => ({type: 'UNFOLLOW_USER', userId}) as const;

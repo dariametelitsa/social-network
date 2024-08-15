@@ -5,7 +5,7 @@ import { setCurrentPage } from "../../redux/usersReducer";
 import { UserType } from "../../api/usersAPI";
 import React from "react";
 import { Users } from "./Users";
-import Preloader from "../../components/preloader/Preloader";
+import Preloader from "../../components/common/preloader/Preloader";
 import { followUserTC, getUsersTC, unfollowUserTC } from "../../redux/thunks/usersThunk";
 
 type mapStateToPropsType = {
