@@ -10,17 +10,6 @@ export const MyPosts = ({posts, addPost}: MyPostsPropsType) => {
     const postElements = posts.map((post: postsProps) => (
         <Post key={post.id} src={post.img} text={post.text} likes={post.likes}/>));
 
-    //const newPostEl: RefObject<HTMLTextAreaElement> = React.createRef();
-    // const addPostHandler = () => {
-    //     const newPost = newPostEl.current?.value;
-    //     if(newPost) {
-    //         addPost();
-    //     }
-    // }
-    // const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //     changeNewText(e.currentTarget.value);
-    // }
-
     const onSubmit = (formData: MyPostsFormType) => {
         console.log(formData)
             if(formData) {

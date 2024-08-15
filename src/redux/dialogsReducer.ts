@@ -3,17 +3,11 @@ import uuid from "react-uuid";
 import { DialogsPageType } from "../types/types";
 
 //actions
-export const AddMessageAction = () => ({type: 'ADD_MESSAGE'} as const);
-export const ChangeNewMessageAction = (newText: string) => ({
-    type: 'UPDATE_NEW_MESSAGE',
-    newText
-} as const);
+export const AddMessageAction = (newMessage: string) => ({type: 'ADD_MESSAGE', newMessage} as const);
 
 type AddMessageActionType = ReturnType<typeof AddMessageAction>
-type ChangeNewMessageActionType = ReturnType<typeof ChangeNewMessageAction>
 export type DialogActionType =
     | AddMessageActionType
-    | ChangeNewMessageActionType
 
 const initialState: DialogsPageType = {
     dialogs: [
@@ -39,11 +33,9 @@ const dialogsReducer = (state: dialogsPageType = initialState, action: DialogAct
         case 'ADD_MESSAGE':
             const newMessage: messageType = {
                 id: uuid(),
-                message: state.newMessageText,
+                message: action.newMessage,
             };
             return {...state, messages: [...state.messages, newMessage], newMessageText: ''};
-        case 'UPDATE_NEW_MESSAGE':
-            return {...state, newMessageText: action.newText};
         default:
             return state;
     }

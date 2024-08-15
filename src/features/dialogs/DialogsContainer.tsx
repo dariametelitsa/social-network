@@ -1,11 +1,11 @@
 // @flow
-import { AddMessageAction, ChangeNewMessageAction } from "../../redux/dialogsReducer";
+import { AddMessageAction } from "redux/dialogsReducer";
 import { Dialogs } from "./Dialogs";
-import { DispatchActionTypes, StateType } from "../../redux/store";
+import { DispatchActionTypes, StateType } from "redux/store";
 import { connect } from "react-redux";
-import { dialogsPageType } from "../../redux/store-example";
+import { dialogsPageType } from "redux/store-example";
 import { compose, Dispatch } from "redux";
-import { withAuthRedirect } from "../../components/HOC/withAuthRedirect";
+import { withAuthRedirect } from "components/HOC/withAuthRedirect";
 import React from "react";
 
 type mapStateToPropsType = {
@@ -13,8 +13,7 @@ type mapStateToPropsType = {
 }
 
 type mapDispatchToPropsType = {
-    addMessage: () => void
-    changeNewMessage: (newText: string) => void
+    addMessage: (newMessage: string) => void
 }
 
 export type DialogsPropsType = mapStateToPropsType & mapDispatchToPropsType;
@@ -27,8 +26,7 @@ const mapStateToProps = (state: StateType): mapStateToPropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch<DispatchActionTypes>): mapDispatchToPropsType => {
     return {
-        addMessage: () => dispatch(AddMessageAction()),
-        changeNewMessage: (newText: string) => {dispatch(ChangeNewMessageAction(newText))}
+        addMessage: (newMessage: string) => dispatch(AddMessageAction(newMessage)),
     }
 };
 

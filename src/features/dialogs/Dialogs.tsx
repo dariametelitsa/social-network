@@ -5,26 +5,13 @@ import s from './Dialogs.module.scss';
 import { DialogItem } from "./DialogItem";
 import { Message } from "./Message";
 import { DialogsPropsType } from "./DialogsContainer";
+import { NewMessageFormRedux, NewMessageFormType } from "features/dialogs/NewMessageForm";
 
-// type DialogsProps = {
-//     dialogsPage: {
-//         dialogs: dialogType[]
-//         messages: messageType[]
-//         newMessageText: string
-//     },
-//     addMessage: () => void
-//     changeNewMessage: (newText: string) => void
-// }
+export const Dialogs = ({dialogsPage, addMessage}: DialogsPropsType) => {
 
-export const Dialogs = ({dialogsPage, addMessage, changeNewMessage}: DialogsPropsType) => {
-    const newMessage: RefObject<HTMLTextAreaElement> = React.createRef();
 
-    const addNewMessage = () => {
-        addMessage();
-    }
-
-    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        changeNewMessage(e.currentTarget.value);
+    const onSubmit = (formData: NewMessageFormType) => {
+        addMessage(formData.newMessage);
     }
 
     return (
@@ -37,14 +24,15 @@ export const Dialogs = ({dialogsPage, addMessage, changeNewMessage}: DialogsProp
                     <Message key={message.id} message={message.message}/>
                 ))}
             </div>
-            <div>
-                <textarea
-                    ref={newMessage}
-                    placeholder={'Enter your message...'}
-                    onChange={onChangeHandler}
-                    value={dialogsPage.newMessageText}></textarea>
-                <button onClick={addNewMessage}>Add message</button>
-            </div>
+            <NewMessageFormRedux onSubmit={onSubmit}/>
+            {/*<div>*/}
+            {/*    /!*<textarea*!/*/}
+            {/*    /!*    ref={newMessage}*!/*/}
+            {/*    /!*    placeholder={'Enter your message...'}*!/*/}
+            {/*    /!*    onChange={onChangeHandler}*!/*/}
+            {/*    /!*    value={dialogsPage.newMessageText}></textarea>*!/*/}
+            {/*    /!*<button onClick={addNewMessage}>Add message</button>*!/*/}
+            {/*</div>*/}
         </div>
     );
 };

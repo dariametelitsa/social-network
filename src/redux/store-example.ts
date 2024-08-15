@@ -1,6 +1,6 @@
 import uuid from "react-uuid";
 import avatar from './avatar5.jpeg'
-import dialogsReducer, { AddMessageAction, ChangeNewMessageAction, DialogActionType } from "./dialogsReducer";
+import dialogsReducer, { AddMessageAction, DialogActionType } from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 import { DispatchActionTypes } from "./store";
 import { GetUserProfileResponseType, UserType } from "api/usersAPI";
@@ -63,7 +63,6 @@ export type stateType = {
 //AC
 export type AddPostActionType = ReturnType<typeof addPost>
 export type AddMessageActionType = ReturnType<typeof AddMessageAction>
-export type ChangeNewMessageActionType = ReturnType<typeof ChangeNewMessageAction>
 
 //export type DispatchActionTypes = AddPostActionType | ChangeNewTextActionType | ChangeNewMessageActionType | AddMessageActionType
 
