@@ -10,8 +10,7 @@ export const MyPosts = ({posts, addPost}: MyPostsPropsType) => {
     const postElements = posts.map((post: postsProps) => (
         <Post key={post.id} src={post.img} text={post.text} likes={post.likes}/>));
 
-    const onSubmit = (formData: MyPostsFormType) => {
-        console.log(formData)
+    const addNewPost = (formData: MyPostsFormType) => {
             if(formData) {
                 addPost(formData.newPost);
             }
@@ -20,7 +19,7 @@ export const MyPosts = ({posts, addPost}: MyPostsPropsType) => {
     return (
         <div className={s.posts}>
             <h3>My posts</h3>
-            <NewPostReduxForm onSubmit={onSubmit} />
+            <NewPostReduxForm onSubmit={addNewPost} />
             <ul>
                 {postElements}
             </ul>

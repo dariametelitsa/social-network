@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { ChangeEvent, RefObject } from 'react';
 import s from './Dialogs.module.scss';
 import { DialogItem } from "./DialogItem";
 import { Message } from "./Message";
@@ -10,7 +9,7 @@ import { NewMessageFormRedux, NewMessageFormType } from "features/dialogs/NewMes
 export const Dialogs = ({dialogsPage, addMessage}: DialogsPropsType) => {
 
 
-    const onSubmit = (formData: NewMessageFormType) => {
+    const addNewMessage = (formData: NewMessageFormType) => {
         addMessage(formData.newMessage);
     }
 
@@ -24,15 +23,7 @@ export const Dialogs = ({dialogsPage, addMessage}: DialogsPropsType) => {
                     <Message key={message.id} message={message.message}/>
                 ))}
             </div>
-            <NewMessageFormRedux onSubmit={onSubmit}/>
-            {/*<div>*/}
-            {/*    /!*<textarea*!/*/}
-            {/*    /!*    ref={newMessage}*!/*/}
-            {/*    /!*    placeholder={'Enter your message...'}*!/*/}
-            {/*    /!*    onChange={onChangeHandler}*!/*/}
-            {/*    /!*    value={dialogsPage.newMessageText}></textarea>*!/*/}
-            {/*    /!*<button onClick={addNewMessage}>Add message</button>*!/*/}
-            {/*</div>*/}
+            <NewMessageFormRedux onSubmit={addNewMessage}/>
         </div>
     );
 };
