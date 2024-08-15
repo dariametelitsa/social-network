@@ -3,8 +3,8 @@ import avatar from './avatar5.jpeg'
 import dialogsReducer, { AddMessageAction, ChangeNewMessageAction, DialogActionType } from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 import { DispatchActionTypes } from "./store";
-import { GetUserProfileResponseType, UserType } from "../api/usersAPI";
-import profileReducer, { addPostAction, changeNewTextAction, ProfileActionType } from "./profileReducer";
+import { GetUserProfileResponseType, UserType } from "api/usersAPI";
+import profileReducer, { addPost, ProfileActionType } from "./profileReducer";
 import { UserActionType } from "./usersReducer";
 import { AuthActionsType } from "./authReducer";
 
@@ -28,7 +28,6 @@ export type myFriendsType = {
 };
 export type ProfilePageType = {
     posts: postsProps[]
-    newPostText: string
     profile: GetUserProfileResponseType | null
     status: string
 }
@@ -62,9 +61,8 @@ export type stateType = {
 };
 
 //AC
-export type AddPostActionType = ReturnType<typeof addPostAction>
+export type AddPostActionType = ReturnType<typeof addPost>
 export type AddMessageActionType = ReturnType<typeof AddMessageAction>
-export type ChangeNewTextActionType = ReturnType<typeof changeNewTextAction>
 export type ChangeNewMessageActionType = ReturnType<typeof ChangeNewMessageAction>
 
 //export type DispatchActionTypes = AddPostActionType | ChangeNewTextActionType | ChangeNewMessageActionType | AddMessageActionType
@@ -116,7 +114,6 @@ export const storeExample: TStore = {
                     likes: 972,
                 },
             ],
-            newPostText: 'i am new here',
             profile: null,
             status: '123',
         },

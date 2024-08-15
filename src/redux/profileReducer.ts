@@ -4,17 +4,12 @@ import avatar from "./avatar5.jpeg";
 import { GetUserProfileResponseType } from "../api/usersAPI";
 
 //actions
-export const addPostAction = () => ({type: 'ADD_POST'} as const);
-export const changeNewTextAction = (newText: string) => ({
-    type: 'UPDATE_NEW_POST_TEXT',
-    newText
-} as const);
+export const addPost = (newPost: string) => ({type: 'ADD_POST', newPost} as const);
 export const setUserProfile = (profile: GetUserProfileResponseType) => ({type: 'SET_USER_PROFILE', profile} as const);
 export const setUserStatus = (status: string) => ({type: 'SET_USER_STATUS', status} as const);
 
 export type ProfileActionType =
-    | ReturnType<typeof addPostAction>
-    | ReturnType<typeof changeNewTextAction>
+    | ReturnType<typeof addPost>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setUserStatus>
 
@@ -51,7 +46,6 @@ const initialState: ProfilePageType = {
             likes: 972,
         },
     ],
-    newPostText: 'i am new here',
     profile: null,
     status: '',
 };
@@ -62,12 +56,10 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
             const newPost: postsProps = {
                 id: uuid(),
                 img: avatar,
-                text: state.newPostText,
+                text: action.newPost,
                 likes: 0,
             };
-            return {...state, posts: [...state.posts, newPost], newPostText: ''};
-        case 'UPDATE_NEW_POST_TEXT':
-            return {...state, newPostText: action.newText};
+            return {...state, posts: [...state.posts, newPost]};
         case "SET_USER_PROFILE": {
             return {...state, profile: action.profile};
         }

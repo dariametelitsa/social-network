@@ -1,38 +1,37 @@
-import React, { ChangeEvent, RefObject } from 'react';
+import React from 'react';
 import { Post } from "./post/Post";
 import s from './MyPosts.module.scss';
-import { postsProps } from "../../../redux/store-example";
+import { postsProps } from "redux/store-example";
 import { MyPostsPropsType } from "./MyPostsContainer";
+import { NewPostReduxForm } from "features/profile/myPosts/newPostForm/NewPostForm";
 
-// type MyPostsProps = {
-//     posts: postsProps[]
-//     newPostChange: string
-//     changeNewText: (newText: string) => void
-//     addPost: () => void
-// }
 
-export const MyPosts = ({posts, changeNewText, newPostChange, addPost}: MyPostsPropsType) => {
+export const MyPosts = ({posts, addPost}: MyPostsPropsType) => {
     const postElements = posts.map((post: postsProps) => (
         <Post key={post.id} src={post.img} text={post.text} likes={post.likes}/>));
 
-    const newPostEl: RefObject<HTMLTextAreaElement> = React.createRef();
+    //const newPostEl: RefObject<HTMLTextAreaElement> = React.createRef();
+    // const addPostHandler = () => {
+    //     const newPost = newPostEl.current?.value;
+    //     if(newPost) {
+    //         addPost();
+    //     }
+    // }
+    // const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    //     changeNewText(e.currentTarget.value);
+    // }
 
-    const addPostHandler = () => {
-        const newPost = newPostEl.current?.value;
-        if(newPost) {
-            addPost();
-        }
+    const onSubmit = (formData: MyPostsFormType) => {
+        console.log(formData)
+            if(formData) {
+                addPost(formData.newPost);
+            }
     }
 
-    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        changeNewText(e.currentTarget.value);
-    }
     return (
         <div className={s.posts}>
             <h3>My posts</h3>
-            <textarea ref={newPostEl} value={newPostChange} onChange={onPostChange}/>
-            <button onClick={addPostHandler} className={s.addPostButton}>Add post
-            </button>
+            <NewPostReduxForm onSubmit={onSubmit} />
             <ul>
                 {postElements}
             </ul>
@@ -41,3 +40,6 @@ export const MyPosts = ({posts, changeNewText, newPostChange, addPost}: MyPostsP
     );
 };
 
+export type MyPostsFormType = {
+    newPost: string
+}
