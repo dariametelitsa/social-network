@@ -10,12 +10,12 @@ import { Textarea } from "components/common/formsControls/FormsControls";
 type Props = {
     handleSubmit: FormEventHandler<HTMLFormElement>
 };
-const maxLength10 = maxLengthCreator(30);
+const maxLength30 = maxLengthCreator(30);
 
 export const NewPostForm = (props: Props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field name={'newPost'} placeholder={"Print your idea..."} component={Textarea} validate={[required, maxLength10]}/>
+            <Field name={'newPost'} placeholder={"Print your idea..."} component={Textarea} type={'textarea'} validate={[required, maxLength30]}/>
             <button className={s.addPostButton}>Add post</button>
         </form>
     );

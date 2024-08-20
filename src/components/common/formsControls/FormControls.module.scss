@@ -1,0 +1,17 @@
+.formControl {
+  position: relative;
+}
+
+.formControl.error input,
+.formControl.error textarea {
+  border: 1px solid tomato;
+  margin-bottom: 26px;
+}
+
+.formControl.error span{
+  color: tomato;
+  font-size: 14px;
+  position: absolute;
+  left: 0;
+  bottom: 4px;
+}
