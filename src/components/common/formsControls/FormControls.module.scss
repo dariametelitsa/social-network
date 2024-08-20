@@ -1,9 +1,11 @@
 .formControl {
   position: relative;
+  width: 100%;
 }
 
 .formControl.error input,
 .formControl.error textarea {
+  width: 100%;
   border: 1px solid tomato;
   margin-bottom: 26px;
 }

@@ -5,14 +5,15 @@ import s from './FormControls.module.scss'
 
 // type Props = DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>
 type Props = WrappedFieldProps & {
-    type: 'textarea' | 'input'
+    tag: 'textarea' | 'input'
 }
 
-export const Textarea = ({input, meta, type, ...props}: Props) => {
+export const FormControl = ({input, meta, tag, ...props}: Props) => {
     const hasError = meta.touched && meta.error
+    const Tag = tag;
     return (
         <div className={s.formControl + ' ' + (hasError ? s.error : ' ')}>
-            {type === 'textarea'
+            {tag === 'textarea'
                 ? <textarea {...input} {...props} />
                 : <input {...input} {...props}/>
             }
