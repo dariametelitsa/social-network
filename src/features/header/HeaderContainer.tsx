@@ -6,9 +6,6 @@ import { StateType } from "redux/store";
 import { getUserDataTC, logout } from "redux/thunks/authThunk";
 
 class HeaderContainer extends React.PureComponent<HeaderContainerPropsType> {
-    componentDidMount() {
-        this.props.getUserDataTC();
-    }
     render() {
         return <Header login={this.props.auth.login} isAuth={!!this.props.auth.id} logout={this.props.logout} />
     }
@@ -17,7 +14,6 @@ class HeaderContainer extends React.PureComponent<HeaderContainerPropsType> {
 type HeaderContainerPropsType = mapDispatchToProps & mapStateToPropsType;
 
 type mapDispatchToProps = {
-    getUserDataTC: () => void
     logout: () => void
 }
 type mapStateToPropsType = {
@@ -29,4 +25,4 @@ const mapStateToProps = (state: StateType) => {
     }
 }
 
-export default connect(mapStateToProps, {getUserDataTC, logout})(HeaderContainer)
+export default connect(mapStateToProps, {logout})(HeaderContainer)

@@ -10,7 +10,8 @@ const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
-                <App store={store} dispatch={store.dispatch.bind(store)}/>
+                <App />
+                {/*<App store={store} dispatch={store.dispatch.bind(store)}/>*/}
             </Provider>
         </BrowserRouter>,
         document.getElementById('root')
