@@ -6,6 +6,7 @@ import usersReducer, { UserActionType } from "./usersReducer";
 import { AuthActionsType, authReducer } from "./authReducer";
 import thunk, { ThunkAction } from "redux-thunk";
 import {reducer as formReducer} from 'redux-form';
+import {FormAction} from "redux-form/lib/actions";
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -25,7 +26,7 @@ window.store = store;
 
 export type StoreType = Store<EmptyObject & StateType>
 
-export type DispatchActionTypes = UserActionType | ProfileActionType | DialogActionType | AuthActionsType
+export type DispatchActionTypes = UserActionType | ProfileActionType | DialogActionType | AuthActionsType | FormAction
 export type ThunkActionType<ReturnType = void> = ThunkAction<ReturnType, StateType, unknown, DispatchActionTypes>
 
 export default store;

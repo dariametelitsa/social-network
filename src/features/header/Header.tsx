@@ -1,7 +1,5 @@
 import React from 'react';
 import s from './Header.module.scss';
-import { Navigate, NavLink } from "react-router-dom";
-import { PATH } from "common/routes/PATHS";
 
 type HeaderProps = {
     isAuth: boolean
@@ -9,10 +7,6 @@ type HeaderProps = {
     logout: () => void
 }
 export const Header: React.FC<HeaderProps> = ({isAuth, login, logout}) => {
-
-    if(!isAuth) {
-        return <Navigate to={PATH.LOGIN}/>
-    }
 
     return (
         <header className={s.header}>
@@ -23,7 +17,10 @@ export const Header: React.FC<HeaderProps> = ({isAuth, login, logout}) => {
                 {/*<NavLink to={PATH.LOGIN}*/}
                 {/*         className={({isActive}) => isActive ? s.active + ' ' + s.loginLink : s.loginLink}>*/}
                 {/*</NavLink>*/}
-                 <p>{login} / <button onClick={() => logout()}>Logout</button></p>
+                {isAuth
+                    ? <p>{login} / <button onClick={() => logout()}>Logout</button></p>
+                    : <p>Logout</p>
+                }
             </div>
         </header>
     );

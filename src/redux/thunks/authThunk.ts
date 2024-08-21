@@ -2,6 +2,7 @@ import { ThunkActionType } from "../store";
 import { authAPI } from "api/authAPI";
 import { setUserData } from "../authReducer";
 import { FormDataType } from "components/login/Login";
+import { stopSubmit } from "redux-form";
 
 export const getUserDataTC = ():ThunkActionType => (dispatch) => {
     authAPI.me()
@@ -20,6 +21,9 @@ export const login = (data: FormDataType):ThunkActionType => async (dispatch) =>
         const res = await authAPI.login(data);
         if(res.data.resultCode === 0) {
             dispatch(getUserDataTC());
+        } else {
+            const message = res.data.messages.length > 0 ? res.data.messages[0] : 'Some error occurred'
+            dispatch(stopSubmit('login', {_error: message}))
         }
     }
     catch (error) {
