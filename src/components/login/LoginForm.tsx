@@ -14,7 +14,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
     return (
         <form onSubmit={props.handleSubmit} className={style.loginForm}>
-            <Field name={'login'} className={style.input} placeholder={"Enter your login"} component={FormControl} tag={'input'} validate={[required]}/>
+            <Field name={'email'} className={style.input} placeholder={"Enter your login"} component={FormControl} tag={'input'} validate={[required]}/>
             <Field name={'password'} className={style.input} placeholder={"Enter your password"} component={FormControl} validate={[required]} type={'password'}/>
             <label>
                 <Field name={'rememberMe'} component={'input'} type={'checkbox'}/>

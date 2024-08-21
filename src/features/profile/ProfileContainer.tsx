@@ -1,12 +1,12 @@
 import React from "react";
-import { GetUserProfileResponseType } from "../../api/usersAPI";
+import { GetUserProfileResponseType } from "api/usersAPI";
 import { connect } from "react-redux";
-import { StateType } from "../../redux/store";
+import { StateType } from "redux/store";
 import { Profile } from "./Profile";
-import { withAuthRedirect } from "../../components/HOC/withAuthRedirect";
+import { withAuthRedirect } from "components/HOC/withAuthRedirect";
 import { compose } from "redux";
-import { withRouter } from "../../components/HOC/withRouter";
-import { getUserProfileTC, getUserStatusTC, updateUserStatusTC } from "../../redux/thunks/profileThunks";
+import { withRouter } from "components/HOC/withRouter";
+import { getUserProfileTC, getUserStatusTC, updateUserStatusTC } from "redux/thunks/profileThunks";
 
 
 class ProfileContainer extends React.Component<ProfileContainerProps> {

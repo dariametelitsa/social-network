@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import { FormDataType } from "components/login/Login";
 
 export const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -11,10 +12,16 @@ export const instance = axios.create({
 export const authAPI = {
     me(){
         return instance.get<AuthResponseType<AuthResponseDataType>, AxiosResponse<AuthResponseType<AuthResponseDataType>>>('auth/me');
+    },
+    login(data: FormDataType) {
+        return instance.post<AuthResponseType<{userId: number}>, AxiosResponse<AuthResponseType<{userId: number}>>>('auth/login', {...data});
+    },
+    logout() {
+        return instance.delete<AuthResponseType, AxiosResponse<AuthResponseType>>('auth/login');
     }
 }
 
-type AuthResponseType<T> = {
+type AuthResponseType<T = {}> = {
     data: T
     messages: Array<string>
     fieldsErrors: Array<unknown>
@@ -22,7 +29,8 @@ type AuthResponseType<T> = {
 }
 
 export type AuthResponseDataType = {
-    id: number
-    login: string
-    email: string
+    id: number | null
+    login: string | null
+    email: string | null
+    isAuth: boolean
 }
