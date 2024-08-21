@@ -1,5 +1,7 @@
 import React from 'react';
 import s from './Header.module.scss';
+import { Link, Navigate } from "react-router-dom";
+import { PATH } from "common/routes/PATHS";
 
 type HeaderProps = {
     isAuth: boolean
@@ -19,7 +21,7 @@ export const Header: React.FC<HeaderProps> = ({isAuth, login, logout}) => {
                 {/*</NavLink>*/}
                 {isAuth
                     ? <p>{login} / <button onClick={() => logout()}>Logout</button></p>
-                    : <p>Logout</p>
+                    : <Link to={PATH.LOGIN}>Login</Link>
                 }
             </div>
         </header>
