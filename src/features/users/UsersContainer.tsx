@@ -10,11 +10,12 @@ import {
     getCurrentPage,
     getFollowingInProgress, getIsFetching, getPageSize,
     getTotalUserCount,
-    getUsers
+    getUsers, getUsersWithPhoto
 } from "redux/selectors/userSelectors";
 
 type mapStateToPropsType = {
     users: UserType[]
+    filteredUsers: UserType[]
     pageSize: number
     totalUserCount: number
     currentPage: number
@@ -83,13 +84,15 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
     }
 
     render() {
-        const {users, currentPage, unfollowUserTC, followUserTC, isFetching, followingInProgress} = this.props;
+        const {users, filteredUsers, currentPage, unfollowUserTC, followUserTC, isFetching, followingInProgress} = this.props;
+        const passUser = this.state.isFiltered ? filteredUsers : users;
 
         return (
             <>
                 {isFetching && <Preloader/>}
                 <Users
-                    users={users}
+                    users={passUser}
+                    // users={users}
                     isFiltered={this.state.isFiltered}
                     isFilterUsers={this.isFilterUsers.bind(this)}
                     pagesCount={this.state.pagesCount}
@@ -108,6 +111,7 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
 export const mapStateToProps = (state: StateType): mapStateToPropsType => {
     return {
         users: getUsers(state),
+        filteredUsers: getUsersWithPhoto(state),
         pageSize: getPageSize(state),
         totalUserCount: getTotalUserCount(state),
         currentPage: getCurrentPage(state),

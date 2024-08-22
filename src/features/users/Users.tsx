@@ -39,9 +39,12 @@ export const Users = ({
     return (
         <div>
             <Pagination pagesCount={pagesCount} currentPage={currentPage} onPageClick={onPageChangedHandler}/>
-            {isFiltered
-                ? <button onClick={() => isFilterUsers(false)}>Show all users</button>
-                : <button onClick={() => isFilterUsers(true)}>Show users with photo</button>}
+            <div className={s.filterContainer}>
+                {isFiltered
+                    ? <button onClick={() => isFilterUsers(false)} className={s.button}>Show all users</button>
+                    : <button onClick={() => isFilterUsers(true)} className={s.button + ' ' + s.filter}>Show users with photo</button>}
+            </div>
+
             {
                 users.map(u => {
                     return (
