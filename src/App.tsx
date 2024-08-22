@@ -10,24 +10,29 @@ import ProfileContainer from "./features/profile/ProfileContainer";
 import HeaderContainer from "./features/header/HeaderContainer";
 import Login from "./components/login/Login";
 import { connect } from "react-redux";
-import { getUserDataTC, logout } from "redux/thunks/authThunk";
 import { compose } from "redux";
 import { withRouter } from "components/HOC/withRouter";
+import { initializeApp } from "redux/appReducer";
+import Preloader from "components/common/preloader/Preloader";
+import { myFriendsType } from "redux/store-example";
 
 
 class App extends React.Component<AppProps> {
 
     componentDidMount() {
-        this.props.getUserDataTC();
+        this.props.initializeApp();
     }
 
     render(): JSX.Element {
-        let {store} = this.props;
+
+        if(!this.props.isInitialized) {
+            return <Preloader/>
+        }
 
         return (
             <div className="app-wrapper">
                 <HeaderContainer/>
-                <Navbar friends={store.getState().sidebar}/>
+                <Navbar friends={this.props.sidebar}/>
                 <main className="main_wrapper">
                     <Routes>
                         <Route path={`${PATH.PROFILE}/:userId?`} element={<ProfileContainer/>}/>
@@ -46,19 +51,20 @@ class App extends React.Component<AppProps> {
 type AppProps = MapDispatchToProps & MapStateToProps
 
 type MapDispatchToProps = {
-    getUserDataTC: () => void
+    initializeApp: () => void
 }
 type MapStateToProps = {
-    store: StoreType
-    dispatch: (action: DispatchActionTypes) => void
+    isInitialized: boolean
+    sidebar: myFriendsType[]
 }
 
 const mapStateToProps = (state: StateType) => {
     return {
-        store: store
+        isInitialized: state.app.isInitialized,
+        sidebar: state.sidebar
     }
 }
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserDataTC}),
+    connect(mapStateToProps, {initializeApp}),
     withRouter
-)(App)
+)(App);

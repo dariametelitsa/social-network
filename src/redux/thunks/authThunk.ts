@@ -4,16 +4,15 @@ import { setUserData } from "../authReducer";
 import { FormDataType } from "components/login/Login";
 import { stopSubmit } from "redux-form";
 
-export const getUserDataTC = ():ThunkActionType => (dispatch) => {
-    authAPI.me()
-        .then((res) => {
-            if(res.data.resultCode === 0) {
-                dispatch(setUserData({...res.data.data, isAuth: true}));
-            }
-        })
-        .catch(e => {
-            console.log(e.message)
-        })
+export const getUserDataTC = ():ThunkActionType<Promise<void>> => async (dispatch) => {
+    try {
+        const res = await authAPI.me();
+        if (res.data.resultCode === 0) {
+            dispatch(setUserData({...res.data.data, isAuth: true}));
+        }
+    } catch (error) {
+        console.log('Some error occurred');
+    }
 }
 
 export const login = (data: FormDataType):ThunkActionType => async (dispatch) => {
