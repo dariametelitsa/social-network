@@ -10,7 +10,7 @@ import {
     unfollowUser
 } from "../usersReducer";
 
-export const getUsersTC = (currentPage: number, pageSize: number, extended?: boolean): ThunkActionType => (dispatch) => {
+export const fetchUsers = (currentPage: number, pageSize: number, extended?: boolean): ThunkActionType => (dispatch) => {
     dispatch(setIsFetching(true))
     dispatch(setCurrentPage(currentPage));
     userApi.getUsers(currentPage, pageSize)

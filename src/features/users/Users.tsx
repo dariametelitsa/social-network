@@ -1,13 +1,15 @@
 // @flow
 import * as React from 'react';
-import { UserType } from "../../api/usersAPI";
-import { Pagination } from "../../components/pagination/Pagination";
+import { UserType } from "api/usersAPI";
+import { Pagination } from "components/pagination/Pagination";
 import s from "./Users.module.scss";
 import { Link } from "react-router-dom";
-import { PATH } from "../../common/routes/PATHS";
+import { PATH } from "common/routes/PATHS";
 
 type UsersProps = {
     users: UserType[]
+    isFiltered: boolean
+    isFilterUsers: (isFiltered: boolean) => void
     pagesCount: number
     currentPage: number
     onPageChangedHandler: (pageNumber: number) => void
@@ -18,6 +20,8 @@ type UsersProps = {
 };
 export const Users = ({
                           users,
+                          isFiltered,
+                          isFilterUsers,
                           pagesCount,
                           currentPage,
                           onPageChangedHandler,
@@ -28,11 +32,16 @@ export const Users = ({
                       }: UsersProps) => {
     const defaultPhoto = 'https://i.ebayimg.com/images/g/hywAAOSwxflZwEwe/s-l1200.webp';
     const isDisabled = (userId: number) => {
-        return typeof followingInProgress.find(u => u === userId)  === 'number';
+        return typeof followingInProgress.find(u => u === userId) === 'number';
     }
+
+
     return (
         <div>
             <Pagination pagesCount={pagesCount} currentPage={currentPage} onPageClick={onPageChangedHandler}/>
+            {isFiltered
+                ? <button onClick={() => isFilterUsers(false)}>Show all users</button>
+                : <button onClick={() => isFilterUsers(true)}>Show users with photo</button>}
             {
                 users.map(u => {
                     return (
@@ -46,9 +55,10 @@ export const Users = ({
                                     ? <button disabled={isDisabled(u.id)} className={s.button} onClick={() => {
                                         unfollowUser(u.id);
                                     }}>Follow</button>
-                                    : <button disabled={isDisabled(u.id)}  className={s.button + ' ' + s.unfollow} onClick={() => {
-                                        followUser(u.id);
-                                    }}>Unfollow</button>
+                                    : <button disabled={isDisabled(u.id)} className={s.button + ' ' + s.unfollow}
+                                              onClick={() => {
+                                                  followUser(u.id);
+                                              }}>Unfollow</button>
                                 }
                             </div>
                             <div className={s.blocksPosition}>

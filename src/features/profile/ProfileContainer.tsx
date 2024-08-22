@@ -10,6 +10,7 @@ import { getUserProfileTC, getUserStatusTC, updateUserStatusTC } from "redux/thu
 
 
 class ProfileContainer extends React.Component<ProfileContainerProps> {
+
     componentDidMount() {
         let userId = this.props.router.params.userId;
         if(!userId && this.props.userId) {
@@ -27,8 +28,8 @@ class ProfileContainer extends React.Component<ProfileContainerProps> {
             }
         }
     }
-
     render() {
+
         return (
             <Profile
                 profile = {this.props.profile}

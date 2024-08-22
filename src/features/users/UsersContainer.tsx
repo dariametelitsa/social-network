@@ -1,12 +1,17 @@
-// @flow
 import { connect } from "react-redux";
-import { StateType } from "../../redux/store";
-import { setCurrentPage } from "../../redux/usersReducer";
-import { UserType } from "../../api/usersAPI";
+import { StateType } from "redux/store";
+import { setCurrentPage } from "redux/usersReducer";
+import { UserType } from "api/usersAPI";
 import React from "react";
 import { Users } from "./Users";
 import Preloader from "../../components/common/preloader/Preloader";
-import { followUserTC, getUsersTC, unfollowUserTC } from "../../redux/thunks/usersThunk";
+import { followUserTC, fetchUsers, unfollowUserTC } from "redux/thunks/usersThunk";
+import {
+    getCurrentPage,
+    getFollowingInProgress, getIsFetching, getPageSize,
+    getTotalUserCount,
+    getUsers
+} from "redux/selectors/userSelectors";
 
 type mapStateToPropsType = {
     users: UserType[]
@@ -17,7 +22,7 @@ type mapStateToPropsType = {
     followingInProgress: Array<number>
 }
 type mapStateToDispatchType = {
-    getUsersTC: (currentPage: number, pageSize: number, extended?: boolean) => void
+    fetchUsers: (currentPage: number, pageSize: number, extended?: boolean) => void
     followUserTC: (userId: number) => void
     unfollowUserTC: (userId: number) => void
     setCurrentPage: (pageNumber: number) => void
@@ -28,6 +33,7 @@ type UsersAPIComponentState = {
     photo: string
     pagesCount: number
     extendedPage: number
+    isFiltered: boolean
 }
 
 class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentState> {
@@ -39,6 +45,7 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
             photo: 'https://i.ebayimg.com/images/g/hywAAOSwxflZwEwe/s-l1200.webp',
             pagesCount: Math.ceil(this.props.totalUserCount / this.props.pageSize) || 1,
             extendedPage: this.props.currentPage,
+            isFiltered: false,
         }
         //this.property = "It's private";
     }
@@ -52,7 +59,7 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
     }
 
     componentDidMount() {
-        this.props.getUsersTC(this.props.currentPage, this.props.pageSize);
+        this.props.fetchUsers(this.props.currentPage, this.props.pageSize);
     }
 
     componentWillUnmount() {
@@ -60,15 +67,19 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
     }
 
     onPageChanged(pageNumber: number) {
-        this.props.getUsersTC(pageNumber, this.props.pageSize)
+        this.props.fetchUsers(pageNumber, this.props.pageSize)
         this.setState({extendedPage: pageNumber})
     }
 
     onLoadMoreUsers() {
         const newPage = this.state.extendedPage + 1 <= this.state.pagesCount ? this.state.extendedPage + 1 : this.state.pagesCount
         this.setState({extendedPage: newPage});
-        this.props.getUsersTC(newPage, this.props.pageSize, true);
+        this.props.fetchUsers(newPage, this.props.pageSize, true);
 
+    }
+
+    isFilterUsers(isFiltered: boolean) {
+        this.setState({isFiltered: isFiltered});
     }
 
     render() {
@@ -79,6 +90,8 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
                 {isFetching && <Preloader/>}
                 <Users
                     users={users}
+                    isFiltered={this.state.isFiltered}
+                    isFilterUsers={this.isFilterUsers.bind(this)}
                     pagesCount={this.state.pagesCount}
                     currentPage={currentPage}
                     onPageChangedHandler={this.onPageChanged.bind(this)}
@@ -94,12 +107,12 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
 
 export const mapStateToProps = (state: StateType): mapStateToPropsType => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUserCount: state.usersPage.totalUserCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUserCount: getTotalUserCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
@@ -107,6 +120,6 @@ export const mapStateToProps = (state: StateType): mapStateToPropsType => {
 export default connect(mapStateToProps, {
     followUserTC,
     unfollowUserTC,
-    getUsersTC,
+    fetchUsers,
     setCurrentPage,
 })(UsersContainer);
