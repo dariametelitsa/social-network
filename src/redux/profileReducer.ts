@@ -1,10 +1,11 @@
 import { postsProps, ProfilePageType } from "./store-example";
 import uuid from "react-uuid";
 import avatar from "./avatar5.jpeg";
-import { GetUserProfileResponseType } from "../api/usersAPI";
+import { GetUserProfileResponseType } from "api/usersAPI";
 
 //actions
 export const addPost = (newPost: string) => ({type: 'ADD_POST', newPost} as const);
+export const deletePost = (id: string) => ({type: 'DELETE_POST', id} as const);
 export const setUserProfile = (profile: GetUserProfileResponseType) => ({type: 'SET_USER_PROFILE', profile} as const);
 export const setUserStatus = (status: string) => ({type: 'SET_USER_STATUS', status} as const);
 
@@ -12,6 +13,7 @@ export type ProfileActionType =
     | ReturnType<typeof addPost>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setUserStatus>
+    | ReturnType<typeof deletePost>
 
 const initialState: ProfilePageType = {
     posts: [
@@ -65,7 +67,10 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
         }
         case "SET_USER_STATUS": {
             return {...state, status: action.status};
-    }
+        }
+        case "DELETE_POST": {
+            return {...state, posts: state.posts.filter((post) => post.id !== action.id)}
+        }
         default:
             return state;
     }
