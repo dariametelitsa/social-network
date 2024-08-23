@@ -29,7 +29,7 @@ it('length of posts should be incremented', () => {
     let action = addPost('New post text');
     let newState = profileReducer(initialState, action);
 
-    expect(newState.posts.length).toBe(3)
+    expect(newState.posts.length).toBe(3);
 });
 
 it('message of new post should be corrected', () => {
@@ -38,11 +38,18 @@ it('message of new post should be corrected', () => {
     let newState = profileReducer(initialState, action);
 
     expect(newState.posts[2].text).toBe(newTitle);
-})
+});
 
 it('after deleting length of posts should be decrement', () => {
     let action = deletePost('1');
     let newState = profileReducer(initialState, action);
 
-    expect(newState.posts.length).toBe(1)
+    expect(newState.posts.length).toBe(1);
+});
+
+it("after deleting length shouldn't be decrement if id is incorrect", () => {
+    let action = deletePost('100');
+    let newState = profileReducer(initialState, action);
+
+    expect(newState.posts.length).toBe(2);
 })
