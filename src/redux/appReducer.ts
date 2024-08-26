@@ -10,7 +10,7 @@ const initialState: AppState = {
 
 export const appReducer = (state = initialState, action: AppActionsType): AppState => {
     switch (action.type) {
-        case "SET_INITIALIZING": {
+        case "samurai-network/app/SET_INITIALIZING": {
             return {...state, isInitialized: true};
         }
         default: {
@@ -19,7 +19,7 @@ export const appReducer = (state = initialState, action: AppActionsType): AppSta
     }
 }
 
-export const setInitializing = () => ({type: "SET_INITIALIZING" } as const);
+export const setInitializing = () => ({type: "samurai-network/app/SET_INITIALIZING" } as const);
 export type AppActionsType =
     | ReturnType<typeof setInitializing>
 

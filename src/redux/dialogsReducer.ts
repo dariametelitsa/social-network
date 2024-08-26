@@ -1,9 +1,9 @@
 import { dialogsPageType, messageType } from "./store-example";
 import uuid from "react-uuid";
-import { DialogsPageType } from "../common/types/types";
+import { DialogsPageType } from "common/types/types";
 
 //actions
-export const AddMessageAction = (newMessage: string) => ({type: 'ADD_MESSAGE', newMessage} as const);
+export const AddMessageAction = (newMessage: string) => ({type: 'samurai-network/dialogs/ADD_MESSAGE', newMessage} as const);
 
 type AddMessageActionType = ReturnType<typeof AddMessageAction>
 export type DialogActionType =
@@ -30,7 +30,7 @@ const initialState: DialogsPageType = {
 
 const dialogsReducer = (state: dialogsPageType = initialState, action: DialogActionType): dialogsPageType => {
     switch (action.type) {
-        case 'ADD_MESSAGE':
+        case 'samurai-network/dialogs/ADD_MESSAGE':
             const newMessage: messageType = {
                 id: uuid(),
                 message: action.newMessage,

@@ -4,10 +4,10 @@ import avatar from "./avatar5.jpeg";
 import { GetUserProfileResponseType } from "api/usersAPI";
 
 //actions
-export const addPost = (newPost: string) => ({type: 'ADD_POST', newPost} as const);
-export const deletePost = (id: string) => ({type: 'DELETE_POST', id} as const);
-export const setUserProfile = (profile: GetUserProfileResponseType) => ({type: 'SET_USER_PROFILE', profile} as const);
-export const setUserStatus = (status: string) => ({type: 'SET_USER_STATUS', status} as const);
+export const addPost = (newPost: string) => ({type: 'samurai-network/profile/ADD_POST', newPost} as const);
+export const deletePost = (id: string) => ({type: 'samurai-network/profile/DELETE_POST', id} as const);
+export const setUserProfile = (profile: GetUserProfileResponseType) => ({type: 'samurai-network/profile/SET_USER_PROFILE', profile} as const);
+export const setUserStatus = (status: string) => ({type: 'samurai-network/profile/SET_USER_STATUS', status} as const);
 
 export type ProfileActionType =
     | ReturnType<typeof addPost>
@@ -54,7 +54,7 @@ const initialState: ProfilePageType = {
 
 const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionType): ProfilePageType => {
     switch (action.type) {
-        case 'ADD_POST':
+        case 'samurai-network/profile/ADD_POST':
             const newPost: postsProps = {
                 id: uuid(),
                 img: avatar,
@@ -62,13 +62,13 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
                 likes: 0,
             };
             return {...state, posts: [...state.posts, newPost]};
-        case "SET_USER_PROFILE": {
+        case "samurai-network/profile/SET_USER_PROFILE": {
             return {...state, profile: action.profile};
         }
-        case "SET_USER_STATUS": {
+        case "samurai-network/profile/SET_USER_STATUS": {
             return {...state, status: action.status};
         }
-        case "DELETE_POST": {
+        case "samurai-network/profile/DELETE_POST": {
             return {...state, posts: state.posts.filter((post) => post.id !== action.id)}
         }
         default:

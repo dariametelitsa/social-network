@@ -1,4 +1,4 @@
-import { AuthResponseDataType } from "../api/authAPI";
+import { AuthResponseDataType } from "api/authAPI";
 
 export type AuthState = {
     id: number | null
@@ -17,7 +17,7 @@ const initialState: AuthState = {
 
 export const authReducer = (state = initialState, action: AuthActionsType): AuthState => {
     switch (action.type) {
-        case "SET_USER_DATA": {
+        case "samurai-network/auth/SET_USER_DATA": {
             return {...state, ...action.payload, isFetching: false};
         }
         default: {
@@ -26,6 +26,6 @@ export const authReducer = (state = initialState, action: AuthActionsType): Auth
     }
 }
 
-export const setUserData = (payload: AuthResponseDataType) => ({type: "SET_USER_DATA", payload } as const);
+export const setUserData = (payload: AuthResponseDataType) => ({type: "samurai-network/auth/SET_USER_DATA", payload } as const);
 export type AuthActionsType =
     | ReturnType<typeof setUserData>
