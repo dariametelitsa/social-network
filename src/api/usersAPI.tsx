@@ -1,4 +1,5 @@
 import { instance } from "./authAPI";
+import { AxiosResponse } from "axios";
 
 export const userApi = {
     getUsers: async (currentPage: number, pageSize: number) => {
@@ -20,11 +21,16 @@ export const userApi = {
     },
 
     subscribe: (userId: number) => {
-        return instance.post(`follow/${userId}`);
+        return instance.post<BaseResponse>(`follow/${userId}`);
     },
     unsubscribe: (userId: number) => {
-        return instance.delete(`follow/${userId}`);
+        return instance.delete<BaseResponse>(`follow/${userId}`);
     }
+}
+type BaseResponse <T = {}> = {
+    resultCode: number
+    messages: string[]
+    data: T
 }
 
 export type UserType = {
@@ -33,7 +39,7 @@ export type UserType = {
     photos: {
         small: string | null
         large: string | null
-},
+    },
     status: string| null
     followed: boolean
 }

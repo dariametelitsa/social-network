@@ -1,8 +1,6 @@
-// getUserStatus
-
 import { ThunkActionType } from "../store";
 import { toggleFollowingUser } from "../usersReducer";
-import { profileAPI } from "../../api/profileAPI";
+import { profileAPI } from "api/profileAPI";
 import { setUserProfile, setUserStatus } from "../profileReducer";
 import axios, { AxiosError } from "axios";
 
