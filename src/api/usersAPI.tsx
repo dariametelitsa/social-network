@@ -9,15 +9,6 @@ export const userApi = {
             } catch (e: any) {
                 return e.message;
             }
-        // } catch (e: unknown) {
-        //     if (axios.isAxiosError(e)) {
-        //         console.log(e.message);
-        //         return e.message;
-        //     } else {
-        //         console.log((e as Error).message);
-        //         return (e as Error).message;
-        //     }
-        // }
     },
 
     subscribe: (userId: number) => {
@@ -27,6 +18,7 @@ export const userApi = {
         return instance.delete<BaseResponse>(`follow/${userId}`);
     }
 }
+
 type BaseResponse <T = {}> = {
     resultCode: number
     messages: string[]

@@ -51,13 +51,20 @@ export const unfollowUserTC = (userId: number): ThunkActionType => async (dispat
     }
 }
 
-export const followUserTC = (userId: number): ThunkActionType => (dispatch) => {
+export const followUserTC = (userId: number): ThunkActionType => async (dispatch) => {
     dispatch(toggleFollowingUser(userId, true));
-    userApi.subscribe(userId)
-        .then(() => {
+    try {
+        const res = await userApi.subscribe(userId);
+        if(res.data.resultCode === 0) {
             dispatch(followUser(userId));
-        })
-        .finally(() => {
-            dispatch(toggleFollowingUser(userId, false));
-        })
+        }
+    } catch (e: unknown) {
+        if (axios.isAxiosError(e)) {
+            console.log(e.message);
+        } else {
+            console.log((e as Error).message);
+        }
+    } finally {
+        dispatch(toggleFollowingUser(userId, false));
+    }
 }
