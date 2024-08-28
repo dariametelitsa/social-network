@@ -8,14 +8,14 @@ import { Navigate } from "react-router-dom";
 import { StateType } from "redux/store";
 
 
-const Login = (props: Login) => {
+const Login = ({isAuth, login}: Login) => {
 
     const onSubmit = (formData: FormDataType) => {
         console.log(formData);
-        props.login(formData);
+        login(formData);
     }
 
-    if(props.isAuth) {
+    if(isAuth) {
         return <Navigate to={'/profile'}/>
     }
 
