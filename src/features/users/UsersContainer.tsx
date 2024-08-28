@@ -52,9 +52,10 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
     }
 
     componentDidUpdate(prevProps: Readonly<UserPropsType>, prevState: Readonly<UsersAPIComponentState>, snapshot?: any) {
-        if (prevProps.totalUserCount !== this.props.totalUserCount) {
+        const {totalUserCount, pageSize} = this.props;
+        if (prevProps.totalUserCount !== totalUserCount) {
             this.setState({
-                pagesCount: Math.ceil(this.props.totalUserCount / this.props.pageSize) || 1
+                pagesCount: Math.ceil(totalUserCount / pageSize) || 1
             })
         }
     }
@@ -92,7 +93,6 @@ class UsersContainer extends React.Component<UserPropsType, UsersAPIComponentSta
                 {isFetching && <Preloader/>}
                 <Users
                     users={passUser}
-                    // users={users}
                     isFiltered={this.state.isFiltered}
                     isFilterUsers={this.isFilterUsers.bind(this)}
                     pagesCount={this.state.pagesCount}

@@ -1,10 +1,7 @@
-// @flow
 import * as React from 'react';
 import { UserType } from "api/usersAPI";
 import { Pagination } from "components/pagination/Pagination";
 import s from "./Users.module.scss";
-import { Link } from "react-router-dom";
-import { PATH } from "common/routes/PATHS";
 import { User } from "features/users/User";
 
 type UsersProps = {
@@ -45,7 +42,6 @@ export const Users = ({
                     ? <button onClick={() => isFilterUsers(false)} className={s.button}>Show all users</button>
                     : <button onClick={() => isFilterUsers(true)} className={s.button + ' ' + s.filter}>Show users with photo</button>}
             </div>
-
             {
                 users.map(u => {
                     return <User key={u.id} user={u} isDisabled={isDisabled} unfollowUser={unfollowUser} followUser={followUser}/>
