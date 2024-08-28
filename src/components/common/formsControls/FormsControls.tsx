@@ -1,6 +1,6 @@
 // @flow 
 import * as React from 'react';
-import { WrappedFieldProps } from "redux-form";
+import { Field, WrappedFieldProps } from "redux-form";
 import s from './FormControls.module.scss'
 
 // type Props = DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>
@@ -14,10 +14,18 @@ export const FormControl = ({input, meta, tag, ...props}: Props) => {
     return (
         <div className={s.formControl + ' ' + (hasError ? s.error : ' ')}>
             {tag === 'textarea'
-                ? <textarea {...input} {...props} />
-                : <input {...input} {...props}/>
+                ? <textarea {...input} {...props} className={s.input}/>
+                : <input {...input} {...props} className={s.input}/>
             }
             {hasError && <span>{meta.error}</span>}
         </div>
     );
 };
+
+export const createField = (name: string, placeholder: string, validators: Function[], component: ({
+                                                                                                       input,
+                                                                                                       meta,
+                                                                                                       tag,
+                                                                                                       ...props
+                                                                                                   }: Props) => JSX.Element) =>
+    (<Field name={name} placeholder={placeholder} validate={validators} component={component}/>);
