@@ -1,5 +1,6 @@
 import { UserType } from "api/usersAPI";
 import { UsersPageType } from "common/types/types";
+import { updateObjectInArray } from "common/utils/objectHelpers";
 
 export const followUser = (userId: number) => ({type: 'samurai-network/users/FOLLOW_USER', userId}) as const;
 export const unfollowUser = (userId: number) => ({type: 'samurai-network/users/UNFOLLOW_USER', userId}) as const;
@@ -35,6 +36,9 @@ const usersReducer = (state: UsersPageType = initialState, action: UserActionTyp
                     return u.id === action.userId ? {...u, followed: true} : u
                 })
             }
+            // return {
+            //     ...state, users: updateObjectInArray(state.users, action.userId, 'followed', true)
+            // }
         }
         case "samurai-network/users/UNFOLLOW_USER": {
             return {
@@ -42,6 +46,9 @@ const usersReducer = (state: UsersPageType = initialState, action: UserActionTyp
                     return u.id === action.userId ? {...u, followed: false} : u
                 })
             }
+            // return {
+            //     ...state, users: updateObjectInArray(state.users, action.userId, 'followed', false)
+            // }
         }
         case "samurai-network/users/SET_USERS": {
             if(action.extended) {
