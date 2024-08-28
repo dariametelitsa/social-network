@@ -5,6 +5,7 @@ import { Pagination } from "components/pagination/Pagination";
 import s from "./Users.module.scss";
 import { Link } from "react-router-dom";
 import { PATH } from "common/routes/PATHS";
+import { User } from "features/users/User";
 
 type UsersProps = {
     users: UserType[]
@@ -30,7 +31,7 @@ export const Users = ({
                           followUser,
                           followingInProgress,
                       }: UsersProps) => {
-    const defaultPhoto = 'https://i.ebayimg.com/images/g/hywAAOSwxflZwEwe/s-l1200.webp';
+
     const isDisabled = (userId: number) => {
         return typeof followingInProgress.find(u => u === userId) === 'number';
     }
@@ -47,34 +48,7 @@ export const Users = ({
 
             {
                 users.map(u => {
-                    return (
-                        <div key={u.id} className={s.containerUser}>
-                            <div className={s.blocksPosition}>
-                                <Link to={`${PATH.PROFILE}/${u.id}`}>
-                                    <img className={s.avatar} src={u.photos.small || defaultPhoto}
-                                         alt={'User avatar'}/>
-                                </Link>
-                                {u.followed
-                                    ? <button disabled={isDisabled(u.id)} className={s.button} onClick={() => {
-                                        unfollowUser(u.id);
-                                    }}>Follow</button>
-                                    : <button disabled={isDisabled(u.id)} className={s.button + ' ' + s.unfollow}
-                                              onClick={() => {
-                                                  followUser(u.id);
-                                              }}>Unfollow</button>
-                                }
-                            </div>
-                            <div className={s.blocksPosition}>
-                                <b>{u.name}</b>
-                                <span>{u.status}</span>
-                            </div>
-                            <div className={s.blocksPosition}>
-                                <span>Country</span>
-                                <span>City</span>
-                                <span>{u.id}</span>
-                            </div>
-                        </div>
-                    )
+                    return <User key={u.id} user={u} isDisabled={isDisabled} unfollowUser={unfollowUser} followUser={followUser}/>
                 })
             }
             <button onClick={() => onLoadMoreUsers()}>Load more...</button>
