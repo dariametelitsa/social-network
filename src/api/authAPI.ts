@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { FormDataType } from "components/login/Login";
+import { FormDataType } from "features/login/Login";
 
 export const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',

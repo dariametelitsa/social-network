@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styles from './Pagination.module.scss'
+import styles from 'components/common/pagination/Pagination.module.scss'
 
 type PaginationProps = {
     pagesCount: number

@@ -8,7 +8,7 @@ import UsersContainer from "./features/users/UsersContainer";
 import { PATH } from "common/routes/PATHS";
 import ProfileContainer from "./features/profile/ProfileContainer";
 import HeaderContainer from "./features/header/HeaderContainer";
-import Login from "./components/login/Login";
+import Login from "./features/login/Login";
 import { connect, Provider } from "react-redux";
 import { compose } from "redux";
 import { withRouter } from "components/HOC/withRouter";

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import style from './Login.module.scss'
-import { LoginReduxForm } from "./LoginForm";
+import style from 'features/login/Login.module.scss'
+import { LoginReduxForm } from "features/login/LoginForm";
 import { connect } from "react-redux";
 import { login } from "redux/thunks/authThunk";
 import { Navigate } from "react-router-dom";

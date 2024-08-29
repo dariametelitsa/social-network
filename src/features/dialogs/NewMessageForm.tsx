@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Field, reduxForm } from "redux-form";
-import style from "components/login/Login.module.scss";
+import style from "features/login/Login.module.scss";
 import { FormEventHandler } from "react";
 import { FormControl } from "components/common/formsControls/FormsControls";
 import { maxLengthCreator, required } from "common/utils/validators/validators";

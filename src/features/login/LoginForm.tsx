@@ -1,8 +1,8 @@
 // @flow 
 import * as React from 'react';
-import style from "./Login.module.scss";
+import style from "features/login/Login.module.scss";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
-import { FormDataType } from "./Login";
+import { FormDataType } from "features/login/Login";
 import { FormEventHandler } from "react";
 import { required } from "common/utils/validators/validators";
 import { createField, FormControl } from "components/common/formsControls/FormsControls";

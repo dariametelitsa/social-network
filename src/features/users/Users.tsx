@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { UserType } from "api/usersAPI";
-import { Pagination } from "components/pagination/Pagination";
+import { Pagination } from "components/common/pagination/Pagination";
 import s from "./Users.module.scss";
 import { User } from "features/users/User";
 

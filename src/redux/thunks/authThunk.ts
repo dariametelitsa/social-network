@@ -1,7 +1,7 @@
 import { ThunkActionType } from "../store";
 import { authAPI } from "api/authAPI";
 import { setUserData } from "../authReducer";
-import { FormDataType } from "components/login/Login";
+import { FormDataType } from "features/login/Login";
 import { stopSubmit } from "redux-form";
 
 export const getUserDataTC = ():ThunkActionType<Promise<void>> => async (dispatch) => {
