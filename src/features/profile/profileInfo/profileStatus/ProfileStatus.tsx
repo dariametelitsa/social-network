@@ -31,9 +31,9 @@ export class ProfileStatus extends React.Component<ProfileStatusProps, ProfileSt
             editMode: false,
         });
         this.props.updateStatus(this.state.status)
-            .then(res => {
-              //console.log(res)
-            })
+            // .then(res => {
+            //   //console.log(res)
+            // })
         // if(this.statusInputRef.current) {
         //     this.props.updateStatus(this.statusInputRef.current.value);
         // }
@@ -63,10 +63,10 @@ export class ProfileStatus extends React.Component<ProfileStatusProps, ProfileSt
                         type={'text'}
                         onChange={(e) => this.onStatusChange(e)}
                         value={this.state.status}
-                        onBlur={this.deactivateEditMode} autoFocus={true}/>
+                        onBlur={this.deactivateEditMode.bind(this)} autoFocus={true}/>
                 </div>)
-                : (<div onDoubleClick={this.activateEditMode.bind(this)}>
-                    <p>{this.props.status || '---'}</p>
+                : (<div>
+                    <p onDoubleClick={this.activateEditMode.bind(this)}>{this.props.status || '---'}</p>
                 </div>)
             }
         </>)
