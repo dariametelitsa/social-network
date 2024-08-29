@@ -7,8 +7,11 @@ type PaginationProps = {
     currentPage: number
     onPageClick: (pageNumber: number) => void
 };
+
 export const Pagination = ({pagesCount, currentPage = 1, onPageClick}: PaginationProps) => {
 
+    const paginationButtonCount = 7;
+    const leftRightButtonsCount = Math.floor(paginationButtonCount / 2);
     const onPageClickHandler = (pageNumber: number) => {
         onPageClick(pageNumber);
     }
@@ -31,20 +34,27 @@ export const Pagination = ({pagesCount, currentPage = 1, onPageClick}: Paginatio
 
     const paginationGeneration = () => {
         const pageNumbers: React.ReactNode[] = [];
-        if(currentPage - 3 > 1) {
+        if(currentPage - leftRightButtonsCount > 1 && pagesCount > paginationButtonCount) {
             pageNumbers.push(<span key={'startDots'} className={styles.page + ' ' + styles.dots}>...</span>);
         }
-        const preStart = currentPage - 3 > 0 ? currentPage - 3 : 1;
-        const end = currentPage + 3 < pagesCount ? currentPage + 3 + (preStart === 1 ? 4 - currentPage : 0) : pagesCount;
-        const start = currentPage + 3 < pagesCount ? preStart : currentPage - 3 > 0 ? preStart - 3 + (pagesCount - currentPage) : 1 ;
+        const preStart = currentPage - leftRightButtonsCount > 0 ? currentPage - leftRightButtonsCount : 1;
+
+        const end = pagesCount <= paginationButtonCount ? pagesCount : currentPage + leftRightButtonsCount < pagesCount
+            ? currentPage + leftRightButtonsCount + (preStart === 1
+            ? (leftRightButtonsCount + 1 - currentPage)
+            : 0)
+            : pagesCount;
+
+        let start = currentPage + leftRightButtonsCount < pagesCount ? preStart : currentPage - leftRightButtonsCount > 0 ? preStart - leftRightButtonsCount + (pagesCount - currentPage) : 1 ;
+        start = start < 1 ? 1 : start;
 
         for (let i = start; i <= end; i++) {
             pageNumbers.push(
                 <button key={i} className={i === currentPage ? `${styles.page} ${styles.selectedPage}` : styles.page}
                         onClick={() => onPageClickHandler(i)}>{i}</button>);
         }
-        if(currentPage + 3 < pagesCount) {
-            pageNumbers.push(<span key={'endDdots'} className={styles.page + ' ' + styles.dots}>...</span>);
+        if(currentPage + 3 < pagesCount && end !== pagesCount) {
+            pageNumbers.push(<span key={'endDots'} className={styles.page + ' ' + styles.dots}>...</span>);
         }
         return pageNumbers;
     }

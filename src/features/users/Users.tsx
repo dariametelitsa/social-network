@@ -16,6 +16,7 @@ type UsersProps = {
     followUser: (userId: number) => void
     followingInProgress: Array<number>
 };
+
 export const Users = ({
                           users,
                           isFiltered,
