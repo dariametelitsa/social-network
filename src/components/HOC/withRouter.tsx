@@ -14,3 +14,4 @@ export const withRouter = <T extends object>(Component: React.ComponentType<T>) 
     };
     return ComponentWithRouterProp as React.ComponentType<T & WithRouterType>;
 };
+

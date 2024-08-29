@@ -7,6 +7,7 @@ import { withAuthRedirect } from "components/HOC/withAuthRedirect";
 import { compose } from "redux";
 import { withRouter } from "components/HOC/withRouter";
 import { getUserProfileTC, getUserStatusTC, updateUserStatusTC } from "redux/thunks/profileThunks";
+import { withSuspense } from "components/HOC/withSuspense";
 
 
 class ProfileContainer extends React.Component<ProfileContainerProps> {
