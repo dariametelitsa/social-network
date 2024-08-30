@@ -1,5 +1,5 @@
-import { PATH } from "../common/routes/PATHS";
-import { GetUserProfileResponseType } from "./usersAPI";
+import { PATH } from "common/routes/PATHS";
+import { GetUserProfileResponseType, PhotosType } from "./usersAPI";
 import { instance } from "./authAPI";
 
 
@@ -10,11 +10,20 @@ export const profileAPI = {
                 return res.data
             })
     },
-    getUserStatus(userId: number){
+    getUserStatus(userId: number) {
         return instance.get<string>(`/profile/status/${userId}`);
     },
     updateUserStatus(status: string) {
         return instance.put<ResponseType>(`/profile/status`, {status})
+    },
+    saveAvatar(photo: File) {
+        const formData = new FormData();
+        formData.append('image', photo);
+        return instance.put<ResponseType<PhotosType>>(`/profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
     }
 }
 

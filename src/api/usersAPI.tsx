@@ -1,5 +1,4 @@
 import { instance } from "./authAPI";
-import { AxiosResponse } from "axios";
 
 export const userApi = {
     getUsers: async (currentPage: number, pageSize: number) => {
@@ -63,7 +62,7 @@ type SocialMediaType = {
     mainLink: string | null
 }
 
-type PhotosType = {
+export type PhotosType = {
     small: string | null
     large: string | null
 }

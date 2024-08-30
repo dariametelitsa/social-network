@@ -4,25 +4,25 @@ import s from "./ProfileInfo.module.scss";
 import { GetUserProfileResponseType } from "api/usersAPI";
 import Preloader from "../../../components/common/preloader/Preloader";
 import { ProfileStatus } from "./profileStatus/ProfileStatus";
-import { ChangeEvent, ChangeEventHandler } from "react";
-
+import { ChangeEvent } from "react";
 
 type Props = {
     profile: GetUserProfileResponseType | null
     status: string
     updateStatus: (status: string) => Promise<void>
     isOwner: boolean
-    savePhoto: (photo: File) => void
+    saveAvatar: (photo: File) => void
 };
 
-export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}: Props) => {
+export const ProfileInfo = ({profile, status, updateStatus, isOwner, saveAvatar}: Props) => {
     const defaultPhoto = 'https://www.film.ru/sites/default/files/people/1564966-1099943.jpg';
 
     const onAvatarPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
         if(e.target.files && e.target.files.length) {
-            savePhoto(e.target.files[0]);
+            saveAvatar(e.target.files[0]);
         }
     }
+    console.log(profile)
 
     return (
         profile

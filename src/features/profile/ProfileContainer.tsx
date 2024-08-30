@@ -6,8 +6,7 @@ import { Profile } from "./Profile";
 import { withAuthRedirect } from "components/HOC/withAuthRedirect";
 import { compose } from "redux";
 import { withRouter } from "components/HOC/withRouter";
-import { getUserProfileTC, getUserStatusTC, updateUserStatusTC } from "redux/thunks/profileThunks";
-import { withSuspense } from "components/HOC/withSuspense";
+import { getUserProfileTC, getUserStatusTC, saveAvatar, updateUserStatusTC } from "redux/thunks/profileThunks";
 
 
 class ProfileContainer extends React.Component<ProfileContainerProps> {
@@ -37,7 +36,7 @@ class ProfileContainer extends React.Component<ProfileContainerProps> {
                 profile = {this.props.profile}
                 status={this.props.status}
                 updateStatus={this.props.updateUserStatusTC}
-                savePhoto={this.props.savePhoto}
+                saveAvatar={this.props.saveAvatar}
                 // router={this.props.router}
             />
         );
@@ -60,7 +59,7 @@ type mapDispatchToPropsType = {
     getUserProfileTC: (id: number) => void
     getUserStatusTC: (id: number) => void
     updateUserStatusTC: (status: string) => Promise<void>
-    savePhoto: (photo: File) => void
+    saveAvatar: (photo: File) => void
 }
 
 type mapStateToPropsType = {
@@ -80,7 +79,7 @@ const mapStateToProps = (state: StateType): mapStateToPropsType => {
  // export default connect(mapStateToProps, {getUserProfileTC})(withRouter(withAuthRedirect(ProfileContainer)));
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfileTC, getUserStatusTC, updateUserStatusTC}),
+    connect(mapStateToProps, {getUserProfileTC, getUserStatusTC, updateUserStatusTC, saveAvatar}),
     withRouter,
     withAuthRedirect,
 )(ProfileContainer)

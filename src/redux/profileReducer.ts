@@ -1,19 +1,21 @@
 import { postsProps, ProfilePageType } from "./store-example";
 import uuid from "react-uuid";
 import avatar from "./avatar5.jpeg";
-import { GetUserProfileResponseType } from "api/usersAPI";
+import { GetUserProfileResponseType, PhotosType } from "api/usersAPI";
 
 //actions
 export const addPost = (newPost: string) => ({type: 'samurai-network/profile/ADD_POST', newPost} as const);
 export const deletePost = (id: string) => ({type: 'samurai-network/profile/DELETE_POST', id} as const);
 export const setUserProfile = (profile: GetUserProfileResponseType) => ({type: 'samurai-network/profile/SET_USER_PROFILE', profile} as const);
 export const setUserStatus = (status: string) => ({type: 'samurai-network/profile/SET_USER_STATUS', status} as const);
+export const saveAvatarSuccess = (photos: PhotosType) => ({type: 'samurai-network/profile/SAVE_AVATAR_SUCCESS', photos} as const);
 
 export type ProfileActionType =
     | ReturnType<typeof addPost>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setUserStatus>
     | ReturnType<typeof deletePost>
+    | ReturnType<typeof saveAvatarSuccess>
 
 const initialState: ProfilePageType = {
     posts: [
@@ -70,6 +72,12 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
         }
         case "samurai-network/profile/DELETE_POST": {
             return {...state, posts: state.posts.filter((post) => post.id !== action.id)}
+        }
+        case "samurai-network/profile/SAVE_AVATAR_SUCCESS": {
+            if(state.profile) {
+                return {...state, profile: {...state.profile, photos: {small: action.photos.small, large: action.photos.large}}}
+            }
+            return  state;
         }
         default:
             return state;
