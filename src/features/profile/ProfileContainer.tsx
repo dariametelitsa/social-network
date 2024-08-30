@@ -33,9 +33,11 @@ class ProfileContainer extends React.Component<ProfileContainerProps> {
 
         return (
             <Profile
+                isOwner={this.props.userId === this.props.profile?.userId}
                 profile = {this.props.profile}
                 status={this.props.status}
                 updateStatus={this.props.updateUserStatusTC}
+                savePhoto={this.props.savePhoto}
                 // router={this.props.router}
             />
         );
@@ -58,7 +60,9 @@ type mapDispatchToPropsType = {
     getUserProfileTC: (id: number) => void
     getUserStatusTC: (id: number) => void
     updateUserStatusTC: (status: string) => Promise<void>
+    savePhoto: (photo: File) => void
 }
+
 type mapStateToPropsType = {
     profile: GetUserProfileResponseType | null
     userId: number | null

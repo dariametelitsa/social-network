@@ -3,20 +3,22 @@ import { ProfileInfo } from "./profileInfo/ProfileInfo";
 import { MyPostsContainer } from "./myPosts/MyPostsContainer";
 import { GetUserProfileResponseType } from "api/usersAPI";
 
-type ProfileProps = {
+type Props = {
     profile: GetUserProfileResponseType | null
     status: string
     updateStatus: (status: string) => Promise<void>
+    isOwner: boolean
+    savePhoto: (photo: File) => void
     // router: {
     //     //location: Object
     //     //navigate: Object
     //     params: Object
     // }
 }
-export const Profile = ({profile, status, updateStatus}: ProfileProps) => {
+export const Profile = ({profile, status, updateStatus, isOwner, savePhoto}: Props) => {
     return (
             <div>
-                <ProfileInfo profile={profile} status={status} updateStatus={updateStatus}/>
+                <ProfileInfo profile={profile} status={status} updateStatus={updateStatus} isOwner={isOwner} savePhoto={savePhoto}/>
                 <MyPostsContainer/>
             </div>
     );
