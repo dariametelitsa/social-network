@@ -50,8 +50,7 @@ export const saveAvatar = (photo: File): ThunkActionType => async (dispatch) => 
     try {
         const res = await profileAPI.saveAvatar(photo);
         if (res.data.resultCode === 0) {
-            console.log(res.data.data)
-            dispatch(saveAvatarSuccess(res.data.data));
+            dispatch(saveAvatarSuccess(res.data.data.photos));
         }
     }
     catch (e: unknown) {

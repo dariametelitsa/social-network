@@ -22,7 +22,6 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, saveAvatar}
             saveAvatar(e.target.files[0]);
         }
     }
-    console.log(profile)
 
     return (
         profile
@@ -30,7 +29,7 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, saveAvatar}
                 <img className={s.bgImage} height={'200'} src={'https://www.kino-teatr.ru/news/30463/272783.jpg'}
                      alt={'Background image.'}/>
                 <div className={s.description}>
-                    <img className={s.avatar} src={profile.photos.small || defaultPhoto} alt={'Avatar'}/>
+                    <img className={s.avatar} src={profile.photos.large || defaultPhoto} alt={'Avatar'}/>
                     <div className={s.info}>
                         <b className={s.name}>{profile.fullName}</b>
                         <p>{profile.aboutMe}</p>

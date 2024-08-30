@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore, EmptyObject, Store } from "redux";
+import { applyMiddleware, combineReducers, compose, createStore, EmptyObject, Store } from "redux";
 import profileReducer, { ProfileActionType } from "./profileReducer";
 import dialogsReducer, { DialogActionType } from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";

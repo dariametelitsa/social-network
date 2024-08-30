@@ -19,7 +19,7 @@ export const profileAPI = {
     saveAvatar(photo: File) {
         const formData = new FormData();
         formData.append('image', photo);
-        return instance.put<ResponseType<PhotosType>>(`/profile/photo`, formData, {
+        return instance.put<ResponseType<{ photos: PhotosType }>>(`/profile/photo`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

@@ -1,5 +1,5 @@
 import React from "react";
-import { GetUserProfileResponseType } from "api/usersAPI";
+import { GetUserProfileResponseType, PhotosType } from "api/usersAPI";
 import { connect } from "react-redux";
 import { StateType } from "redux/store";
 import { Profile } from "./Profile";
@@ -7,6 +7,7 @@ import { withAuthRedirect } from "components/HOC/withAuthRedirect";
 import { compose } from "redux";
 import { withRouter } from "components/HOC/withRouter";
 import { getUserProfileTC, getUserStatusTC, saveAvatar, updateUserStatusTC } from "redux/thunks/profileThunks";
+import DialogsContainer from "features/dialogs/DialogsContainer";
 
 
 class ProfileContainer extends React.Component<ProfileContainerProps> {
@@ -30,6 +31,7 @@ class ProfileContainer extends React.Component<ProfileContainerProps> {
     }
     render() {
 
+        console.log(this.props.profile?.photos.small)
         return (
             <Profile
                 isOwner={this.props.userId === this.props.profile?.userId}
@@ -69,10 +71,11 @@ type mapStateToPropsType = {
 }
 
 const mapStateToProps = (state: StateType): mapStateToPropsType => {
+    console.log(state.profilePage.profile?.photos.small)
     return {
         profile: state.profilePage.profile,
         userId: state.auth.id,
-        status: state.profilePage.status
+        status: state.profilePage.status,
     }
 }
 
