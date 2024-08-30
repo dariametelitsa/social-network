@@ -5,6 +5,7 @@ import { GetUserProfileResponseType } from "api/usersAPI";
 import Preloader from "../../../components/common/preloader/Preloader";
 import { ProfileStatus } from "./profileStatus/ProfileStatus";
 import { ChangeEvent } from "react";
+import { Contacts } from "components/common/contacts/Contacts";
 
 type Props = {
     profile: GetUserProfileResponseType | null
@@ -43,7 +44,7 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, saveAvatar}
                             <b>My professional skills</b>: {profile.lookingForAJobDescription}
                         </p>}
                         <p>About me: {profile.aboutMe || 'no information'}</p>
-                        <p><b>Contacts</b>: </p>
+                        <p><b>Contacts</b>: <Contacts contacts={profile.contacts} /> </p>
                         <div>
                             <ProfileStatus status={status} updateStatus={updateStatus}/>
                         </div>

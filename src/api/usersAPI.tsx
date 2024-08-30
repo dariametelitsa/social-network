@@ -51,7 +51,7 @@ export type GetUserProfileResponseType = {
     photos: PhotosType
 }
 
-type SocialMediaType = {
+export type SocialMediaType = {
     facebook: string | null
     website: string | null
     vk: string | null
