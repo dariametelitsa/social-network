@@ -2,7 +2,7 @@ import { ThunkActionType } from "../store";
 import { toggleFollowingUser } from "../usersReducer";
 import { profileAPI } from "api/profileAPI";
 import { saveAvatarSuccess, setUserProfile, setUserStatus } from "../profileReducer";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 export const getUserProfileTC = (userId: number): ThunkActionType => async (dispatch) => {
     dispatch(toggleFollowingUser(userId, true));

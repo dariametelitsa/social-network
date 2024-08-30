@@ -1,12 +1,12 @@
-import { applyMiddleware, combineReducers, compose, createStore, EmptyObject, Store } from "redux";
+import { applyMiddleware, combineReducers, createStore, EmptyObject, Store } from "redux";
 import profileReducer, { ProfileActionType } from "./profileReducer";
 import dialogsReducer, { DialogActionType } from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 import usersReducer, { UserActionType } from "./usersReducer";
 import { AuthActionsType, authReducer } from "./authReducer";
 import thunk, { ThunkAction } from "redux-thunk";
-import {reducer as formReducer} from 'redux-form';
-import {FormAction} from "redux-form/lib/actions";
+import { reducer as formReducer } from 'redux-form';
+import { FormAction } from "redux-form/lib/actions";
 import { appReducer } from "redux/appReducer";
 
 const rootReducer = combineReducers({

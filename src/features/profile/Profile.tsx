@@ -2,7 +2,6 @@ import React from 'react';
 import { ProfileInfo } from "./profileInfo/ProfileInfo";
 import { MyPostsContainer } from "./myPosts/MyPostsContainer";
 import { GetUserProfileResponseType } from "api/usersAPI";
-import { saveAvatar } from "redux/thunks/profileThunks";
 
 type Props = {
     profile: GetUserProfileResponseType | null
