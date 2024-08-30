@@ -11,9 +11,9 @@ export const Contacts = ({contacts}: Props) => {
     return (
         <div>
             {
-                Object.entries(contacts).map(c => {
+                Object.entries(contacts).map((c, index) => {
                     if(c[1]) {
-                        return (<Contact contactTitle={c[0]} contactValue={c[1]}/>)
+                        return (<Contact key={index} contactTitle={c[0]} contactValue={c[1]}/>)
                     }
                 })
             }

@@ -44,7 +44,7 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, saveAvatar}
                             <b>My professional skills</b>: {profile.lookingForAJobDescription}
                         </p>}
                         <p>About me: {profile.aboutMe || 'no information'}</p>
-                        <p><b>Contacts</b>: <Contacts contacts={profile.contacts} /> </p>
+                        <div><b>Contacts</b>: <Contacts contacts={profile.contacts} /> </div>
                         <div>
                             <ProfileStatus status={status} updateStatus={updateStatus}/>
                         </div>
