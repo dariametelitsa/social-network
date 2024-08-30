@@ -31,7 +31,6 @@ class ProfileContainer extends React.Component<ProfileContainerProps> {
     }
     render() {
 
-        console.log(this.props.profile?.photos.small)
         return (
             <Profile
                 isOwner={this.props.userId === this.props.profile?.userId}
@@ -71,7 +70,6 @@ type mapStateToPropsType = {
 }
 
 const mapStateToProps = (state: StateType): mapStateToPropsType => {
-    console.log(state.profilePage.profile?.photos.small)
     return {
         profile: state.profilePage.profile,
         userId: state.auth.id,
